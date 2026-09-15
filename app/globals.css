@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand palette (from brief) */
+  --ink: #262626;
+  --steel: #676b6c;
+  --mist: #aabbc5;
+
+  --background: #171717;
+  --background-elevated: var(--ink);
+  --foreground: #f2f3f3;
+  --muted-foreground: #9ea3a4;
+  --border: #34363633;
+  --border-strong: #3a3d3d;
+  --accent: var(--mist);
+  --accent-foreground: #10151a;
+  --card: var(--ink);
+
+  --font-body: var(--font-en);
+}
+
+[data-locale="fa"] {
+  --font-body: var(--font-fa);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-steel: var(--steel);
+  --color-mist: var(--mist);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-body);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--mist);
+  color: var(--accent-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container-px {
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .container-px {
+    padding-inline: 3rem;
+  }
+}
