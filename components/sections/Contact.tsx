@@ -25,7 +25,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative flex min-h-[90vh] items-center justify-center px-6 py-28">
+    <section id="contact" className="relative flex h-screen items-center justify-center px-6 py-6">
       <div className="relative flex flex-col items-center gap-12">
         <div
           className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -37,7 +37,7 @@ export function Contact() {
         >
           <div className="flex flex-col items-center gap-2">
             <span
-              className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground transition-all duration-500"
+              className="text-md md:text-lg mb-3 font-medium uppercase tracking-[0.3em] text-muted-foreground transition-all duration-500"
               style={{
                 transform: showSuccess ? "translateY(0)" : "translateY(10px)",
                 opacity: showSuccess ? 1 : 0,
@@ -47,7 +47,7 @@ export function Contact() {
               {t.contact.available}
             </span>
             <h3
-              className="text-3xl font-light tracking-tight text-foreground transition-all duration-500 sm:text-4xl"
+              className="text-6xl mb-5 font-light tracking-tight text-foreground transition-all duration-500 text-center"
               style={{
                 transform: showSuccess ? "translateY(0)" : "translateY(10px)",
                 opacity: showSuccess ? 1 : 0,
@@ -74,29 +74,29 @@ export function Contact() {
             }}
           >
             <div
-              className="h-px w-8 bg-border-strong transition-all duration-500 sm:w-12"
+              className="h-px w-14 md:w-30 bg-border-strong transition-all duration-500"
               style={{ transform: isButtonHovered ? "scaleX(0)" : "scaleX(1)", opacity: isButtonHovered ? 0 : 0.5 }}
             />
             <div
-              className="relative flex items-center gap-3 overflow-hidden rounded-full border px-6 py-3 transition-all duration-500 sm:px-8 sm:py-4"
+              className="relative flex items-center gap-3 overflow-hidden rounded-full border transition-all duration-500 px-8 py-4"
               style={{
                 borderColor: isButtonHovered ? "var(--mist)" : "var(--border-strong)",
                 backgroundColor: isButtonHovered ? "var(--mist)" : "transparent",
               }}
             >
               <Calendar
-                className="size-4 transition-all duration-500 sm:size-5"
+                className="size-6 transition-all duration-500 sm:size-5"
                 strokeWidth={1.5}
                 style={{ color: isButtonHovered ? "var(--accent-foreground)" : "var(--foreground)" }}
               />
               <span
-                className="text-sm font-medium tracking-wide transition-all duration-500 sm:text-base"
+                className="text-md md:text-lg font-medium tracking-wide transition-all duration-500 sm:text-base"
                 style={{ color: isButtonHovered ? "var(--accent-foreground)" : "var(--foreground)" }}
               >
                 {t.contact.book}
               </span>
               <ArrowUpRight
-                className="size-4 transition-all duration-500 sm:size-5"
+                className="size-7 transition-all duration-500 sm:size-5"
                 strokeWidth={1.5}
                 style={{
                   color: isButtonHovered ? "var(--accent-foreground)" : "var(--foreground)",
@@ -105,13 +105,13 @@ export function Contact() {
               />
             </div>
             <div
-              className="h-px w-8 bg-border-strong transition-all duration-500 sm:w-12"
+              className="h-px w-14 md:w-30 bg-border-strong transition-all duration-500 "
               style={{ transform: isButtonHovered ? "scaleX(0)" : "scaleX(1)", opacity: isButtonHovered ? 0 : 0.5 }}
             />
           </button>
 
           <span
-            className="text-xs uppercase tracking-widest text-muted-foreground/60 transition-all duration-500"
+            className="text-md mt-5 md:text-lg uppercase tracking-widest text-muted-foreground/60 transition-all duration-500"
             style={{ transform: showSuccess ? "translateY(0)" : "translateY(10px)", opacity: showSuccess ? 1 : 0, transitionDelay: "450ms" }}
           >
             {t.contact.duration}
@@ -127,7 +127,7 @@ export function Contact() {
         >
           <div className="flex flex-col items-center gap-6">
             <h2
-              className="relative text-center text-5xl font-light tracking-tight text-foreground transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:text-6xl md:text-7xl lg:text-8xl"
+              className="relative text-center font-light tracking-tight text-foreground transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] text-7xl md:text-9xl"
               style={{
                 opacity: isClicked ? 0 : 1,
                 transform: isClicked ? "translateY(-40px) scale(0.95)" : "translateY(0) scale(1)",
@@ -151,7 +151,7 @@ export function Contact() {
               </span>
             </h2>
 
-            <div className="relative mt-4 flex size-16 items-center justify-center sm:size-20">
+            <div className="relative mt-8 mb-3 flex items-center justify-center size-23 md:size-28">
               <div
                 className="pointer-events-none absolute inset-0 rounded-full border transition-all ease-out"
                 style={{
@@ -163,7 +163,7 @@ export function Contact() {
                 }}
               />
               <ArrowUpRight
-                className="size-6 transition-all ease-[cubic-bezier(0.16,1,0.3,1)] sm:size-7"
+                className="transition-all ease-[cubic-bezier(0.16,1,0.3,1)] size-12"
                 style={{
                   transform: isClicked
                     ? "translate(100px, -100px) scale(0.5)"
@@ -180,11 +180,11 @@ export function Contact() {
         </div>
 
         <div
-          className="mt-8 flex flex-col items-center gap-4 text-center transition-all delay-100 duration-500"
+          className="absoult bottom-0 flex flex-col items-center gap-4 text-center transition-all delay-100 duration-500"
           style={{ opacity: isClicked ? 0 : 1, transform: isClicked ? "translateY(20px)" : "translateY(0)", pointerEvents: isClicked ? "none" : "auto" }}
         >
-          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">{t.contact.body}</p>
-          <span className="text-xs uppercase tracking-widest text-muted-foreground/60">
+          <p className="max-w-xl text-lg md:text-xl leading-relaxed text-muted-foreground">{t.contact.body}</p>
+          <span className="text-sm md:text-lg uppercase tracking-widest text-muted-foreground/60">
             {t.contact.email}
           </span>
         </div>

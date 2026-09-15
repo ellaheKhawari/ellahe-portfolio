@@ -200,7 +200,7 @@ const en: Dictionary = {
     available: "Available for projects",
     book: "Book a call",
     duration: "15 min intro call",
-    email: "hello@example.com",
+    email: "ellahe.khawari@gmail.com",
   },
   footer: {
     tagline: "Designing and building thoughtful digital products.",

@@ -128,7 +128,7 @@ const fa: Dictionary = {
     available: "آماده همکاری در پروژه‌ها",
     book: "رزرو تماس",
     duration: "۱۵ دقیقه گفتگوی آشنایی",
-    email: "hello@example.com",
+    email: "ellahe.khawari@gmail.com",
   },
   footer: {
     tagline: "طراحی و ساخت محصولات دیجیتال هوشمندانه.",
