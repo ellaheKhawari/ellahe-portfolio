@@ -4,7 +4,7 @@ import "./globals.css";
 import { LocaleProvider } from "@/providers/LocaleProvider";
 import { ThemeRegistry } from "@/providers/ThemeRegistry";
 import { Toaster } from "sonner";
-import { CursorTrailProvider } from "@/components/CursorTrailProvider";
+import { CursorTrailProvider } from "@/providers/CursorTrailProvider";
 import CursorTrailBackground from "@/components/backgroundEffects/cursorTrailBackground";
 
 const fontEn = Inter({

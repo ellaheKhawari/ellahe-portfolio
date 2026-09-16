@@ -1,16 +1,17 @@
 'use client';
 
+import { useCursorTrail } from '@/providers/CursorTrailProvider';
 import { Shader } from 'shaders/react';
 
 export default function CursorTrailBackground() {
+  const { active } = useCursorTrail();
   return (
     <div
       aria-hidden="true"
       style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 0,          // پشت محتوای سایتت
-        pointerEvents: 'none', // کلیک‌ها رو قطع نکنه
+        position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none',
+        opacity: active ? 1 : 0,
+        transition: 'opacity 0.4s ease', // کلیک‌ها رو قطع نکنه
       }}
     >
       <Shader
