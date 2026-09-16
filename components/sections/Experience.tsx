@@ -38,7 +38,7 @@ export function Experience() {
               transition={{ duration: 0.6, ease: EASE_OUT, delay: i * 0.06 }}
               className="relative pb-14 last:pb-0"
             >
-              <span className="absolute -start-[2.55rem] top-1.5 flex size-3 items-center justify-center">
+              <span className="absolute inset-s-[2.55rem] top-1.5 flex size-3 items-center justify-center">
                 <span className="size-2.5 rounded-full border-2 border-mist bg-background-elevated" />
               </span>
 

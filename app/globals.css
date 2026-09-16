@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand palette (from brief) */
   --ink: #262626;
   --steel: #676b6c;
-  --mist: #aabbc5;
+  --mist: #9dc4dd;
 
   --background: #0a0a0a;
   --background-elevated: var(--ink);
