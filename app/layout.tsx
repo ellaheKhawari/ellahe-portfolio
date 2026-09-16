@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Vazirmatn } from "next/font/google";
+import { Inter, Vazirmatn, Geist } from "next/font/google";
 import "./globals.css";
 import { LocaleProvider } from "@/providers/LocaleProvider";
 import { ThemeRegistry } from "@/providers/ThemeRegistry";
 import { Toaster } from "sonner";
 import { CursorTrailProvider } from "@/providers/CursorTrailProvider";
 import CursorTrailBackground from "@/components/backgroundEffects/cursorTrailBackground";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const fontEn = Inter({
   subsets: ["latin"],
@@ -29,7 +32,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html lang="en" dir="ltr" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <body
         className={`${fontEn.variable} ${fontFa.variable} antialiased`}
         suppressHydrationWarning
