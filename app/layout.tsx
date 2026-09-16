@@ -4,6 +4,8 @@ import "./globals.css";
 import { LocaleProvider } from "@/providers/LocaleProvider";
 import { ThemeRegistry } from "@/providers/ThemeRegistry";
 import { Toaster } from "sonner";
+import { CursorTrailProvider } from "@/components/CursorTrailProvider";
+import CursorTrailBackground from "@/components/backgroundEffects/cursorTrailBackground";
 
 const fontEn = Inter({
   subsets: ["latin"],
@@ -32,22 +34,25 @@ export default function RootLayout({
         className={`${fontEn.variable} ${fontFa.variable} antialiased`}
         suppressHydrationWarning
       >
-        <LocaleProvider>
-          <ThemeRegistry>
-            {children}
-            <Toaster
-              position="bottom-right"
-              theme="dark"
-              toastOptions={{
-                style: {
-                  background: "var(--card)",
-                  color: "var(--foreground)",
-                  border: "1px solid var(--border-strong)",
-                },
-              }}
-            />
-          </ThemeRegistry>
-        </LocaleProvider>
+        <CursorTrailProvider>
+          <CursorTrailBackground />
+          <LocaleProvider>
+            <ThemeRegistry>
+              {children}
+              <Toaster
+                position="bottom-right"
+                theme="dark"
+                toastOptions={{
+                  style: {
+                    background: "var(--card)",
+                    color: "var(--foreground)",
+                    border: "1px solid var(--border-strong)",
+                  },
+                }}
+              />
+            </ThemeRegistry>
+          </LocaleProvider>
+        </CursorTrailProvider>
       </body>
     </html>
   );
