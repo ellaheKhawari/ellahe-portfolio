@@ -1,10 +1,16 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "motion/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
+import { useMemo, useRef, useState } from "react";
 import { Milestone } from "@/types";
 import { DEFAULT_MILESTONES } from "@/lib/mockData";
-
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -12,8 +18,10 @@ const PAD_START = 14;
 const PAD_END = 86;
 const HEAD_START = 6;
 const HEAD_END = 94;
+const LIT_FADE_IN_FRACTION = 0.06;
 
 const r2 = (n: number) => Math.round(n * 100) / 100;
+const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 const smoothstep = (x: number) => x * x * (3 - 2 * x);
 
 function cn(...classes: Array<string | false | null | undefined>) {
@@ -23,9 +31,11 @@ function cn(...classes: Array<string | false | null | undefined>) {
 export function TimelineHorizontal({
   milestones = DEFAULT_MILESTONES,
   className,
+  scrollYProgress,
 }: {
   milestones?: Milestone[];
   className?: string;
+  scrollYProgress: MotionValue<number>;
 }) {
   const count = milestones.length;
 
@@ -50,72 +60,38 @@ export function TimelineHorizontal({
   const [activeCount, setActiveCount] = useState(0);
   const lastActive = useRef(-1);
 
-  useEffect(() => {
-    let raf = 0;
-    let start = 0;
+  useMotionValueEvent(scrollYProgress, "change", (raw) => {
+    const p = smoothstep(clamp01(raw));
+    const l = Math.min(1, p / LIT_FADE_IN_FRACTION);
 
-    const SWEEP = 6000;
-    const HOLD = 1500;
-    const FADE = 850;
-    const GAP = 550;
-    const TOTAL = SWEEP + HOLD + FADE + GAP;
+    head.set(p);
+    lit.set(l);
 
-    const tick = (ts: number) => {
-      if (!start) start = ts;
-      const t = (ts - start) % TOTAL;
+    const reach = HEAD_START + (HEAD_END - HEAD_START) * p;
+    let c = 0;
+    for (const pos of positions) {
+      if (pos <= reach) c++;
+    }
 
-      let p = 0;
-      let l = 0;
-
-      if (t < SWEEP) {
-        p = smoothstep(t / SWEEP);
-        l = Math.min(1, t / 450);
-      } else if (t < SWEEP + HOLD) {
-        p = 1;
-        l = 1;
-      } else if (t < SWEEP + HOLD + FADE) {
-        p = 1;
-        l = 1 - (t - SWEEP - HOLD) / FADE;
-      } else {
-        p = 0;
-        l = 0;
-      }
-
-      head.set(p);
-      lit.set(l);
-
-      const reach = HEAD_START + (HEAD_END - HEAD_START) * p;
-      let c = 0;
-
-      for (const pos of positions) {
-        if (pos <= reach) c++;
-      }
-
-      if (c !== lastActive.current) {
-        lastActive.current = c;
-        setActiveCount(c);
-      }
-
-      raf = requestAnimationFrame(tick);
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [head, lit, positions]);
+    if (c !== lastActive.current) {
+      lastActive.current = c;
+      setActiveCount(c);
+    }
+  });
 
   return (
     <div
       className={cn(
-        "flex h-dvh w-full flex-col overflow-hidden rounded-2xl border border-foregroundbg-foreground/10 bg-background ",
+        "flex h-full w-full flex-col overflow-hidden rounded-2xl border border-foregroundbg-foreground/10 bg-background ",
         className
       )}
     >
-      <div className="flex items-start justify-between px-6 pt-5">
+      <div className="flex flex-wrap items-start justify-between gap-3 px-4 pt-5 sm:px-6">
         <div>
           <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-mist/70">
             Platform roadmap
           </p>
-          <h3 className="mt-1.5 text-base font-semibold text-foregroundbg-foreground">
+          <h3 className="mt-1.5 text-sm font-semibold text-foregroundbg-foreground sm:text-base">
             Shipping through 2026
           </h3>
         </div>
@@ -210,7 +186,7 @@ function Node({
   return (
     <>
       <div
-        className="absolute z-10 w-33 -translate-x-1/2"
+        className="absolute z-10 w-28 -translate-x-1/2 sm:w-33"
         style={
           isTop
             ? { left: `${left}%`, bottom: "calc(50% + 28px)" }
@@ -317,21 +293,35 @@ function Node({
 }
 
 export function Experience() {
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"],
+  });
+
   return (
     <section
       id="experience"
-      className="border-y border-border-strong bg-background py-28 md:py-36"
+      ref={trackRef}
+      className="relative border-y border-border-strong bg-background"
+      style={{ height: "300vh" }}
     >
-      <div className="container-px mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: EASE_OUT }}
-          className="mb-16 max-w-xl"
-        />
+      <div className="sticky top-0 flex h-dvh w-full flex-col overflow-hidden py-20 sm:py-28 md:py-36">
+        <div className="container-px mx-auto flex w-full max-w-6xl flex-1 flex-col overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: EASE_OUT }}
+            className="mb-8 max-w-xl sm:mb-16"
+          />
 
-        <TimelineHorizontal />
+          <TimelineHorizontal
+            scrollYProgress={scrollYProgress}
+            className="flex-1"
+          />
+        </div>
       </div>
     </section>
   );
