@@ -27,9 +27,9 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative flex h-dvh px-6 py-6">
+    <section id="contact" className="relative flex h-[110vh] px-6 py-6">
       <SpotlightNew className="absolute inset-0">
-        <div className="absolute h-dvh min-h-screen inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-700 ">
+        <div className="absolute h-dvh min-h-screen! inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-700 ">
           <div
             className="absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
@@ -183,7 +183,7 @@ export function Contact() {
           </div>
 
           <div
-            className=" flex flex-col items-center gap-4 text-center transition-all delay-100 duration-500"
+            className="flex flex-col gap-4 text-center transition-all delay-100 duration-500"
             style={{ opacity: isClicked ? 0 : 1, transform: isClicked ? "translateY(20px)" : "translateY(0)", pointerEvents: isClicked ? "none" : "auto" }}
           >
             <p className="max-w-xl text-lg md:text-xl leading-relaxed text-muted-foreground">{t.contact.body}</p>
