@@ -4,6 +4,7 @@
   --ink: #262626;
   --steel: #676b6c;
   --mist: #9dc4dd;
+  --darkMist: rgb(135, 190, 226) ;
 
   --background: #0a0a0a;
   --background-elevated: var(--ink);
@@ -14,7 +15,6 @@
   --accent: var(--mist);
   --accent-foreground: #10151a;
   --card: var(--ink);
-
   --font-body: var(--font-en);
 }
 

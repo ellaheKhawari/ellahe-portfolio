@@ -5,6 +5,8 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useDictionary } from "@/lib/i18n/store";
 import { HeroScene } from "@/components/three/HeroScene";
 import { EASE_OUT } from "@/lib/utils";
+import TunnelBackground from "../backgroundEffects/tunnelBackground";
+import { HeroBackground } from "../backgroundEffects/heroBg";
 
 export function Hero() {
   const { t } = useDictionary();
@@ -14,8 +16,7 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-screen items-center overflow-hidden pt-28"
     >
-      <HeroScene />
-
+      <HeroBackground className="absolute inset-0" />
       <div className="container-px relative mx-auto w-full max-w-6xl">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
