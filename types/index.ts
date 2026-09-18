@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Milestone {
   date: string;
   title: string;
@@ -24,4 +26,9 @@ export interface ParticlesProps {
   connectDistance?: number;
   repelRadius?: number;
   palette?: RGB[];
+}
+
+export interface NotFoundStageProps {
+  className?: string;
+  children: ReactNode;
 }

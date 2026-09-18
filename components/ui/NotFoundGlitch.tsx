@@ -4,17 +4,13 @@ import { useEffect, useState, type ReactNode } from "react";
 import { useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useDictionary } from "@/lib/i18n/store";
-
-interface NotFoundStageProps {
-  className?: string;
-  children: ReactNode;
-}
+import { NotFoundStageProps } from "@/types";
 
 function NotFoundStage({ className, children }: NotFoundStageProps) {
   return (
     <section
       className={cn(
-        "flex min-h-[520px] w-full flex-col items-center justify-center gap-8 px-6 py-20 text-center",
+        "flex min-h-130 w-full flex-col items-center justify-center gap-8 px-6 py-20 text-center",
         className,
       )}
     >
@@ -100,16 +96,16 @@ export function NotFoundGlitch() {
 
   return (
     <NotFoundStage>
-      <div className="group relative select-none font-mono font-bold leading-none tracking-tighter text-foreground [font-size:clamp(5rem,18vw,11rem)]">
+      <div className="group relative select-none font-mono font-bold leading-none tracking-tighter text-foreground text-[clamp(5rem,18vw,11rem)]">
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-0 text-[#ff5b7f] opacity-0 mix-blend-screen transition-[transform,opacity] duration-150 ease-out group-hover:translate-x-[3px] group-hover:opacity-70 motion-reduce:hidden"
+          className="pointer-events-none absolute inset-0 text-[#ff5b7f] opacity-0 mix-blend-screen transition-[transform,opacity] duration-150 ease-out group-hover:translate-x-0.75 group-hover:opacity-70 motion-reduce:hidden"
         >
           <Scramble text="404" />
         </span>
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-0 text-mist opacity-0 mix-blend-screen transition-[transform,opacity] duration-150 ease-out group-hover:-translate-x-[3px] group-hover:opacity-70 motion-reduce:hidden"
+          className="pointer-events-none absolute inset-0 text-mist opacity-0 mix-blend-screen transition-[transform,opacity] duration-150 ease-out group-hover:-translate-x-0.75 group-hover:opacity-70 motion-reduce:hidden"
         >
           <Scramble text="404" />
         </span>
