@@ -3,9 +3,7 @@
 import { motion } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useDictionary } from "@/lib/i18n/store";
-import { HeroScene } from "@/components/three/HeroScene";
 import { EASE_OUT } from "@/lib/utils";
-import TunnelBackground from "../backgroundEffects/tunnelBackground";
 import { HeroBackground } from "../backgroundEffects/heroBg";
 
 export function Hero() {

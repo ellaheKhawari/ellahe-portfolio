@@ -158,22 +158,31 @@ export function HeroBackground({
     };
   }, [quantity, connectDistance, repelRadius, palette]);
 
-  function onMove(e: React.PointerEvent<HTMLDivElement>) {
+  useEffect(() => {
+  function onMove(e: PointerEvent) {
     const rect = canvasRef.current?.getBoundingClientRect();
     if (!rect) return;
-    mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
+    mouseRef.current = inside ? { x, y } : null;
   }
 
   function onLeave() {
     mouseRef.current = null;
   }
 
+  window.addEventListener("pointermove", onMove, { passive: true });
+  document.documentElement.addEventListener("pointerleave", onLeave);
+
+  return () => {
+    window.removeEventListener("pointermove", onMove);
+    document.documentElement.removeEventListener("pointerleave", onLeave);
+  };
+}, []);
+
   return (
-    <div
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
-      className={cn("absolute inset-0", className)}
-    >
+    <div aria-hidden className={cn("pointer-events-none absolute inset-0", className)}>
       <canvas ref={canvasRef} className="h-full w-full" />
     </div>
   );
