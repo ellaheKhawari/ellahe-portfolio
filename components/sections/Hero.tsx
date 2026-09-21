@@ -14,8 +14,8 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-screen items-center overflow-hidden pt-28"
     >
-      <HeroBackground className="absolute inset-0" />
-      <div className="container-px relative mx-auto w-full max-w-6xl">
+      <HeroBackground />
+      <div className="container-px relative mx-auto w-full max-w-6xl z-20">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

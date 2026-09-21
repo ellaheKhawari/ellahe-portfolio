@@ -95,7 +95,7 @@ export function Skills({
   const CurrentIcon = current.icon;
 
   return (
-    <section className="flex w-full border border-red-600 min-h-screen justify-center items-center bg-ink" >
+    <section className="flex w-full h-dvh justify-center items-center" >
       <div
       role="tablist"
       aria-label="Skills"
@@ -106,7 +106,7 @@ export function Skills({
         pausedRef.current = false;
       }}
       className={cn(
-        "flex w-full md:w-[60%] h-[calc(100vh-40%)] gap-3 rounded-3xl border border-border-strong bg-background p-3",
+        "flex w-full md:w-[50%] h-90 gap-3 rounded-3xl border border-foreground bg-border p-3",
         className,
       )}
     >
@@ -127,7 +127,7 @@ export function Skills({
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => select(i)}
-                className="group/tab relative w-full rounded-xl px-3 py-2.5 text-left outline-none transition-colors focus-visible:ring-1 focus-visible:ring-[var(--mist)]/50"
+                className="group/tab relative w-full rounded-xl px-3 py-2.5 text-left outline-none transition-colors focus-visible:ring-1 focus-visible:ring-(--mist)/50"
               >
                 {isActive && (
                   <motion.span
@@ -140,7 +140,7 @@ export function Skills({
                       damping: 34,
                     }}
                   >
-                    <span className="absolute left-0 top-1/2 h-6 w-0.5 -translate-y-1/2 rounded-full bg-linear-to-b from-[var(--darkMist)] to-[var(--mist)]" />
+                    <span className="absolute left-0 top-1/2 h-6 w-0.5 -translate-y-1/2 rounded-full bg-linear-to-b from-(--darkMist) to-mist" />
                   </motion.span>
                 )}
 
@@ -177,7 +177,7 @@ export function Skills({
                 {isActive && (
                   <motion.span
                     aria-hidden
-                    className="absolute bottom-1.5 left-3 right-3 h-0.5 origin-left rounded-full bg-linear-to-r from-mist to-[var(--darkMist)]"
+                    className="absolute bottom-1.5 left-3 right-3 h-0.5 origin-left rounded-full bg-linear-to-r from-mist to-(--darkMist)"
                     style={{ scaleX: progress }}
                   />
                 )}
@@ -243,7 +243,7 @@ export function Skills({
                   key={pt}
                   className="flex items-start gap-2.5 text-[13px] text-muted-foreground"
                 >
-                  <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[var(--mist)]/15 text-[var(--mist)]">
+                  <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-(--mist)/15 text-mist">
                     <Check size={11} strokeWidth={3} />
                   </span>
 
