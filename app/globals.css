@@ -1,10 +1,108 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   Local fonts
+   - EN body   : Pilcrow Rounded (variable)
+   - FA body   : Iranyekan
+   - EN heading: Tanker
+   - FA heading: IRAN Rounded
+   ========================================================================= */
+
+@font-face {
+  font-family: "PilcrowRounded";
+  src:
+    url("/fonts/pilcrow/PilcrowRounded-Variable.woff2") format("woff2"),
+    url("/fonts/pilcrow/PilcrowRounded-Variable.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Iranyekan";
+  src: url("/fonts/iranyekan/Qs_Iranyekan_thin.ttf") format("truetype");
+  font-weight: 100;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iranyekan";
+  src:
+    url("/fonts/iranyekan/iranyekanweblight.woff2") format("woff2"),
+    url("/fonts/iranyekan/Qs_Iranyekan_light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iranyekan";
+  src:
+    url("/fonts/iranyekan/iranyekanwebregular.woff2") format("woff2"),
+    url("/fonts/iranyekan/Qs_Iranyekan.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iranyekan";
+  src: url("/fonts/iranyekan/Qs_Iranyekan_medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iranyekan";
+  src:
+    url("/fonts/iranyekan/iranyekanwebbold.woff2") format("woff2"),
+    url("/fonts/iranyekan/Qs_Iranyekan_bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iranyekan";
+  src: url("/fonts/iranyekan/Qs_Iranyekan_extrabold.ttf") format("truetype");
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iranyekan";
+  src: url("/fonts/iranyekan/Qs_Iranyekan_black.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iranyekan";
+  src: url("/fonts/iranyekan/Qs_Iranyekan_extrablack.ttf") format("truetype");
+  font-weight: 950;
+  font-display: swap;
+}
+
+/* Tanker/IRAN Rounded only ship one static weight each. Declaring a full
+   100–900 range (instead of locking to one number) tells the browser "use
+   this face for any weight in this range" — otherwise headings styled with
+   e.g. font-medium/font-semibold (500/600) wouldn't match a face pinned to
+   900 and would silently fall back to the system font. */
+@font-face {
+  font-family: "Tanker";
+  src:
+    url("/fonts/tanker/Tanker-Regular.woff2") format("woff2"),
+    url("/fonts/tanker/Tanker-Regular.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IranRounded";
+  src:
+    url("/fonts/iran-rounded/IRAN-Rounded.woff") format("woff"),
+    url("/fonts/iran-rounded/IRAN_Rounded.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --ink: #262626;
   --steel: #676b6c;
   --mist: #9dc4dd;
-  --darkMist: rgb(135, 190, 226) ;
+  --darkMist: rgb(135, 190, 226);
 
   --background: #0a0a0a;
   --background-elevated: var(--ink);
@@ -15,11 +113,15 @@
   --accent: var(--mist);
   --accent-foreground: #10151a;
   --card: var(--ink);
-  --font-body: var(--font-en);
+
+  /* Body: default = English. */
+  --font-body: "PilcrowRounded", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Tanker", var(--font-body);
 }
 
 [data-locale="fa"] {
-  --font-body: var(--font-fa);
+  --font-body: "Iranyekan", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "IranRounded", var(--font-body);
 }
 
 @theme inline {
@@ -36,6 +138,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
 }
 
 * {
@@ -49,7 +152,16 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
 }
 
 ::selection {
