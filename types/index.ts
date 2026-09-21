@@ -32,3 +32,19 @@ export interface NotFoundStageProps {
   className?: string;
   children: ReactNode;
 }
+
+export interface Translations {
+  about: string;
+  features: string;
+  pricing: string;
+  blog: string;
+  menu: string;
+  homepage: string;
+  careers: string;
+  resources: string;
+  privacy: string;
+  terms: string;
+  downloadApp: string;
+  closeMenu: string;
+  openMenu: string;
+}

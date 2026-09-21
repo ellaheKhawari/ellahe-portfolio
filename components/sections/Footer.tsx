@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Share2, AtSign, Video, Link2, Hexagon } from "lucide-react";
 import { useDictionary } from "@/lib/i18n/store";

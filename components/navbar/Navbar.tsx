@@ -1,268 +1,252 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { CustomEase } from "gsap/CustomEase";
-import { Languages, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Download, Link, Share } from "lucide-react";
 import { useDictionary, useLanguageStore } from "@/lib/i18n/store";
-import "./navbar.css";
+import { Switch } from "@/components/ui/switch";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(CustomEase);
+function BrandMark({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" className={className} aria-hidden="true">
+      <circle cx="13" cy="16" r="9" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="19" cy="16" r="9" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
 }
 
-const SECTION_LINKS = ["about", "skills", "projects", "experience", "contact"] as const;
+const burgerBarVariants = {
+  top: {
+    closed: { rotate: 0, y: -5 },
+    open: { rotate: 45, y: 0 },
+  },
+  middle: {
+    closed: { opacity: 1, scaleX: 1 },
+    open: { opacity: 0, scaleX: 0 },
+  },
+  bottom: {
+    closed: { rotate: 0, y: 5 },
+    open: { rotate: -45, y: 0 },
+  },
+} as const;
+
+function BurgerIcon({ open }: { open: boolean }) {
+  const state = open ? "open" : "closed";
+  return (
+    <span className="relative flex h-4 w-4 items-center justify-center">
+      <motion.span
+        className="absolute h-0.5 w-4 rounded-full bg-foreground"
+        variants={burgerBarVariants.top}
+        animate={state}
+        transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] }}
+      />
+      <motion.span
+        className="absolute h-0.5 w-4 rounded-full bg-foreground"
+        variants={burgerBarVariants.middle}
+        animate={state}
+        transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
+      />
+      <motion.span
+        className="absolute h-0.5 w-4 rounded-full bg-foreground"
+        variants={burgerBarVariants.bottom}
+        animate={state}
+        transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] }}
+      />
+    </span>
+  );
+}
+
+const panelVariants = {
+  hidden: { opacity: 0, y: -18, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    scale: 0.97,
+    transition: { duration: 0.2, ease: "easeIn" },
+  },
+} as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
+} as const;
 
 export function Navbar() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t, locale } = useDictionary();
-  const toggleLocale = useLanguageStore((s) => s.toggleLocale);
+  const [open, setOpen] = useState(false);
+  const { locale, setLocale } = useLanguageStore();
+  const { t, dir } = useDictionary();
 
-  // Custom ease + hover shape reveals
+  const navLinks = [
+    { href: "#about", label: t.nav.links.about },
+    { href: "#skills", label: t.nav.links.skills },
+    { href: "#projects", label: t.nav.links.projects },
+    { href: "#experience", label: t.nav.links.experience },
+    { href: "#contact", label: t.nav.links.contact },
+  ];
+
+  const socialLinks = t.footer.sections.social.links.map((label) => ({
+    href: "#",
+    label,
+  }));
+
+  const downloadLabel = locale === "fa" ? "دانلود رزومه" : "Download CV";
+
   useEffect(() => {
-    if (!containerRef.current) return;
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
-    try {
-      if (!gsap.parseEase("main")) {
-        CustomEase.create("main", "0.65, 0.01, 0.05, 0.99");
-      }
-      gsap.defaults({ ease: "main", duration: 0.7 });
-    } catch {
-      gsap.defaults({ ease: "power2.out", duration: 0.7 });
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
     }
 
-    const ctx = gsap.context(() => {
-      const menuItems = containerRef.current!.querySelectorAll(
-        ".menu-list-item[data-shape]",
-      );
-      const shapesContainer = containerRef.current!.querySelector(
-        ".ambient-background-shapes",
-      );
-
-      menuItems.forEach((item) => {
-        const shapeIndex = item.getAttribute("data-shape");
-        const shape = shapesContainer?.querySelector(`.bg-shape-${shapeIndex}`);
-        if (!shape) return;
-
-        const shapeEls = shape.querySelectorAll(".shape-element");
-
-        const onEnter = () => {
-          shapesContainer
-            ?.querySelectorAll(".bg-shape")
-            .forEach((s) => s.classList.remove("active"));
-          shape.classList.add("active");
-          gsap.fromTo(
-            shapeEls,
-            { scale: 0.5, opacity: 0, rotation: -10 },
-            {
-              scale: 1,
-              opacity: 1,
-              rotation: 0,
-              duration: 0.6,
-              stagger: 0.08,
-              ease: "back.out(1.7)",
-              overwrite: "auto",
-            },
-          );
-        };
-
-        const onLeave = () => {
-          gsap.to(shapeEls, {
-            scale: 0.8,
-            opacity: 0,
-            duration: 0.3,
-            ease: "power2.in",
-            onComplete: () => shape.classList.remove("active"),
-            overwrite: "auto",
-          });
-        };
-
-        item.addEventListener("mouseenter", onEnter);
-        item.addEventListener("mouseleave", onLeave);
-        (item as unknown as { _cleanup?: () => void })._cleanup = () => {
-          item.removeEventListener("mouseenter", onEnter);
-          item.removeEventListener("mouseleave", onLeave);
-        };
-      });
-    }, containerRef);
-
-    return () => {
-      ctx.revert();
-      containerRef.current
-        ?.querySelectorAll(".menu-list-item[data-shape]")
-        .forEach((item) => (item as unknown as { _cleanup?: () => void })._cleanup?.());
-    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // Open / close timeline
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const navWrap = containerRef.current!.querySelector(".nav-overlay-wrapper");
-      const menu = containerRef.current!.querySelector(".menu-content");
-      const overlay = containerRef.current!.querySelector(".overlay");
-      const bgPanels = containerRef.current!.querySelectorAll(".backdrop-layer");
-      const menuLinks = containerRef.current!.querySelectorAll(".nav-link");
-      const fadeTargets = containerRef.current!.querySelectorAll("[data-menu-fade]");
-      const menuButton = containerRef.current!.querySelector(".nav-close-btn");
-      const menuButtonTexts = menuButton?.querySelectorAll("p");
-      const menuButtonIcon = menuButton?.querySelector(".menu-button-icon");
-
-      const tl = gsap.timeline();
-
-      if (isMenuOpen) {
-        navWrap?.setAttribute("data-nav", "open");
-
-        tl.set(navWrap, { display: "block" })
-          .set(menu, { xPercent: 0 }, "<")
-          .fromTo(menuButtonTexts ?? [], { yPercent: 0 }, { yPercent: -100, stagger: 0.2 })
-          .fromTo(menuButtonIcon ?? {}, { rotate: 0 }, { rotate: 90 }, "<")
-          .fromTo(overlay, { autoAlpha: 0 }, { autoAlpha: 1 }, "<")
-          .fromTo(
-            bgPanels,
-            { xPercent: 101 },
-            { xPercent: 0, stagger: 0.12, duration: 0.575 },
-            "<",
-          )
-          .fromTo(
-            menuLinks,
-            { yPercent: 140, rotate: 10 },
-            { yPercent: 0, rotate: 0, stagger: 0.05 },
-            "<+=0.35",
-          );
-
-        if (fadeTargets.length) {
-          tl.fromTo(
-            fadeTargets,
-            { autoAlpha: 0, yPercent: 50 },
-            { autoAlpha: 1, yPercent: 0, stagger: 0.04, clearProps: "all" },
-            "<+=0.2",
-          );
-        }
-      } else {
-        navWrap?.setAttribute("data-nav", "closed");
-
-        tl.to(overlay, { autoAlpha: 0 })
-          .to(menu, { xPercent: 120 }, "<")
-          .to(menuButtonTexts ?? [], { yPercent: 0 }, "<")
-          .to(menuButtonIcon ?? [], { rotate: 0 }, "<")
-          .set(navWrap, { display: "none" });
-      }
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isMenuOpen) setIsMenuOpen(false);
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [isMenuOpen]);
-
-  const toggleMenu = () => setIsMenuOpen((v) => !v);
-  const closeMenu = () => setIsMenuOpen(false);
+  const closeMenu = () => setOpen(false);
 
   return (
-    <div ref={containerRef}>
-      <div className="site-header-wrapper">
-        <header className="header">
-          <div className="container is--full">
-            <nav className="nav-row">
-              <a href="#hero" className="nav-logo-row w-inline-block">
-                Portfolio
-              </a>
-              <div className="nav-row__right">
-                <button type="button" className="lang-switch" onClick={toggleLocale}>
-                  <Languages className="size-3.5" strokeWidth={1.75} />
-                  {locale === "en" ? "فارسی" : "English"}
-                </button>
-
-                <div className="nav-toggle-label" onClick={toggleMenu} style={{ cursor: "pointer" }}>
-                  <span className="toggle-text">{t.nav.toggle}</span>
-                </div>
-
-                <button
-                  type="button"
-                  aria-label={isMenuOpen ? t.nav.close : t.nav.toggle}
-                  className="nav-close-btn"
-                  onClick={toggleMenu}
-                >
-                  <div className="menu-button-text">
-                    <p className="p-large">{t.nav.toggle}</p>
-                    <p className="p-large">{t.nav.close}</p>
-                  </div>
-                  <div className="icon-wrap">
-                    <X className="menu-button-icon" strokeWidth={1.75} />
-                  </div>
-                </button>
-              </div>
-            </nav>
-          </div>
-        </header>
-      </div>
-
-      <section className="fullscreen-menu-container">
-        <div data-nav="closed" className="nav-overlay-wrapper">
-          <div className="overlay" onClick={closeMenu} />
-          <nav className="menu-content">
-            <div className="menu-bg">
-              <div className="backdrop-layer first" />
-              <div className="backdrop-layer second" />
-              <div className="backdrop-layer" />
-
-              <div className="ambient-background-shapes">
-                <svg className="bg-shape bg-shape-1" viewBox="0 0 400 400" fill="none">
-                  <circle className="shape-element" cx="80" cy="120" r="40" fill="rgba(170,187,197,0.18)" />
-                  <circle className="shape-element" cx="300" cy="80" r="60" fill="rgba(103,107,108,0.18)" />
-                  <circle className="shape-element" cx="200" cy="300" r="80" fill="rgba(170,187,197,0.1)" />
-                  <circle className="shape-element" cx="350" cy="280" r="30" fill="rgba(170,187,197,0.18)" />
-                </svg>
-                <svg className="bg-shape bg-shape-2" viewBox="0 0 400 400" fill="none">
-                  <path className="shape-element" d="M0 200 Q100 100, 200 200 T 400 200" stroke="rgba(170,187,197,0.22)" strokeWidth="60" fill="none" />
-                  <path className="shape-element" d="M0 280 Q100 180, 200 280 T 400 280" stroke="rgba(103,107,108,0.2)" strokeWidth="40" fill="none" />
-                </svg>
-                <svg className="bg-shape bg-shape-3" viewBox="0 0 400 400" fill="none">
-                  <circle className="shape-element" cx="50" cy="50" r="8" fill="rgba(170,187,197,0.35)" />
-                  <circle className="shape-element" cx="150" cy="50" r="8" fill="rgba(103,107,108,0.35)" />
-                  <circle className="shape-element" cx="250" cy="50" r="8" fill="rgba(170,187,197,0.3)" />
-                  <circle className="shape-element" cx="350" cy="50" r="8" fill="rgba(103,107,108,0.3)" />
-                  <circle className="shape-element" cx="100" cy="150" r="12" fill="rgba(170,187,197,0.28)" />
-                  <circle className="shape-element" cx="200" cy="150" r="12" fill="rgba(103,107,108,0.28)" />
-                  <circle className="shape-element" cx="300" cy="150" r="12" fill="rgba(170,187,197,0.28)" />
-                </svg>
-                <svg className="bg-shape bg-shape-4" viewBox="0 0 400 400" fill="none">
-                  <path className="shape-element" d="M100 100 Q150 50, 200 100 Q250 150, 200 200 Q150 250, 100 200 Q50 150, 100 100" fill="rgba(170,187,197,0.16)" />
-                  <path className="shape-element" d="M250 200 Q300 150, 350 200 Q400 250, 350 300 Q300 350, 250 300 Q200 250, 250 200" fill="rgba(103,107,108,0.16)" />
-                </svg>
-                <svg className="bg-shape bg-shape-5" viewBox="0 0 400 400" fill="none">
-                  <line className="shape-element" x1="0" y1="100" x2="300" y2="400" stroke="rgba(170,187,197,0.2)" strokeWidth="30" />
-                  <line className="shape-element" x1="100" y1="0" x2="400" y2="300" stroke="rgba(103,107,108,0.18)" strokeWidth="25" />
-                  <line className="shape-element" x1="200" y1="0" x2="400" y2="200" stroke="rgba(170,187,197,0.14)" strokeWidth="20" />
-                </svg>
-              </div>
-            </div>
-
-            <div className="menu-content-wrapper">
-              <ul className="menu-list">
-                {SECTION_LINKS.map((key, i) => (
-                  <li className="menu-list-item" data-shape={i + 1} key={key}>
-                    <a href={`#${key}`} className="nav-link w-inline-block" onClick={closeMenu}>
-                      <p className="nav-link-text" data-menu-fade>
-                        {t.nav.links[key]}
-                      </p>
-                      <div className="nav-link-hover-bg" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
+    <div dir={dir}>
+      <nav className="fixed inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-4 sm:px-8">
+        <div className="flex items-center gap-2 text-foreground">
+          <span className="text-2xl font-semibold">Ellahe Khawari</span>
         </div>
-      </section>
+
+        <div className="flex items-center gap-3">
+          <Switch
+            checked={locale === "fa"}
+            onCheckedChange={(checked) => setLocale(checked ? "fa" : "en")}
+            showIcons
+            checkedIcon={<span className="text-[10px] text-background font-semibold leading-none">FA</span>}
+            uncheckedIcon={<span className="text-[10px] text-background font-semibold leading-none">EN</span>}
+            aria-label={locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
+            className="border-white/20 bg-white/10"
+          />
+
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-label={open ? t.nav.close : t.nav.toggle}
+            className="flex items-center gap-2 rounded-full bg-foreground/10 px-4 py-2 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-95"
+          >
+            <BurgerIcon open={open} />
+            {open ? t.nav.close : t.nav.toggle}
+          </button>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={closeMenu}
+              className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm"
+            />
+
+            <motion.div
+              key="panel"
+              variants={panelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              role="dialog"
+              aria-modal="true"
+              className="fixed inset-4 z-50 flex flex-col overflow-hidden rounded-3xl bg-background p-6 text-white shadow-2xl sm:inset-auto m-2 w-full md:w-4/12 h-[calc(100vh-2rem)] "
+            >
+              <div
+                className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)] bg-size-[40px_40px]"
+              />
+              <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center bg-mist mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+
+              <motion.div variants={itemVariants} className="flex flex-col">
+                {navLinks.map((link, index) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={closeMenu}
+                    whileTap={{ scale: 0.97 }}
+                    className={`group relative flex items-center justify-between gap-2 overflow-hidden rounded-2xl px-3 py-3 text-4xl font-semibold leading-tight text-foreground  ${
+                      index > 0 ? " pt-6" : ""
+                    }`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 origin-left scale-x-0 rounded-2xl bg-white/5 transition-transform duration-300 ease-out group-hover:scale-x-100 group-active:scale-x-100"
+                    />
+                    <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-active:translate-x-1">
+                      {link.label}
+                    </span>
+                    <ArrowUpRight
+                      size={26}
+                      className="relative z-10 shrink-0 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100"
+                    />
+                  </motion.a>
+                ))}
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="my-6 border-t border-dashed border-foreground/15" />
+
+              <motion.div variants={itemVariants}>
+                <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-white/40">
+                  {t.footer.sections.resources.label}
+                </p>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="my-6 border-t border-dashed border-white/15" />
+
+              <motion.div variants={itemVariants} className="flex items-center gap-3">
+                <a
+                  href="#"
+                  aria-label="Link"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                >
+                  <Link size={18} />
+                </a>
+                <a
+                  href="#"
+                  aria-label="Share"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                >
+                  <Share size={18} />
+                </a>
+              </motion.div>
+
+              <motion.a
+                variants={itemVariants}
+                href="#"
+                whileTap={{ scale: 0.97 }}
+                className="mt-6 flex items-center justify-between rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-white transition-colors bg-white/5"
+              >
+                {downloadLabel}
+                <Download size={16} />
+              </motion.a>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
+
+export default Navbar;
