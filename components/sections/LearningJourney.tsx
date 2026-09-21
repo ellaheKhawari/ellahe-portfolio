@@ -41,7 +41,6 @@ function useIsPortrait() {
     update();
     setMounted(true);
 
-    // addEventListener is preferred, but Safari < 14 only supports addListener.
     if (mql.addEventListener) {
       mql.addEventListener("change", update);
       return () => mql.removeEventListener("change", update);

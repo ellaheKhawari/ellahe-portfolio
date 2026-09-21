@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 
 export interface Milestone {
@@ -47,4 +48,16 @@ export interface Translations {
   downloadApp: string;
   closeMenu: string;
   openMenu: string;
+}
+
+export interface VerticalTab {
+  id: string;
+  label: string;
+  hint: string;
+  icon: LucideIcon;
+  eyebrow: string;
+  title: string;
+  body: string;
+  points: string[];
+  metric: { value: string; label: string };
 }

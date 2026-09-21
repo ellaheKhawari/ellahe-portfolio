@@ -27,9 +27,9 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative flex h-[110vh] px-6 py-6">
+    <section id="contact" className="relative flex min-h-screen px-6 py-6">
       <SpotlightNew className="absolute inset-0">
-        <div className="absolute h-dvh min-h-screen! inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-700 ">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-700 ">
           <div
             className="absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{

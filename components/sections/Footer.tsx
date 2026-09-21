@@ -19,7 +19,8 @@ export function Footer() {
   ];
 
   return (
-    <footer
+    <section className="flex justify-end items-end h-dvh">  
+      <footer
       className="relative mx-auto flex w-full min-h-[75vh] flex-row items-center justify-center rounded-t-[50px] border-t px-6 py-12 md:rounded-t-6xl md:py-8 md:px-8 "
       style={{
         borderTop: "1px solid #4b4b4b",
@@ -55,15 +56,17 @@ export function Footer() {
                           {link}
                         </a>
                       </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </AnimatedContainer>
-          ))}
+                      );
+                    })}
+                  </ul>
+                </div>
+              </AnimatedContainer>
+            ))}
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </section>
+    
   );
 }
 
