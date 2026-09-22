@@ -14,8 +14,10 @@ export default function Home() {
       <main className="overflow-x-clip">
         <Hero />
         <About />
-        <Skills />
-        <Projects />
+        <div className="relative">
+          <Skills />
+          <Projects />
+        </div>
         <LearningJourney />
         <Contact />
       </main>

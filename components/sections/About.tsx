@@ -8,7 +8,7 @@ export function About() {
   const { t } = useDictionary();
 
   return (
-    <section id="about" className="min-h-screen mx-auto max-w-6xl py-28 md:py-36">
+    <section id="about" className="min-h-screen mx-auto w-full py-28 md:py-36">
       <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -70,17 +70,6 @@ export function Hero() {
           </a>
         </motion.div>
       </div>
-
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.9 }}
-        className="absolute bottom-8 inset-s-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground md:flex"
-      >
-        {t.hero.scroll}
-        <ArrowDown className="size-4 animate-bounce" />
-      </motion.a>
     </section>
   );
 }
