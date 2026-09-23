@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Download, Link, Share, X } from "lucide-react";
+import { SiGithub, SiInstagram, SiTelegram, SiWhatsapp } from "react-icons/si"
 import { useDictionary, useLanguageStore } from "@/lib/i18n/store";
 import { Switch } from "@/components/ui/switch";
 
@@ -174,7 +175,7 @@ export function Navbar() {
               exit="exit"
               role="dialog"
               aria-modal="true"
-              className="fixed inset-4 z-50 flex flex-col overflow-hidden rounded-3xl bg-background p-6 text-white shadow-2xl sm:inset-auto sm:m-2 sm:w-full sm:h-[calc(100vh-2rem)] md:w-4/12"
+              className="fixed inset-4 z-50 flex flex-col justify-center  overflow-hidden rounded-3xl bg-background p-6 text-foreground shadow-2xl sm:inset-auto sm:m-2 sm:w-full sm:h-[calc(100vh-2rem)] md:w-4/12"
             >
               <div
                 className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)] bg-size-[40px_40px]"
@@ -219,27 +220,47 @@ export function Navbar() {
               <motion.div variants={itemVariants} className="my-6 border-t border-dashed border-foreground/15" />
 
               <motion.div variants={itemVariants}>
-                <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-white/40">
-                  {t.footer.sections.resources.label}
+                <p className="mb-3 text-lg font-medium uppercase tracking-[0.2em] text-foreground/60">
+                  {t.nav.links.waysToConnect}
                 </p>
               </motion.div>
 
-              <motion.div variants={itemVariants} className="my-6 border-t border-dashed border-white/15" />
-
               <motion.div variants={itemVariants} className="flex items-center gap-3">
-                <a
+                 <a
                   href="#"
-                  aria-label="Link"
+                  aria-label="Whatsapp"
                   className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
                 >
-                  <Link size={18} />
+                  <SiWhatsapp size={18} />
                 </a>
                 <a
                   href="#"
-                  aria-label="Share"
+                  aria-label="Telegram"
                   className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
                 >
-                  <Share size={18} />
+                  <SiTelegram size={18} />
+                </a>
+              
+                <a
+                  href="#"
+                  aria-label="Instegram"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                >
+                  <SiInstagram size={18} />
+                </a>
+                <a
+                  href="#"
+                  aria-label="GitHub"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                >
+                  <SiGithub size={18} />
+                </a>
+                <a
+                  href="#"
+                  aria-label="Linkdin"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                >
+                  <Link size={18} />
                 </a>
               </motion.div>
 

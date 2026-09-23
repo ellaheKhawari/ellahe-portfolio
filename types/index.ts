@@ -11,6 +11,7 @@ export interface Dictionary {
       projects: string;
       experience: string;
       contact: string;
+      waysToConnect: string;
     };
   };
   hero: {

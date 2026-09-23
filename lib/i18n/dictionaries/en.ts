@@ -14,6 +14,7 @@ const en: Dictionary = {
       projects: "Projects",
       experience: "Experience",
       contact: "Contact",
+      waysToConnect: "Ways To Connect",
     },
   },
   hero: {

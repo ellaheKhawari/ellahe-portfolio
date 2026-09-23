@@ -14,6 +14,7 @@ const fa: Dictionary = {
       projects: "نمونه‌کارها",
       experience: "سوابق",
       contact: "تماس",
+      waysToConnect: "راه های ارتباط ",
     },
   },
   hero: {
