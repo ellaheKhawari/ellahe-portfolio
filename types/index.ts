@@ -1,6 +1,77 @@
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 
+export interface Dictionary {
+  meta: { title: string; description: string };
+  nav: {
+    close: string;
+    links: {
+      about: string;
+      skills: string;
+      projects: string;
+      experience: string;
+      contact: string;
+    };
+  };
+  hero: {
+    eyebrow: string;
+    title1: string;
+    title2: string;
+    subtitle: string;
+    cta: string;
+    ctaSecondary: string;
+    scroll: string;
+  };
+  about: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    body2: string;
+    stats: { value: string; label: string }[];
+  };
+  skills: {
+    eyebrow: string;
+    title: string;
+    groups: { name: string; items: string[] }[];
+  };
+  projects: {
+    eyebrow: string;
+    title: string;
+    viewProject: string;
+    items: { title: string; category: string; description: string }[];
+  };
+  experience: {
+    eyebrow: string;
+    title: string;
+    items: { year: string; role: string; org: string; description: string }[];
+  };
+  contact: {
+    eyebrow: string;
+    title1: string;
+    title2: string;
+    body: string;
+    available: string;
+    book: string;
+    duration: string;
+    email: string;
+  };
+  footer: {
+    tagline: string;
+    sections: {
+      product: { label: string; links: string[] };
+      company: { label: string; links: string[] };
+      resources: { label: string; links: string[] };
+      social: { label: string; links: string[] };
+    };
+    rights: string;
+  };
+  notFound: {
+    title: string;
+    description: string;
+    home: string;
+    browse: string;
+  };
+}
 export interface Milestone {
   date: string;
   title: string;

@@ -3,7 +3,6 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 
-// --- MATERIAL DESIGN 3 PHYSICS ---
 const SWITCH_THEME = {
   "--ease-spring": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
 } as React.CSSProperties;
@@ -17,8 +16,8 @@ const switchVariants = cva(
         destructive: "peer-checked:bg-destructive peer-checked:border-destructive",
       },
       size: {
-        default: "h-9 w-[55px]", // Standard M3
-        sm: "h-6 w-10",          // Compact
+        default: "h-9 w-[55px]", 
+        sm: "h-6 w-10",         
       },
     },
     defaultVariants: {
@@ -28,7 +27,6 @@ const switchVariants = cva(
   }
 );
 
-// --- AUDIO HAPTIC ENGINE ---
 const playHapticFeedback = (type: "heavy" | "light" | "none") => {
   if (type === "none" || typeof window === "undefined") return;
 
@@ -75,8 +73,8 @@ export interface SwitchProps
     VariantProps<typeof switchVariants> {
   onCheckedChange?: (checked: boolean) => void;
   showIcons?: boolean;
-  checkedIcon?: React.ReactNode;   // Custom Icon for On State
-  uncheckedIcon?: React.ReactNode; // Custom Icon for Off State
+  checkedIcon?: React.ReactNode;   
+  uncheckedIcon?: React.ReactNode; 
   haptic?: "heavy" | "light" | "none";
 }
 
@@ -118,25 +116,20 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       onCheckedChange?.(newValue);
     };
 
-    // Size Calcs
     const isSmall = size === "sm";
     const translateDist = isSmall ? "translate-x-[16px]" : "translate-x-[20px]";
     const handleSizeUnchecked = isSmall ? "w-3 h-3 ml-[2px]" : "w-4 h-4 ml-[2px]";
     const handleSizeChecked = isSmall ? "w-4 h-4" : "w-6 h-6";
     const handleSizePressed = isSmall ? "w-5 h-5 -ml-[2px]" : "w-7 h-7 -ml-[2px]";
-    
-    // Icon sizing classes
     const iconClasses = isSmall ? "w-2.5 h-2.5" : "w-3.5 h-3.5";
-
-    // Logic to determine if we render any icons
     const shouldRenderIcons = showIcons || checkedIcon || uncheckedIcon;
 
     return (
       <label 
         className={cn(
-          "group relative inline-flex items-center justify-center", 
+          "group relative inline-flex h-10 items-center justify-center",
           disabled && "cursor-not-allowed opacity-50",
-          "min-w-[48px] min-h-[48px]" 
+          "min-w-12 min-h-0"
         )}
         style={{ ...SWITCH_THEME, ...style }}
         onPointerDown={() => !disabled && setIsPressed(true)}
@@ -157,7 +150,6 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           {...props}
         />
 
-        {/* --- TRACK --- */}
         <div
           className={cn(
             switchVariants({ variant, size }),
@@ -166,14 +158,12 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
             className
           )}
         >
-          {/* --- HANDLE CONTAINER --- */}
           <div
             className={cn(
               "pointer-events-none block h-full w-full transition-all duration-300 ease-[var(--ease-spring)]",
               isChecked ? translateDist : "translate-x-0"
             )}
           >
-            {/* --- HANDLE --- */}
             <div
               className={cn(
                 "absolute top-1/2 -translate-y-1/2 shadow-sm transition-all duration-300 flex items-center justify-center rounded-full left-[2px]",
@@ -192,26 +182,20 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
                     : handleSizeUnchecked
               )}
             >
-              {/* --- ICONS RENDERING --- */}
               {shouldRenderIcons && (
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                     
-                    {/* CHECKED STATE ICON */}
                     <div className={cn(
                         "absolute inset-0 flex items-center justify-center transition-all duration-300",
                         isChecked ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-50 -rotate-45"
                     )}>
                         {checkedIcon ? (
-                             // If custom icon, render it. 
-                             // We don't force size classes on custom nodes to allow flexibility, 
-                             // but we provide a wrapper that centers it.
-                             checkedIcon
+                              checkedIcon
                         ) : (
                              <Check className={iconClasses} strokeWidth={4} />
                         )}
                     </div>
 
-                    {/* UNCHECKED STATE ICON */}
                     <div className={cn(
                         "absolute inset-0 flex items-center justify-center transition-all duration-300 text-muted-foreground",
                         !isChecked ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-50 rotate-45"
@@ -226,7 +210,6 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
               )}
             </div>
 
-            {/* --- HALO --- */}
             <div 
                 className={cn(
                     "absolute top-1/2 left-[2px] -translate-y-1/2 -translate-x-1/2 rounded-full pointer-events-none transition-all duration-200",

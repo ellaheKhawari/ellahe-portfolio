@@ -1,4 +1,4 @@
-import type { Dictionary } from "./en";
+import { Dictionary } from "@/types";
 
 const fa: Dictionary = {
   meta: {
@@ -7,7 +7,6 @@ const fa: Dictionary = {
       "یک نمونه‌کار مدرن و دوزبانه ساخته‌شده با Next.js، React، TypeScript و Tailwind CSS.",
   },
   nav: {
-    toggle: "منو",
     close: "بستن",
     links: {
       about: "درباره من",

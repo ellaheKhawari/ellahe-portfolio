@@ -2,18 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Download, Link, Share } from "lucide-react";
+import { ArrowUpRight, Download, Link, Share, X } from "lucide-react";
 import { useDictionary, useLanguageStore } from "@/lib/i18n/store";
 import { Switch } from "@/components/ui/switch";
-
-function BrandMark({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" className={className} aria-hidden="true">
-      <circle cx="13" cy="16" r="9" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="19" cy="16" r="9" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  );
-}
 
 const burgerBarVariants = {
   top: {
@@ -57,23 +48,32 @@ function BurgerIcon({ open }: { open: boolean }) {
 }
 
 const panelVariants = {
-  hidden: { opacity: 0, y: -18, scale: 0.95 },
+  hidden: {
+    opacity: 0,
+    scale: 0.85,
+    y: -24,
+    filter: "blur(6px)",
+  },
   visible: {
     opacity: 1,
-    y: 0,
     scale: 1,
+    y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.4,
-      ease: [0.16, 1, 0.3, 1],
-      staggerChildren: 0.06,
-      delayChildren: 0.08,
+      type: "spring",
+      stiffness: 260,
+      damping: 22,
+      mass: 0.9,
+      staggerChildren: 0.07,
+      delayChildren: 0.1,
     },
   },
   exit: {
     opacity: 0,
-    y: -10,
-    scale: 0.97,
-    transition: { duration: 0.2, ease: "easeIn" },
+    scale: 0.92,
+    y: -14,
+    filter: "blur(4px)",
+    transition: { duration: 0.25, ease: [0.4, 0, 1, 1] },
   },
 } as const;
 
@@ -122,7 +122,10 @@ export function Navbar() {
 
   return (
     <div dir={dir}>
-      <nav className="fixed inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-4 sm:px-8">
+      <nav
+        dir="ltr"
+        className="fixed inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-4 sm:px-8"
+      >
         <div className="flex items-center gap-2 text-foreground">
           <span className="text-2xl font-special-2  ">Ellahe Khawari</span>
         </div>
@@ -132,21 +135,20 @@ export function Navbar() {
             checked={locale === "fa"}
             onCheckedChange={(checked) => setLocale(checked ? "fa" : "en")}
             showIcons
-            checkedIcon={<span className="text-[10px] text-background font-semibold leading-none">FA</span>}
-            uncheckedIcon={<span className="text-[10px] text-background font-semibold leading-none">EN</span>}
-            aria-label={locale === "fa" ? "Switch to English" : "تغییر زبان به فارسی"}
-            className="border-white/20 bg-white/10"
+            checkedIcon={<span className="text-[10px] text-background font-semibold leading-none font-special-2">EN</span>}
+            uncheckedIcon={<span className="text-[10px] text-background font-semibold font-special-2 leading-none">FA</span>}
+            aria-label={locale === "en" ? "Switch to English" : "تغییر زبان به فارسی"}
+            className="border-white/20 bg-white/10 font-special-2"
           />
 
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            aria-expanded={open}
-            aria-label={open ? t.nav.close : t.nav.toggle}
-            className="flex items-center gap-2 rounded-full bg-foreground/10 px-4 py-2 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-95"
+            aria-label={open ? t.nav.close : "Open menu"}
+            className="flex h-9 items-center justify-center gap-2 rounded-full bg-foreground/10 px-4 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-95"
           >
             <BurgerIcon open={open} />
-            {open ? t.nav.close : t.nav.toggle}
+            {open && t.nav.close}
           </button>
         </div>
       </nav>
@@ -172,12 +174,21 @@ export function Navbar() {
               exit="exit"
               role="dialog"
               aria-modal="true"
-              className="fixed inset-4 z-50 flex flex-col overflow-hidden rounded-3xl bg-background p-6 text-white shadow-2xl sm:inset-auto m-2 w-full md:w-4/12 h-[calc(100vh-2rem)] "
+              className="fixed inset-4 z-50 flex flex-col overflow-hidden rounded-3xl bg-background p-6 text-white shadow-2xl sm:inset-auto sm:m-2 sm:w-full sm:h-[calc(100vh-2rem)] md:w-4/12"
             >
               <div
                 className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)] bg-size-[40px_40px]"
               />
               <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center bg-mist mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+
+              <button
+                type="button"
+                onClick={closeMenu}
+                aria-label={t.nav.close}
+                className="absolute top-4 inset-e-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-foreground transition-colors hover:bg-white/10 active:bg-white/10"
+              >
+                <X size={18} />
+              </button>
 
               <motion.div variants={itemVariants} className="flex flex-col">
                 {navLinks.map((link, index) => (
