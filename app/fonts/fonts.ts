@@ -2,6 +2,7 @@ import {
   Baloo_Bhaijaan_2,
   Varela_Round,
   Zeyada,
+  Rubik_Iso,
 } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -16,6 +17,13 @@ export const varelaRound = Varela_Round({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-body-en",
+  display: "swap",
+});
+
+export const rubikIso = Rubik_Iso({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-special2-raw",
   display: "swap",
 });
 
@@ -47,12 +55,6 @@ export const zeyada = Zeyada({
   display: "swap",
 });
 
-export const terminalGrotesque = localFont({
-  src: "./local/TerminalGrotesque.woff2",
-  weight: "400",
-  variable: "--font-special2-raw",
-  display: "swap",
-});
 
 export const fontVariables = [
   balooBhaijaan2.variable,
@@ -61,5 +63,5 @@ export const fontVariables = [
   sligoilMicro.variable,
   qasedak.variable,
   zeyada.variable,
-  terminalGrotesque.variable,
+  rubikIso.variable,
 ].join(" ");

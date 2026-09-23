@@ -124,7 +124,7 @@ export function Navbar() {
     <div dir={dir}>
       <nav className="fixed inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-4 sm:px-8">
         <div className="flex items-center gap-2 text-foreground">
-          <span className="text-2xl font-special-2 ">Ellahe Khawari</span>
+          <span className="text-2xl font-special-2  ">Ellahe Khawari</span>
         </div>
 
         <div className="flex items-center gap-3">
