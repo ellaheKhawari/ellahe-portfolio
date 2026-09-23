@@ -1,7 +1,6 @@
 import {
   Baloo_Bhaijaan_2,
   Varela_Round,
-  Bebas_Neue,
   Zeyada,
 } from "next/font/google";
 import localFont from "next/font/local";
@@ -27,19 +26,19 @@ export const iranRounded = localFont({
   display: "swap",
 });
 
-export const leagueGothic = Bebas_Neue({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-heading-en",
-  display: "swap",
-});
-
 export const qasedak = localFont({
   src: "./local/Qasedak.woff2",
   weight: "400",
   variable: "--font-special1-fa",
   display: "swap",
 });
+
+export const sligoilMicro = localFont({
+  src: "./local/SligoilMicro.woff2",
+  weight: "400",
+  variable: "--font-heading-en",
+  display: "swap",
+}); 
 
 export const zeyada = Zeyada({
   subsets: ["latin"],
@@ -51,7 +50,7 @@ export const zeyada = Zeyada({
 export const terminalGrotesque = localFont({
   src: "./local/TerminalGrotesque.woff2",
   weight: "400",
-  variable: "--font-special2",
+  variable: "--font-special2-raw",
   display: "swap",
 });
 
@@ -59,7 +58,7 @@ export const fontVariables = [
   balooBhaijaan2.variable,
   varelaRound.variable,
   iranRounded.variable,
-  leagueGothic.variable,
+  sligoilMicro.variable,
   qasedak.variable,
   zeyada.variable,
   terminalGrotesque.variable,

@@ -18,7 +18,7 @@
   --font-body: var(--font-body-en), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-heading-en), var(--font-body);
   --font-special1: var(--font-special1-en), cursive;
-  --font-special2: var(--font-special2), monospace;
+  --font-special2: var(--font-special2-raw), monospace;
 }
 
 [data-locale="fa"] {
@@ -43,7 +43,7 @@
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);
   --font-special-1: var(--font-special1);
-  --font-special-2: var(--font-special2);
+  --font-special-2: var(--font-special2-raw);
 }
 
 * {
