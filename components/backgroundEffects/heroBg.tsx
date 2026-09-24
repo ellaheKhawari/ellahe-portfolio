@@ -21,14 +21,14 @@ const seeded = (i: number) =>
 const DEFAULT_PALETTE: RGB[] = [
   [135, 190, 226],
   [135, 190, 226],
-  [103, 107, 108],
+  [157, 196, 221],
 ];
 
 export function HeroBackground({
   className,
   quantity = 220,
-  connectDistance = 190,
-  repelRadius = 200,
+  connectDistance = 170,
+  repelRadius = 120,
   palette = DEFAULT_PALETTE,
 }: ParticlesProps) {
   const skillsRef = useRef<HTMLDivElement>(null);

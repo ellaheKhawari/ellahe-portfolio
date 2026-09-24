@@ -19,13 +19,14 @@ const en: Dictionary = {
   },
   hero: {
     eyebrow: "Available for new projects",
-    title1: "I build interfaces",
-    title2: "that feel alive.",
+    title1: "Builder of modern",
+    title2: "web experience",
     subtitle:
-      "Front-end engineer crafting fast, precise, and quietly ambitious products — from motion-driven interfaces to full-stack platforms.",
+      "I care about clean interfaces, thoughtful interactions and the deatlis that make a digital experience memorable ",
     cta: "See my work",
     ctaSecondary: "Get in touch",
     scroll: "Scroll",
+    skills: "React TypeScript  Next.js  Three.js",
   },
   about: {
     eyebrow: "About",

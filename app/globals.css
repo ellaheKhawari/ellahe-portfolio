@@ -4,7 +4,7 @@
   --ink: #262626;
   --steel: #676b6c;
   --mist: #9dc4dd;
-  --darkMist: rgb(135, 190, 226);
+  --darkMist: #87bee2;
 
   --background: #0a0a0a;
   --background-elevated: var(--ink);
@@ -75,6 +75,7 @@ h6 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -88,8 +89,124 @@ h6 {
 .container-px {
   padding-inline: 1.25rem;
 }
+
 @media (min-width: 768px) {
   .container-px {
     padding-inline: 3rem;
+  }
+}
+
+@property --si-duration {
+  syntax: "<time>";
+  inherits: true;
+  initial-value: 16s;
+}
+
+.si-rotor {
+  transform-box: view-box;
+  transform-origin: center;
+  animation-name: si-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--si-duration);
+  transition: --si-duration 0.5s ease;
+  will-change: transform;
+}
+
+@keyframes si-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .si-rotor {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+}
+
+
+.mqx-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.mqx-container:hover .mqx-track {
+  animation-play-state: paused;
+}
+
+.mqx-ribbon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transform: translate(-50%, -50%) rotate(var(--mqx-rotate-desktop));
+  box-shadow: none;
+  border-radius: 0;
+}
+
+@media (max-width: 640px) {
+  .mqx-ribbon {
+    transform: translate(-50%, -50%) rotate(var(--mqx-rotate-mobile));
+  }
+}
+
+.mqx-track {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.mqx-unit {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: var(--font-special2-raw), sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mqx-sep {
+  margin-left: 1em;
+  opacity: 0.6;
+}
+
+@keyframes mqx-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .mqx-track {
+    animation-play-state: paused;
   }
 }

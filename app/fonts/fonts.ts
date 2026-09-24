@@ -2,7 +2,7 @@ import {
   Baloo_Bhaijaan_2,
   Varela_Round,
   Zeyada,
-  Rubik_Iso,
+  VT323,
 } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -20,7 +20,7 @@ export const varelaRound = Varela_Round({
   display: "swap",
 });
 
-export const rubikIso = Rubik_Iso({
+export const vt323 = VT323({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-special2-raw",
@@ -63,5 +63,5 @@ export const fontVariables = [
   sligoilMicro.variable,
   qasedak.variable,
   zeyada.variable,
-  rubikIso.variable,
+  vt323.variable,
 ].join(" ");

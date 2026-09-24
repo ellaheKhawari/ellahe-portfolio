@@ -1,3 +1,4 @@
+import { MarqueeDirection } from "@/components/ui/MarqueeCross";
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -22,6 +23,7 @@ export interface Dictionary {
     cta: string;
     ctaSecondary: string;
     scroll: string;
+    skills: string;
   };
   about: {
     eyebrow: string;
@@ -132,4 +134,62 @@ export interface VerticalTab {
   body: string;
   points: string[];
   metric: { value: string; label: string };
+}
+
+export interface MarqueeCrossProps {
+  text?: string;
+  separator?: string;
+  speed?: number;
+  topSpeed?: number;
+  bottomSpeed?: number;
+  topDirection?: MarqueeDirection;
+  bottomDirection?: MarqueeDirection;
+  angle?: number;
+  mobileAngle?: number;
+  width?: number | string;
+  height?: number | string;
+  rotate?: number;
+  ribbonHeight?: number;
+  fontSize?: number;
+  letterSpacing?: string;
+  gap?: number;
+  repeatCount?: number;
+  ribbonColor?: string;
+  textColor?: string;
+  backgroundColor?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface RibbonProps {
+  text: string;
+  separator: string;
+  rotateDeg: number;
+  mobileRotateDeg: number;
+  speed: number;
+  direction: MarqueeDirection;
+  ribbonHeight: number;
+  fontSize: number;
+  letterSpacing: string;
+  gap: number;
+  repeatCount: number;
+  ribbonColor: string;
+  textColor: string;
+  animationName: string;
+}
+
+export interface ScrollIndicatorProps {
+  text?: string;
+  separator?: string;
+  size?: number;
+  radius?: number;
+  speed?: number;
+  textSize?: number;
+  letterSpacing?: number;
+  strokeWidth?: number;
+  arrowSize?: number;
+  hoverSpeedMultiplier?: number;
+  onClick?: () => void;
+  ariaLabel?: string;
+  className?: string;
 }
