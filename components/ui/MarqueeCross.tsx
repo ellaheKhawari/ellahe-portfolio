@@ -1,5 +1,6 @@
 'use client';
 
+import { MARQUEE_SKILLS } from '@/lib/mockData';
 import { MarqueeCrossProps, RibbonProps } from '@/types';
 import React from 'react';
 
@@ -28,10 +29,11 @@ function Ribbon({
       className="mqx-ribbon"
       style={
         {
-          height: `clamp(28px, 8vw, ${ribbonHeight}px)`,
+          height: `clamp(50px, 6vw, ${ribbonHeight}px)`,
           backgroundColor: ribbonColor,
           '--mqx-rotate-desktop': `${rotateDeg}deg`,
           '--mqx-rotate-mobile': `${mobileRotateDeg}deg`,
+          direction: 'ltr',
         } as React.CSSProperties
       }
     >
@@ -50,7 +52,9 @@ function Ribbon({
             className="mqx-unit"
             style={{
               color: textColor,
-              fontSize: `clamp(9px, 1vw, ${fontSize}px)`,
+              // موبایل: 14px — دسکتاپ: به fontSize prop میرسه
+              // قبلاً clamp(9px, 1vw, fontSize) بود که همیشه کوچیک میموند
+              fontSize: `clamp(20px, 3vw, ${fontSize}px)`,
               letterSpacing,
             }}
           >
@@ -65,10 +69,10 @@ function Ribbon({
   );
 }
 
-export default function MarqueeCross({
-  text = 'YOUR TEXT HERE',
+function MarqueeCross({
+  text = MARQUEE_SKILLS,  
   separator = '✦',
-  speed = 26,
+  speed = 100,
   topSpeed,
   topDirection = 'left',
   angle = 10,
@@ -82,7 +86,7 @@ export default function MarqueeCross({
   gap = 40,
   repeatCount = 10,
   ribbonColor = '#9dc4dd00',
-  textColor = '#f2f3f3',
+  textColor = '#9ea3a4',
   className = '',
   style,
 }: MarqueeCrossProps) {
@@ -92,10 +96,12 @@ export default function MarqueeCross({
   return (
     <div
       className={`mqx-container ${className}`}
+      dir="ltr"
       style={{
         width,
         height,
         transform: rotate ? `rotate(${rotate}deg)` : undefined,
+        direction: 'ltr',
         ...style,
       }}
     >
@@ -118,3 +124,5 @@ export default function MarqueeCross({
     </div>
   );
 }
+
+export default React.memo(MarqueeCross);

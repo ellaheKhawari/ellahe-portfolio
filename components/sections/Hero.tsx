@@ -5,7 +5,7 @@ import { ArrowDown, ArrowUpRight, Space } from "lucide-react";
 import { useDictionary } from "@/lib/i18n/store";
 import { EASE_OUT } from "@/lib/utils";
 import { HeroBackground } from "../backgroundEffects/heroBg";
-import Demo from "../ui/animation/marquee";
+import {MARQUEE_SKILLS} from "@/lib/mockData";
 import MarqueeCross from "../ui/MarqueeCross";
 import ScrollIndicator from "../ui/ScrollIndicator";
 import { useRef } from "react";
@@ -87,8 +87,9 @@ export function Hero() {
       </div>
       <motion.div className="absolute inset-x-0 bottom-0 z-20">
         <MarqueeCross
-          text="YOUR TEXT HERE"
-          topSpeed={30}
+          text={MARQUEE_SKILLS}
+          separator="✦"
+          topSpeed={120}
           topDirection="left"
           height={50}
           ribbonHeight={50}

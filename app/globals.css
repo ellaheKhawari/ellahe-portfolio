@@ -111,6 +111,8 @@ h6 {
   animation-duration: var(--si-duration);
   transition: --si-duration 0.5s ease;
   will-change: transform;
+  direction: ltr;
+  unicode-bidi: plaintext;
 }
 
 @keyframes si-spin {
@@ -141,6 +143,8 @@ h6 {
   cursor: default;
   user-select: none;
   -webkit-user-select: none;
+  direction: ltr;
+  unicode-bidi: plaintext;
 }
 
 .mqx-container:hover .mqx-track {
@@ -176,6 +180,8 @@ h6 {
   backface-visibility: hidden;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  direction: ltr;
+  unicode-bidi: plaintext;
 }
 
 .mqx-unit {
@@ -187,6 +193,8 @@ h6 {
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
+  direction: ltr;
+  unicode-bidi: plaintext;
 }
 
 .mqx-sep {

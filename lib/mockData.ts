@@ -70,3 +70,16 @@ export const DEMO_TABS: VerticalTab[] = [
     metric: { value: "3x", label: "faster review cycles" },
   },
 ];
+
+export const MARQUEE_SKILLS = [
+  'React',
+  'TypeScript',
+  'Tailwind CSS',
+  'Next.js',
+  'Node.js',
+  'Git',
+  'REST API',
+  'Figma',
+  'Framer Motion',
+  'PostgreSQL',
+].join('   ');

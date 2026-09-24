@@ -41,9 +41,15 @@ export default function ScrollIndicator({
         return { value: unit.repeat(repeatCount), circumference };
     }, [text, separator, radius, textSize, letterSpacing]);
 
-    const sizeStyle: React.CSSProperties | undefined = size ? { width: size, height: size } : undefined;
+    const sizeStyle: React.CSSProperties | undefined = size ? { width: size, height: size, direction: 'ltr' } : { direction: 'ltr' };
     const svgContent = (
-        <svg viewBox={`0 0 ${VB} ${VB}`} className="h-full w-full overflow-visible" aria-hidden="true">
+        <svg
+            viewBox={`0 0 ${VB} ${VB}`}
+            className="h-full w-full overflow-visible"
+            aria-hidden="true"
+            direction="ltr"
+            style={{ direction: 'ltr' }}
+        >
             <g fill="none" stroke="rgba(255,255,255,0.92)">
                 <circle cx={CENTER} cy={CENTER} r={outerRadius} strokeWidth={strokeWidth} />
                 <circle cx={CENTER} cy={CENTER} r={innerRadius} strokeWidth={strokeWidth} />
@@ -87,6 +93,7 @@ export default function ScrollIndicator({
         return (
             <button
                 type="button"
+                dir="ltr"
                 onClick={onClick}
                 aria-label={ariaLabel}
                 style={sizeStyle}
@@ -102,6 +109,7 @@ export default function ScrollIndicator({
     return (
         <div
             aria-hidden="true"
+            dir="ltr"
             style={sizeStyle}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
