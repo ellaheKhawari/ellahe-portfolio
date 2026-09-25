@@ -95,7 +95,7 @@ export function Skills({
   const CurrentIcon = current.icon;
 
   return (
-    <section className="sticky top-0 z-0 flex w-full h-dvh justify-center items-center" >
+    <section className="reveal sticky top-0 z-0 flex w-full h-dvh justify-center items-center" >
       <div
       role="tablist"
       aria-label="Skills"

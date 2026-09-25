@@ -9,7 +9,7 @@ export function Projects() {
   const { t } = useDictionary();
 
   return (
-    <section id="projects" className="sticky top-0 z-10 min-h-screen mx-auto w-full py-28 md:py-36 bg-mist rounded-tr-4xl  rounded-tl-4xl">
+    <section id="projects" className="reveal-group sticky top-0 z-10 min-h-screen mx-auto w-full py-28 md:py-36 bg-mist rounded-tr-4xl  rounded-tl-4xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

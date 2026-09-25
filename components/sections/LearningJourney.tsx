@@ -577,7 +577,7 @@ export function LearningJourney() {
     <section
       id="experience"
       ref={trackRef}
-      className="relative border-y border-border-strong bg-background"
+      className="reveal-group relative border-y border-border-strong bg-background"
       style={{ height: mounted ? "300vh" : undefined }}
     >
       <div className="sticky top-0 flex h-dvh w-full flex-col overflow-hidden py-10">

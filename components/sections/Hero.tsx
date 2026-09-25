@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden py-15"
+      className="reveal-group relative flex min-h-screen items-center overflow-hidden py-15"
     >
       <HeroBackground />
       <div className="container-px mx-auto min-w-9/12 max-w-6xl z-20 text-center py-10">
@@ -58,7 +58,7 @@ export function Hero() {
           <span className="text-muted-foreground">{t.hero.title2}</span>
         </motion.h1>
 
-        <motion.div className="absolute bottom-10 right-5 z-10">
+        <motion.div className="absolute bottom-3 right-5 z-10">
           <ScrollIndicator
             text="SCROLL DOWN"
             speed={30}
@@ -104,7 +104,7 @@ export function Hero() {
           </motion.div> */}
       </div>
 
-      <motion.div className="absolute h-1/12 inset-x-0 bottom-[-10] z-20">
+      {/* <motion.div className="absolute h-1/12 inset-x-0 bottom-[-10] z-20">
         <MarqueeCross
           text={MARQUEE_SKILLS}
           separator="✦"
@@ -117,7 +117,7 @@ export function Hero() {
           fontSize={23}
           mobileFontSize={30}
         />
-      </motion.div>
+      </motion.div> */}
     </section>
 
   );
