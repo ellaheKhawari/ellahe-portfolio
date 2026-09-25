@@ -197,3 +197,10 @@ export interface ScrollIndicatorProps {
   ariaLabel?: string;
   className?: string;
 }
+
+export interface SkillsProps {
+  tabs?: VerticalTab[];
+  className?: string;
+  interval?: number;
+  layoutId?: string;
+}
