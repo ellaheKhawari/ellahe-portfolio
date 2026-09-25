@@ -81,10 +81,10 @@ function MarqueeCross({
     rotate = 0,
     width = '100%',
     height = '100%',
-    ribbonHeight = 42,          // desktop: smaller height
-    mobileRibbonHeight = 68,    // mobile: larger height
-    fontSize = 12,              // desktop font size
-    mobileFontSize = 20,        // mobile font size
+    ribbonHeight = 42,          
+    mobileRibbonHeight = 68,    
+    fontSize = 12,             
+    mobileFontSize = 20,        
     letterSpacing = '0.2em',
     gap = 40,
     repeatCount = 10,

@@ -12,7 +12,24 @@ import { useRef } from "react";
 
 export function Hero() {
   const { t } = useDictionary();
-  const nextSectionRef = useRef<HTMLDivElement>(null);
+  const nextSectionRef = useRef<HTMLElement | null>(null);
+
+  const handleScrollToNext = () => {
+    const target =
+      nextSectionRef.current ??
+      document.getElementById("about") ??
+      document.querySelector("main > section:nth-of-type(2)");
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    window.scrollBy({
+      top: window.innerHeight * 0.9,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section
@@ -20,7 +37,7 @@ export function Hero() {
       className="relative flex min-h-screen items-center overflow-hidden py-15"
     >
       <HeroBackground />
-      <div className="container-px mx-auto min-w-9/12 max-w-6xl z-20 text-center  py-10 ">
+      <div className="container-px mx-auto min-w-9/12 max-w-6xl z-20 text-center py-10">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -40,13 +57,14 @@ export function Hero() {
           <br />
           <span className="text-muted-foreground">{t.hero.title2}</span>
         </motion.h1>
-        <motion.div className="absolute bottom-15 left-5 z-10">
+
+        <motion.div className="absolute bottom-10 right-5 z-10">
           <ScrollIndicator
             text="SCROLL DOWN"
             speed={30}
             textSize={20}
             className="size-28! md:size-32!"
-            onClick={() => nextSectionRef.current?.scrollIntoView({ behavior: "smooth" })}
+            onClick={handleScrollToNext}
           />
         </motion.div>
         {/* <motion.h3 
@@ -85,6 +103,7 @@ export function Hero() {
           </a>
           </motion.div> */}
       </div>
+
       <motion.div className="absolute h-1/12 inset-x-0 bottom-[-10] z-20">
         <MarqueeCross
           text={MARQUEE_SKILLS}
@@ -93,12 +112,13 @@ export function Hero() {
           topDirection="left"
           angle={0}
           rotate={0}
-          ribbonHeight={55}          // desktop: smaller height
-          mobileRibbonHeight={55}    // mobile: larger height
-          fontSize={23}              // desktop font size
-          mobileFontSize={30}        // mobile font size
+          ribbonHeight={55}
+          mobileRibbonHeight={55}
+          fontSize={23}
+          mobileFontSize={30}
         />
       </motion.div>
     </section>
+
   );
 }

@@ -68,7 +68,7 @@ export default function ScrollIndicator({
                 <path id={pathId} d={circlePathD(CENTER, CENTER, radius)} fill="none" />
                 <text
                     className="si-font text-md md:text-2xl"
-                    fill="rgba(255,255,255,0.92)"
+                    fill="rgba(255,255,255,0.90)"
                     fontWeight={600}
                     letterSpacing={`${letterSpacing}em`}
                     dominantBaseline="middle"
