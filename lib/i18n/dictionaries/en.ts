@@ -1,4 +1,5 @@
 import { Dictionary } from "@/types";
+import { title } from "process";
 
 const en: Dictionary = {
   meta: {
@@ -41,22 +42,23 @@ const en: Dictionary = {
     ],
   },
   skills: {
-    eyebrow: "Skills",
-    title: "Tools I reach for.",
+    eyebrow: "My Skills",
+    title1: "Frontend, Motion & 3D",
     groups: [
       {
-        name: "Frontend",
+        name: "",
         items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "MUI"],
       },
       {
-        name: "Motion & 3D",
+        name: "",
         items: ["Motion (Framer)", "GSAP", "Three.js", "WebGL"],
       },
       {
-        name: "State & Tooling",
+        name: "",
         items: ["Zustand", "Sonner", "Vite", "Git", "Figma"],
       },
     ],
+    title2:"State & Tooling",
   },
   projects: {
     eyebrow: "Projects",

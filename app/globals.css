@@ -254,3 +254,68 @@ h6 {
     animation-play-state: paused;
   }
 }
+@property --cm-duration {
+  syntax: "<time>";
+  inherits: true;
+  initial-value: 30s;
+}
+
+.cm-font-a {
+  font-family: "Special2", ui-sans-serif, system-ui, sans-serif;
+}
+
+.cm-font-b {
+  font-family: "Special3", ui-sans-serif, system-ui, sans-serif;
+}
+.cm-track {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--cm-duration);
+  transition: --cm-duration 0.5s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.cm-track[data-direction="left"] {
+  animation-name: cm-scroll-left;
+}
+
+.cm-track[data-direction="right"] {
+  animation-name: cm-scroll-right;
+}
+
+@keyframes cm-scroll-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes cm-scroll-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.cm-outline {
+  color: transparent;
+  -webkit-text-stroke-width: var(--cm-outline-width, 2px);
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.92);
+  paint-order: stroke fill;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-track {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+}
+
+.cm-row:hover .cm-track {
+  animation-play-state: paused;
+}

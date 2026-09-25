@@ -1,4 +1,3 @@
-import { MarqueeDirection } from "@/components/ui/MarqueeCross";
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -34,7 +33,8 @@ export interface Dictionary {
   };
   skills: {
     eyebrow: string;
-    title: string;
+    title1: string;
+    title2: string ;
     groups: { name: string; items: string[] }[];
   };
   projects: {
@@ -136,6 +136,7 @@ export interface VerticalTab {
   metric: { value: string; label: string };
 }
 
+export type MarqueeDirection = 'left' | 'right';
 export interface MarqueeCrossProps {
   text?: string;
   separator?: string;
@@ -203,4 +204,35 @@ export interface SkillsProps {
   className?: string;
   interval?: number;
   layoutId?: string;
+}
+
+export type creativeMarqueeDirection = "left" | "right";
+export interface CreativeMarqueeProps {
+  rowOne?: string[];
+  rowTwo?: string[];
+  speed?: number;
+  direction?: creativeMarqueeDirection;
+  separator?: string;
+  hoverSlowdown?: number;
+  outlineWidth?: number;
+  repeat?: number;
+  sizeClassName?: string;
+  className?: string;
+}
+export interface Token {
+  key: string;
+  text: string;
+  kind: "word" | "sep";
+  variant?: "filled" | "outline";
+};
+
+export interface CreateRowProps {
+  words: string[];
+  separator: string;
+  direction: creativeMarqueeDirection;
+  speed: number;
+  hoverSlowdown: number;
+  outlineWidth: number;
+  repeat: number;
+  sizeClassName: string;
 }

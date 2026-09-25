@@ -37,7 +37,7 @@ export function About() {
               className="justify-center"
             />
 
-            <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-border-strong pt-8">
+            <dl className="mt-12 grid grid-cols-3 gap-6 pt-8">
               {t.about.stats.map((stat) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>

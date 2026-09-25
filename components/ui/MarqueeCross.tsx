@@ -4,8 +4,6 @@ import { MARQUEE_SKILLS } from '@/lib/mockData';
 import { MarqueeCrossProps, RibbonProps } from '@/types';
 import React, { useEffect, useState } from 'react';
 
-export type MarqueeDirection = 'left' | 'right';
-
 function Ribbon({
     text,
     separator,
@@ -88,8 +86,8 @@ function MarqueeCross({
     letterSpacing = '0.2em',
     gap = 40,
     repeatCount = 10,
-    ribbonColor = '#9dc4dd00',
-    textColor = '#9ea3a4',
+    ribbonColor = '#9dc4dd',
+    textColor = '#0a0a0a',
     className = '',
     style,
 }: MarqueeCrossProps) {

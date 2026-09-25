@@ -103,21 +103,6 @@ export function Hero() {
           </a>
           </motion.div> */}
       </div>
-
-      {/* <motion.div className="absolute h-1/12 inset-x-0 bottom-[-10] z-20">
-        <MarqueeCross
-          text={MARQUEE_SKILLS}
-          separator="✦"
-          topSpeed={120}
-          topDirection="left"
-          angle={0}
-          rotate={0}
-          ribbonHeight={55}
-          mobileRibbonHeight={55}
-          fontSize={23}
-          mobileFontSize={30}
-        />
-      </motion.div> */}
     </section>
 
   );

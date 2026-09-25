@@ -42,21 +42,22 @@ const fa: Dictionary = {
   },
   skills: {
     eyebrow: "مهارت‌ها",
-    title: "ابزارهایی که استفاده می‌کنم.",
+    title1: "فرانت‌اند، موشن و سه‌بعدی",
     groups: [
       {
-        name: "فرانت‌اند",
+        name: "",
         items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "MUI"],
       },
       {
-        name: "موشن و سه‌بعدی",
+        name: "",
         items: ["Motion (Framer)", "GSAP", "Three.js", "WebGL"],
       },
       {
-        name: "مدیریت وضعیت و ابزارها",
+        name: "",
         items: ["Zustand", "Sonner", "Vite", "Git", "Figma"],
       },
     ],
+    title2: "مدیریت وضعیت و ابزارها",
   },
   projects: {
     eyebrow: "نمونه‌کارها",
