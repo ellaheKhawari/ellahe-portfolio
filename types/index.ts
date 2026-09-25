@@ -159,6 +159,8 @@ export interface MarqueeCrossProps {
   backgroundColor?: string;
   className?: string;
   style?: React.CSSProperties;
+  mobileRibbonHeight?: number; 
+  mobileFontSize?: number;
 }
 
 export interface RibbonProps {
@@ -176,6 +178,8 @@ export interface RibbonProps {
   ribbonColor: string;
   textColor: string;
   animationName: string;
+  mobileRibbonHeight?: number;
+  mobileFontSize?: number;
 }
 
 export interface ScrollIndicatorProps {

@@ -5,7 +5,7 @@ import { ArrowDown, ArrowUpRight, Space } from "lucide-react";
 import { useDictionary } from "@/lib/i18n/store";
 import { EASE_OUT } from "@/lib/utils";
 import { HeroBackground } from "../backgroundEffects/heroBg";
-import {MARQUEE_SKILLS} from "@/lib/mockData";
+import { MARQUEE_SKILLS } from "@/lib/mockData";
 import MarqueeCross from "../ui/MarqueeCross";
 import ScrollIndicator from "../ui/ScrollIndicator";
 import { useRef } from "react";
@@ -40,12 +40,12 @@ export function Hero() {
           <br />
           <span className="text-muted-foreground">{t.hero.title2}</span>
         </motion.h1>
-        <motion.div className="absolute bottom-15 left-10 z-10">
+        <motion.div className="absolute bottom-15 left-5 z-10">
           <ScrollIndicator
             text="SCROLL DOWN"
-            speed={40}
-            size={140}
+            speed={30}
             textSize={20}
+            className="size-28! md:size-32!"
             onClick={() => nextSectionRef.current?.scrollIntoView({ behavior: "smooth" })}
           />
         </motion.div>
@@ -85,16 +85,18 @@ export function Hero() {
           </a>
           </motion.div> */}
       </div>
-      <motion.div className="absolute inset-x-0 bottom-0 z-20">
+      <motion.div className="absolute h-1/12 inset-x-0 bottom-[-10] z-20">
         <MarqueeCross
           text={MARQUEE_SKILLS}
           separator="✦"
           topSpeed={120}
           topDirection="left"
-          height={50}
-          ribbonHeight={50}
           angle={0}
           rotate={0}
+          ribbonHeight={55}          // desktop: smaller height
+          mobileRibbonHeight={55}    // mobile: larger height
+          fontSize={23}              // desktop font size
+          mobileFontSize={30}        // mobile font size
         />
       </motion.div>
     </section>

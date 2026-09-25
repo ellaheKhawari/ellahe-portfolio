@@ -159,6 +159,7 @@ h6 {
   display: flex;
   align-items: center;
   overflow: hidden;
+  height: var(--mqx-ribbon-height-mobile, 60px);
   transform: translate(-50%, -50%) rotate(var(--mqx-rotate-desktop));
   box-shadow: none;
   border-radius: 0;
@@ -167,6 +168,12 @@ h6 {
 @media (max-width: 640px) {
   .mqx-ribbon {
     transform: translate(-50%, -50%) rotate(var(--mqx-rotate-mobile));
+  }
+}
+
+@media (min-width: 768px) {
+  .mqx-ribbon {
+    height: var(--mqx-ribbon-height-desktop, 56px);
   }
 }
 
@@ -195,6 +202,13 @@ h6 {
   white-space: nowrap;
   direction: ltr;
   unicode-bidi: plaintext;
+  font-size: var(--mqx-font-size-mobile, 18px);
+}
+
+@media (min-width: 768px) {
+  .mqx-unit {
+    font-size: var(--mqx-font-size-desktop, 12px);
+  }
 }
 
 .mqx-sep {

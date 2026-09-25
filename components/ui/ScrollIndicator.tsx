@@ -67,9 +67,8 @@ export default function ScrollIndicator({
             <g className="si-rotor" style={{ "--si-duration": `${duration}s` } as React.CSSProperties}>
                 <path id={pathId} d={circlePathD(CENTER, CENTER, radius)} fill="none" />
                 <text
-                    className="si-font"
+                    className="si-font text-md md:text-2xl"
                     fill="rgba(255,255,255,0.92)"
-                    fontSize={textSize}
                     fontWeight={600}
                     letterSpacing={`${letterSpacing}em`}
                     dominantBaseline="middle"
