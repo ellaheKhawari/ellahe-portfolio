@@ -160,13 +160,13 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
         >
           <div
             className={cn(
-              "pointer-events-none block h-full w-full transition-all duration-300 ease-[var(--ease-spring)]",
+              "pointer-events-none block h-full w-full transition-all duration-300 ease-(--ease-spring)",
               isChecked ? translateDist : "translate-x-0"
             )}
           >
             <div
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 shadow-sm transition-all duration-300 flex items-center justify-center rounded-full left-[2px]",
+                "absolute top-1/2 -translate-y-1/2 shadow-sm transition-all duration-300 flex items-center justify-center rounded-full left-0.5",
                 
                 isChecked 
                   ? "bg-foreground" 
@@ -212,14 +212,14 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
 
             <div 
                 className={cn(
-                    "absolute top-1/2 left-[2px] -translate-y-1/2 -translate-x-1/2 rounded-full pointer-events-none transition-all duration-200",
+                    "absolute top-1/2 left-0.5 -translate-y-1/2 -translate-x-1/2 rounded-full pointer-events-none transition-all duration-200",
                     isSmall ? "w-8 h-8" : "w-10 h-10",
                     isChecked 
                       ? (variant === 'destructive' ? "bg-destructive" : "bg-primary") 
                       : "bg-foreground",
                     isPressed ? "opacity-10 scale-100" : isHovered ? "opacity-5 scale-100" : "opacity-0 scale-50",
-                    isChecked ? "left-[14px]" : (shouldRenderIcons && !isSmall) ? "left-[14px]" : "left-[10px]",
-                    isSmall && (isChecked ? "left-[10px]" : "left-[8px]")
+                    isChecked ? "left-3.5" : (shouldRenderIcons && !isSmall) ? "left-3.5" : "left-2.5",
+                    isSmall && (isChecked ? "left-2.5" : "left-2")
                 )}
             />
           </div>

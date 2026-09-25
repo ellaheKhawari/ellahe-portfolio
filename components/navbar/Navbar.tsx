@@ -125,7 +125,7 @@ export function Navbar() {
     <div dir={dir}>
       <nav
         dir="ltr"
-        className="fixed inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-4 sm:px-8"
+        className="fixed zoom-125 inset-x-0 top-0 z-30 flex items-center justify-between px-4 py-4 sm:px-8"
       >
         <div className="flex items-center gap-2 text-foreground">
           <span className="text-2xl font-special-2  ">Ellahe Khawari</span>
@@ -139,14 +139,14 @@ export function Navbar() {
             checkedIcon={<span className="text-[10px] text-background font-semibold leading-none font-special-2">EN</span>}
             uncheckedIcon={<span className="text-[10px] text-background font-semibold font-special-2 leading-none">FA</span>}
             aria-label={locale === "en" ? "Switch to English" : "تغییر زبان به فارسی"}
-            className="border-white/20 bg-white/10 font-special-2"
+            className="border-muted-foreground! bg-white/10 font-special-2"
           />
 
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? t.nav.close : "Open menu"}
-            className="flex h-9 items-center justify-center gap-2 rounded-full bg-foreground/10 px-4 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-95"
+            className="flex h-9 items-center justify-center gap-2 rounded-full border-2 border-muted-foreground! bg-foreground/10 px-4 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-95"
           >
             <BurgerIcon open={open} />
             {open && t.nav.close}
