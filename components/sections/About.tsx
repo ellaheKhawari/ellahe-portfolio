@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { useDictionary } from "@/lib/i18n/store";
 import { EASE_OUT } from "@/lib/utils";
 import { useRef } from "react";
+import { TextGenerate } from "../motion/TextGenerate";
 
 export function About() {
   const { t } = useDictionary();
@@ -19,7 +20,7 @@ export function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: EASE_OUT }}
           >
-            <h1 className="text-5xl font-heading  text-foreground">
+            <h1 className="text-5xl md:text-7xl font-heading text-foreground">
               {t.about.title}
             </h1>
           </motion.div>
@@ -29,17 +30,19 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.1 }}
-            className="space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg"
+            className="space-y-6 font-semibold leading-relaxed text-muted-foreground text-xl md:text-2xl"
           >
-            <p>{t.about.body}</p>
-            <p>{t.about.body2}</p>
+            <TextGenerate
+              text={t.about.body}
+              className="justify-center"
+            />
 
             <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-border-strong pt-8">
               {t.about.stats.map((stat) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-2xl font-medium text-mist md:text-3xl">{stat.value}</dd>
-                  <dd className="mt-1 text-xs leading-snug text-muted-foreground">{stat.label}</dd>
+                  <dd className="text-3xl font-medium text-mist md:text-5xl">{stat.value}</dd>
+                  <dd className="mt-3 text-xs md:text-sm leading-snug text-muted-foreground">{stat.label}</dd>
                 </div>
               ))}
             </dl>
