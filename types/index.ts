@@ -1,6 +1,6 @@
 import type { Locale } from "@/lib/i18n/store";
 import type { LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 export interface Project {
   id: string;
@@ -252,3 +252,25 @@ export interface CreateRowProps {
   repeat: number;
   sizeClassName: string;
 }
+
+export type BinderStyle = "binderA" | "binderB";
+
+export interface ProjectProps {
+  id: number;
+  number: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  href: string;
+  style: BinderStyle;
+};
+
+export type CSSVars = CSSProperties & Record<string, string | number>;
+
+export type PositionLayout = {
+  align: "start" | "end";
+  x: number;
+  y: number;
+  rotate: number;
+};

@@ -4,31 +4,9 @@ import Image from "next/image";
 import { ArrowUpRight, Paperclip } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import clsx from "clsx";
-import type { CSSProperties } from "react";
+import { BinderStyle, CSSVars, PositionLayout, ProjectProps } from "@/types";
 
-/**
- * ─────────────────────────────────────────────────────────────
- * PROJECT DATA
- * Replace titles, descriptions, image paths and links here.
- * `style` alternates binderA (dark, archival) and binderB (bone,
- * minimalist) — keep the A → B → A → B → A rhythm if you add or
- * remove projects.
- * ─────────────────────────────────────────────────────────────
- */
-type BinderStyle = "binderA" | "binderB";
-
-type Project = {
-  id: number;
-  number: string;
-  title: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  href: string;
-  style: BinderStyle;
-};
-
-const PROJECTS: Project[] = [
+const PROJECTS: ProjectProps[] = [
   {
     id: 1,
     number: "01",
@@ -86,13 +64,6 @@ const PROJECTS: Project[] = [
   },
 ];
 
-type PositionLayout = {
-  align: "start" | "end";
-  x: number;
-  y: number;
-  rotate: number;
-};
-
 const POSITION_OFFSETS: PositionLayout[] = [
   { align: "start", x: 16, y: 0, rotate: -2 },
   { align: "end", x: -28, y: 64, rotate: 2.4 },
@@ -101,16 +72,13 @@ const POSITION_OFFSETS: PositionLayout[] = [
   { align: "start", x: 92, y: 16, rotate: -2.4 },
 ];
 
-type CSSVars = CSSProperties & Record<string, string | number>;
-
 export function Projects() {
   return (
     <section
-       id="projects" className="relative z-10 mx-auto min-h-screen w-full bg-mist py-28 md:py-36 rounded-tr-5xl rounded-tl-4xl">
-      {/* ambient top glow — decorative only */}
+       id="projects" className="relative z-10 mx-auto min-h-screen w-full bg-mist py-28 md:py-36 rounded-tr-4xl rounded-tl-4xl">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[36rem] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.05),transparent_65%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-144 transparent_65%)]"
       />
 
       <div className="relative mx-auto max-w-6xl">
@@ -145,24 +113,24 @@ function SectionHeading() {
   return (
     <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-[#8fa37e]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#8fa37e]" aria-hidden="true" />
+        <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-ink">
+          <span className="h-1.5 w-1.5 rounded-full bg-ink" aria-hidden="true" />
           My works
         </div>
         <h2
           id="projects-heading"
-          className="mt-4 text-[15vw] font-black uppercase leading-[0.88] tracking-tight text-[#f5f3ee] sm:text-6xl lg:text-7xl"
+          className="mt-4 text-[15vw] font-black uppercase leading-[0.88] tracking-tight text-background sm:text-6xl lg:text-7xl"
         >
           My Projects
         </h2>
-        <p className="mt-5 max-w-md font-mono text-sm leading-relaxed text-[#9a968a]">
+        <p className="mt-5 max-w-md font-mono text-sm leading-relaxed text-ink">
           A selection of websites and digital experiences I&apos;ve designed and developed.
         </p>
       </div>
 
-      <p className="hidden max-w-55 -rotate-2 pb-2 font-serif text-lg italic leading-snug text-[#948e7c] lg:block">
+      <p className="hidden max-w-55 -rotate-2 pb-2 font-serif text-lg italic leading-snug text-ink lg:block">
         Turning ideas into interactive experiences.
-        <span className="mt-3 block h-px w-24 bg-[#948e7c]/40" aria-hidden="true" />
+        <span className="mt-3 block h-px w-24 bg-ink" aria-hidden="true" />
       </p>
     </div>
   );
@@ -191,7 +159,7 @@ function ConnectorLines({ layouts }: { layouts: PositionLayout[] }) {
       viewBox={`0 0 100 ${count * 100}`}
       preserveAspectRatio="none"
     >
-      <path d={path} fill="none" stroke="rgba(245,243,238,0.14)" strokeWidth={0.35} strokeDasharray="1.4 3.2" />
+      <path d={path} fill="none" stroke="rgba(10,10,10,0.6)" strokeWidth={0.35} strokeDasharray="1.4 3.2" />
     </svg>
   );
 }
@@ -201,7 +169,7 @@ function PositionedNotebook({
   layout,
   total,
 }: {
-  project: Project;
+  project: ProjectProps;
   layout: PositionLayout;
   total: number;
 }) {
@@ -218,7 +186,7 @@ function PositionedNotebook({
         "w-full max-w-95 sm:max-w-100 lg:max-w-110",
         "translate-x-[calc(var(--tx)*0.1)] rotate-[calc(var(--rot)*0.3)]",
         "sm:translate-x-[calc(var(--tx)*0.55)] sm:translate-y-[calc(var(--ty)*0.5)] sm:rotate-[calc(var(--rot)*0.7)]",
-        "lg:translate-x-(--tx) lg:translate-y-(--ty) lg:rotate-[var(--rot)]",
+        "lg:translate-x-(--tx) lg:translate-y-(--ty) lg:rotate-(--rot)",
         "transition-transform duration-500 ease-out"
       )}
     >
@@ -227,7 +195,7 @@ function PositionedNotebook({
   );
 }
 
-function ProjectNotebook({ project, total }: { project: Project; total: number }) {
+function ProjectNotebook({ project, total }: { project: ProjectProps; total: number }) {
   const prefersReducedMotion = useReducedMotion();
   const isBinderA = project.style === "binderA";
 
@@ -236,8 +204,8 @@ function ProjectNotebook({ project, total }: { project: Project; total: number }
       className={clsx(
         "group relative rounded-[3px] p-3 sm:p-4",
         isBinderA
-          ? "bg-gradient-to-br from-[#241f18] via-[#171310] to-[#0b0908] shadow-[0_35px_60px_-30px_rgba(0,0,0,0.95)] ring-1 ring-black/60"
-          : "bg-gradient-to-br from-[#efe9db] via-[#e5ddc9] to-[#d7cdb5] shadow-[0_35px_60px_-30px_rgba(0,0,0,0.7)] ring-1 ring-black/10"
+          ? "bg-linear-to-br from-background via-muted-foreground to-background shadow-[0_35px_60px_-30px_rgba(0,0,0,0.95)] ring-1 ring-background/60"
+          : "bg-linear-to-br from-background via-foreground to-background shadow-[0_35px_60px_-30px_rgba(0,0,0,0.7)] ring-1 ring-background/10"
       )}
       initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
@@ -277,8 +245,8 @@ function BindingRings({ variant }: { variant: BinderStyle }) {
         <span
           key={index}
           className={clsx(
-            "h-3 w-3 rounded-full border shadow-[inset_0_1px_2px_rgba(0,0,0,0.65)]",
-            variant === "binderA" ? "border-[#5c564a] bg-[#2a2620]" : "border-[#9a927c] bg-[#f0ebdd]"
+            "h-3 w-3 rounded-full border shadow-[inset_0_1px_2px_rgba(0,0,0,0.95)]",
+            variant === "binderA" ? "border-background/60! bg-mist" : "border-background bg-mist"
           )}
         />
       ))}
@@ -286,15 +254,15 @@ function BindingRings({ variant }: { variant: BinderStyle }) {
   );
 }
 
-function ProjectImage({ project, isBinderA }: { project: Project; isBinderA: boolean }) {
+function ProjectImage({ project, isBinderA }: { project: ProjectProps; isBinderA: boolean }) {
   return (
     <div
       className={clsx(
         "relative overflow-hidden",
-        isBinderA ? "border border-black/50 bg-[#050403] p-1.5" : "border border-black/10 bg-white p-2 shadow-sm"
+        isBinderA ? "border border-background/50 bg-background p-1.5" : "border border-background/10 bg-foreground p-2 shadow-sm"
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-4/3 overflow-hidden">
         <Image
           src={project.image}
           alt={project.imageAlt}
@@ -306,7 +274,7 @@ function ProjectImage({ project, isBinderA }: { project: Project; isBinderA: boo
       {isBinderA ? (
         <span
           aria-hidden="true"
-          className="absolute -top-1.5 right-3 h-6 w-10 -rotate-6 rounded-[1px] bg-[#d8cfa8]/70 shadow-sm"
+          className="absolute -top-1.5 right-3 h-6 w-10 -rotate-6 rounded-[1px] bg-foreground/90 shadow-sm"
         />
       ) : (
         <Paperclip aria-hidden="true" className="absolute -right-2 -top-2 h-6 w-6 -rotate-45 text-neutral-500" />
@@ -320,7 +288,7 @@ function ProjectMeta({
   isBinderA,
   total,
 }: {
-  project: Project;
+  project: ProjectProps;
   isBinderA: boolean;
   total: number;
 }) {
@@ -346,14 +314,14 @@ function ProjectMeta({
   );
 }
 
-function CtaLink({ project, isBinderA }: { project: Project; isBinderA: boolean }) {
+function CtaLink({ project, isBinderA }: { project: ProjectProps; isBinderA: boolean }) {
   return (
     <a
       href={project.href}
       className={clsx(
         "inline-flex w-fit items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] opacity-90 outline-none transition-all duration-300",
         "after:absolute after:inset-0 after:content-['']",
-        "focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+        "focus-visible:opacity-100 focus-visible:outline focus-visible:outline-offset-4",
         "group-hover:opacity-100",
         isBinderA
           ? "text-[#efe9db] outline-[#efe9db]"
