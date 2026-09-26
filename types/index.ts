@@ -1,5 +1,17 @@
-import { LucideIcon } from "lucide-react";
-import { ReactNode } from "react";
+import type { Locale } from "@/lib/i18n/store";
+import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
+
+export interface Project {
+  id: string;
+  number: string;
+  title: string;
+  category?: string;
+  description: Record<Locale, string>;
+  year: string;
+  technologies: string[];
+  href?: string;
+}
 
 export interface Dictionary {
   meta: { title: string; description: string };
@@ -34,14 +46,18 @@ export interface Dictionary {
   skills: {
     eyebrow: string;
     title1: string;
-    title2: string ;
+    title2: string;
     groups: { name: string; items: string[] }[];
   };
   projects: {
     eyebrow: string;
     title: string;
     viewProject: string;
-    items: { title: string; category: string; description: string }[];
+    items: Array<{
+      title: string;
+      category: string;
+      description: string;
+    }>;
   };
   experience: {
     eyebrow: string;
@@ -160,7 +176,7 @@ export interface MarqueeCrossProps {
   backgroundColor?: string;
   className?: string;
   style?: React.CSSProperties;
-  mobileRibbonHeight?: number; 
+  mobileRibbonHeight?: number;
   mobileFontSize?: number;
 }
 

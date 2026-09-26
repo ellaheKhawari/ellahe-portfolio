@@ -6,7 +6,7 @@ import { useDictionary } from "@/lib/i18n/store";
 import { EASE_OUT } from "@/lib/utils";
 import { HeroBackground } from "../backgroundEffects/heroBg";
 import { MARQUEE_SKILLS } from "@/lib/mockData";
-import MarqueeCross from "../ui/MarqueeCross";
+import MarqueeCross from "../ui/marquees/MarqueeCross";
 import ScrollIndicator from "../ui/ScrollIndicator";
 import { useRef } from "react";
 

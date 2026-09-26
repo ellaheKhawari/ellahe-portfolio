@@ -3,8 +3,8 @@
 import { motion } from "motion/react";
 import { MARQUEE_SKILLS } from "@/lib/mockData";
 import { useDictionary } from "@/lib/i18n/store";
-import CreativeMarquee from "../ui/creativeMarquee";
-import MarqueeCross from "../ui/MarqueeCross";
+import CreativeMarquee from "../ui/marquees/CreativeMarquee";
+import MarqueeCross from "../ui/marquees/MarqueeCross";
 
 export function Skills() {
   const { t } = useDictionary();
