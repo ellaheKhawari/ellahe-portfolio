@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguageStore } from "@/lib/i18n/store";
 import { CreateRowProps, creativeMarqueeDirection, CreativeMarqueeProps, Token } from "@/types";
 import React, { useMemo, useState } from "react";
 
@@ -23,6 +24,7 @@ function buildTokens(words: string[], separator: string, repeat: number): Token[
   }
   return tokens;
 }
+
 function MarqueeRow({
   words,
   separator,
@@ -34,6 +36,9 @@ function MarqueeRow({
   sizeClassName,
 }: CreateRowProps) {
   const [hovering, setHovering] = useState(false);
+  const locale = useLanguageStore((state) => state.locale);
+  const isRtlLocale = locale === "fa";
+  const resolvedDirection = isRtlLocale ? (direction === "left" ? "right" : "left") : direction;
 
   const tokens = useMemo(
     () => buildTokens(words, separator, repeat),
@@ -71,6 +76,7 @@ function MarqueeRow({
   return (
     <div
       className="relative w-full overflow-hidden"
+      dir="ltr"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
@@ -78,11 +84,13 @@ function MarqueeRow({
 
       <div
         className={`cm-track flex w-max items-center whitespace-nowrap ${sizeClassName}`}
-        data-direction={direction}
+        data-direction={resolvedDirection}
         style={
           {
             "--cm-duration": `${duration}s`,
             "--cm-outline-width": `${outlineWidth}px`,
+            direction: "ltr",
+            unicodeBidi: "plaintext",
             animationPlayState: hovering ? "paused" : "running",
           } as React.CSSProperties
         }
@@ -93,6 +101,7 @@ function MarqueeRow({
     </div>
   );
 }
+
 export default function CreativeMarquee({
   rowOne = DEFAULT_ROW_ONE,
   rowTwo = DEFAULT_ROW_TWO,
@@ -105,14 +114,17 @@ export default function CreativeMarquee({
   sizeClassName = DEFAULT_SIZE_CLASSNAME,
   className = "",
 }: CreativeMarqueeProps) {
+  const locale = useLanguageStore((state) => state.locale);
   const oppositeDirection: creativeMarqueeDirection = direction === "left" ? "right" : "left";
 
   return (
     <section
+      dir="ltr"
       className={`relative w-full select-none overflow-x-hidden bg-background py-8 sm:py-10 md:py-14 ${className}`}
     >
       <div className="flex flex-col gap-1 sm:gap-2 md:gap-3">
         <MarqueeRow
+          key={`${locale}-row-one-${direction}`}
           words={rowOne}
           separator={separator}
           direction={direction}
@@ -123,6 +135,7 @@ export default function CreativeMarquee({
           sizeClassName={sizeClassName}
         />
         <MarqueeRow
+          key={`${locale}-row-two-${oppositeDirection}`}
           words={rowTwo}
           separator={separator}
           direction={oppositeDirection}
