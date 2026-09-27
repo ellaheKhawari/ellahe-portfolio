@@ -1,338 +1,55 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowUpRight, Paperclip } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
-import clsx from "clsx";
-import { BinderStyle, CSSVars, PositionLayout, ProjectProps } from "@/types";
-
-const PROJECTS: ProjectProps[] = [
-  {
-    id: 1,
-    number: "01",
-    title: "Visonial",
-    description:
-      "A visual identity and marketing site for a product studio, built around a slow, cinematic scroll.",
-    image: "/images/projects/project-01.webp",
-    imageAlt: "Homepage of the Visonial marketing site",
-    href: "/projects/visonial",
-    style: "binderA",
-  },
-  {
-    id: 2,
-    number: "02",
-    title: "Harbor",
-    description:
-      "A booking platform for boutique hotels, redesigned for clarity across search, rates and checkout.",
-    image: "/images/projects/project-02.webp",
-    imageAlt: "Room search screen of the Harbor booking platform",
-    href: "/projects/harbor",
-    style: "binderB",
-  },
-  {
-    id: 3,
-    number: "03",
-    title: "Crown Low",
-    description:
-      "An e-commerce experience for an independent footwear label, from lookbook to checkout.",
-    image: "/images/projects/project-03.webp",
-    imageAlt: "Product page of the Crown Low footwear store",
-    href: "/projects/crown-low",
-    style: "binderA",
-  },
-  {
-    id: 4,
-    number: "04",
-    title: "The Watch",
-    description:
-      "A single-product landing page built to make a mechanical watch feel worth the wait.",
-    image: "/images/projects/project-04.webp",
-    imageAlt: "Landing page for The Watch product launch",
-    href: "/projects/the-watch",
-    style: "binderB",
-  },
-  {
-    id: 5,
-    number: "05",
-    title: "Lateee",
-    description:
-      "A modern e-commerce platform with a clean design and smooth checkout, built for creative minds.",
-    image: "/images/projects/project-05.webp",
-    imageAlt: "Storefront page of the Lateee e-commerce platform",
-    href: "/projects/lateee",
-    style: "binderA",
-  },
-];
-
-const POSITION_OFFSETS: PositionLayout[] = [
-  { align: "start", x: 16, y: 0, rotate: -2 },
-  { align: "end", x: -28, y: 64, rotate: 2.4 },
-  { align: "start", x: 44, y: 28, rotate: -1.6 },
-  { align: "end", x: -18, y: 68, rotate: 2 },
-  { align: "start", x: 92, y: 16, rotate: -2.4 },
-];
+import { useRef } from "react";
+import { ProjectGrid } from "../ui/VisibleGrid";
 
 export function Projects() {
+  const projectsContainerRef = useRef<HTMLElement | null>(null);
+
   return (
     <section
-       id="projects" className="relative z-10 mx-auto min-h-screen w-full bg-mist py-28 md:py-36 rounded-tr-4xl rounded-tl-4xl">
+      id="projects"
+      className="relative z-10 rounded-tl-4xl rounded-tr-4xl bg-foreground w-full text-ink [--col-count:8] [--grid-line:rgba(20,20,20,0.12)]
+          bg-[repeating-linear-gradient(to_right,var(--grid-line)_0,var(--grid-line)_1px,transparent_1px,transparent_calc(100%/var(--col-count)))]
+          max-[900px]:[--col-count:4]"
+    >
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-144 transparent_65%)]"
-      />
+        className="mx-auto px-[clamp(1rem,4vw,2rem)] py-[clamp(3rem,8vw,7rem)]"
+      >
+        <div className="relative mb-[clamp(1rem,3vw,2rem)]">
+          <span className="mb-2 block text-xs tracking-[0.02em] text-steel">
+            Selected works — 2026
+          </span>
 
-      <div className="relative mx-auto max-w-6xl">
-        <SectionHeading />
+          <h2
+            className="mt-0 mr-0 mb-[clamp(1.5rem,4vw,3rem)] ml-[-0.3rem] w-[calc(100%+3vw)] font-heading text-[clamp(4.5rem,16vw,11rem)] leading-[0.85] font-bold tracking-[-0.01em] min-[901px]:max-[1100px]:text-[clamp(3.25rem,11vw,7rem)] max-[560px]:mx-0 max-[560px]:w-full"
+          >
+            PROJECTS
+          </h2>
 
-        <div className="relative mt-20 lg:mt-28">
-          <ConnectorLines layouts={POSITION_OFFSETS} />
+          <span
+            className="mt-[0.6rem] block text-[0.7rem] italic text-[#8a8a86] sm:absolute sm:right-0 sm:bottom-[0.4rem] sm:mt-0 sm:max-w-64 sm:text-right"
+          >
+            05 case studies, in build order
+          </span>
+        </div>
 
-          <div className="relative flex flex-col gap-16 sm:gap-20 lg:gap-28">
-            {PROJECTS.map((project, index) => {
-              const layout = POSITION_OFFSETS[index % POSITION_OFFSETS.length];
-              return (
-                <div
-                  key={project.id}
-                  className={clsx(
-                    "flex w-full justify-center",
-                    layout.align === "start" ? "sm:justify-start" : "sm:justify-end"
-                  )}
-                >
-                  <PositionedNotebook project={project} layout={layout} total={PROJECTS.length} />
-                </div>
-              );
-            })}
-          </div>
+        <ProjectGrid />
+
+        <div className="mt-[clamp(1rem,3vw,2rem)] border-t border-[rgba(20,20,20,0.12)] pt-[clamp(2rem,5vw,3.5rem)]">
+          <p className="m-0 max-w-[46ch] font-heading text-[clamp(1.5rem,3.6vw,2.5rem)] leading-[1.2]">
+            <span className="font-bold text-ink">I build interfaces</span>{" "}
+            <span className="font-normal text-[#8a8a86]">
+              the way this page is built —
+            </span>{" "}
+            <span className="font-bold text-ink">on a grid you can feel</span>{" "}
+            <span className="font-normal text-[#8a8a86]">
+              even when it stays out of sight. Structure first,
+            </span>{" "}
+            <span className="font-bold text-ink">then character.</span>
+          </p>
         </div>
       </div>
     </section>
-  );
-}
-
-function SectionHeading() {
-  return (
-    <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-ink">
-          <span className="h-1.5 w-1.5 rounded-full bg-ink" aria-hidden="true" />
-          My works
-        </div>
-        <h2
-          id="projects-heading"
-          className="mt-4 text-[15vw] font-black uppercase leading-[0.88] tracking-tight text-background sm:text-6xl lg:text-7xl"
-        >
-          My Projects
-        </h2>
-        <p className="mt-5 max-w-md font-mono text-sm leading-relaxed text-ink">
-          A selection of websites and digital experiences I&apos;ve designed and developed.
-        </p>
-      </div>
-
-      <p className="hidden max-w-55 -rotate-2 pb-2 font-serif text-lg italic leading-snug text-ink lg:block">
-        Turning ideas into interactive experiences.
-        <span className="mt-3 block h-px w-24 bg-ink" aria-hidden="true" />
-      </p>
-    </div>
-  );
-}
-
-function ConnectorLines({ layouts }: { layouts: PositionLayout[] }) {
-  const count = layouts.length;
-  if (count < 2) return null;
-
-  const points = layouts.map((layout, index) => ({
-    x: layout.align === "start" ? 20 : 80,
-    y: index * 100 + 50,
-  }));
-
-  const path = points.reduce((acc, point, index) => {
-    if (index === 0) return `M ${point.x} ${point.y}`;
-    const prev = points[index - 1];
-    const midY = (prev.y + point.y) / 2;
-    return `${acc} C ${prev.x} ${midY}, ${point.x} ${midY}, ${point.x} ${point.y}`;
-  }, "");
-
-  return (
-    <svg
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-      viewBox={`0 0 100 ${count * 100}`}
-      preserveAspectRatio="none"
-    >
-      <path d={path} fill="none" stroke="rgba(10,10,10,0.6)" strokeWidth={0.35} strokeDasharray="1.4 3.2" />
-    </svg>
-  );
-}
-
-function PositionedNotebook({
-  project,
-  layout,
-  total,
-}: {
-  project: ProjectProps;
-  layout: PositionLayout;
-  total: number;
-}) {
-  const offsetStyle: CSSVars = {
-    "--tx": `${layout.x}px`,
-    "--ty": `${layout.y}px`,
-    "--rot": `${layout.rotate}deg`,
-  };
-
-  return (
-    <div
-      style={offsetStyle}
-      className={clsx(
-        "w-full max-w-95 sm:max-w-100 lg:max-w-110",
-        "translate-x-[calc(var(--tx)*0.1)] rotate-[calc(var(--rot)*0.3)]",
-        "sm:translate-x-[calc(var(--tx)*0.55)] sm:translate-y-[calc(var(--ty)*0.5)] sm:rotate-[calc(var(--rot)*0.7)]",
-        "lg:translate-x-(--tx) lg:translate-y-(--ty) lg:rotate-(--rot)",
-        "transition-transform duration-500 ease-out"
-      )}
-    >
-      <ProjectNotebook project={project} total={total} />
-    </div>
-  );
-}
-
-function ProjectNotebook({ project, total }: { project: ProjectProps; total: number }) {
-  const prefersReducedMotion = useReducedMotion();
-  const isBinderA = project.style === "binderA";
-
-  return (
-    <motion.article
-      className={clsx(
-        "group relative rounded-[3px] p-3 sm:p-4",
-        isBinderA
-          ? "bg-linear-to-br from-background via-muted-foreground to-background shadow-[0_35px_60px_-30px_rgba(0,0,0,0.95)] ring-1 ring-background/60"
-          : "bg-linear-to-br from-background via-foreground to-background shadow-[0_35px_60px_-30px_rgba(0,0,0,0.7)] ring-1 ring-background/10"
-      )}
-      initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
-      whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-15% 0px -15% 0px" }}
-      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={prefersReducedMotion ? undefined : { y: -10, scale: 1.014 }}
-    >
-      <span
-        aria-hidden="true"
-        className={clsx(
-          "pointer-events-none absolute inset-0 rounded-[3px] opacity-50 mix-blend-overlay",
-          isBinderA
-            ? "bg-[radial-gradient(circle_at_28%_18%,rgba(255,255,255,0.09),transparent_60%)]"
-            : "bg-[radial-gradient(circle_at_75%_12%,rgba(0,0,0,0.07),transparent_55%)]"
-        )}
-      />
-
-      <BindingRings variant={project.style} />
-
-      <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-[1.05fr_1fr] sm:gap-7">
-        <ProjectImage project={project} isBinderA={isBinderA} />
-        <ProjectMeta project={project} isBinderA={isBinderA} total={total} />
-      </div>
-    </motion.article>
-  );
-}
-
-function BindingRings({ variant }: { variant: BinderStyle }) {
-  const ringCount = 5;
-
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-y-3 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center justify-evenly sm:flex"
-    >
-      {Array.from({ length: ringCount }).map((_, index) => (
-        <span
-          key={index}
-          className={clsx(
-            "h-3 w-3 rounded-full border shadow-[inset_0_1px_2px_rgba(0,0,0,0.95)]",
-            variant === "binderA" ? "border-background/60! bg-mist" : "border-background bg-mist"
-          )}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ProjectImage({ project, isBinderA }: { project: ProjectProps; isBinderA: boolean }) {
-  return (
-    <div
-      className={clsx(
-        "relative overflow-hidden",
-        isBinderA ? "border border-background/50 bg-background p-1.5" : "border border-background/10 bg-foreground p-2 shadow-sm"
-      )}
-    >
-      <div className="relative aspect-4/3 overflow-hidden">
-        <Image
-          src={project.image}
-          alt={project.imageAlt}
-          fill
-          sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-        />
-      </div>
-      {isBinderA ? (
-        <span
-          aria-hidden="true"
-          className="absolute -top-1.5 right-3 h-6 w-10 -rotate-6 rounded-[1px] bg-foreground/90 shadow-sm"
-        />
-      ) : (
-        <Paperclip aria-hidden="true" className="absolute -right-2 -top-2 h-6 w-6 -rotate-45 text-neutral-500" />
-      )}
-    </div>
-  );
-}
-
-function ProjectMeta({
-  project,
-  isBinderA,
-  total,
-}: {
-  project: ProjectProps;
-  isBinderA: boolean;
-  total: number;
-}) {
-  return (
-    <div className={clsx("flex flex-col justify-between gap-5 py-1", isBinderA ? "text-[#efe9db]" : "text-[#1c1811]")}>
-      <div className="space-y-3">
-        <span
-          className={clsx(
-            "block font-mono text-[11px] tracking-[0.22em]",
-            isBinderA ? "text-[#c7bd9e]" : "text-[#6f6752]"
-          )}
-        >
-          {project.number} / {String(total).padStart(2, "0")}
-        </span>
-        <h3 className="text-xl font-semibold uppercase tracking-tight sm:text-2xl">{project.title}</h3>
-        <p className={clsx("text-sm leading-relaxed", isBinderA ? "text-[#cfc7b0]" : "text-[#4c4636]")}>
-          {project.description}
-        </p>
-      </div>
-
-      <CtaLink project={project} isBinderA={isBinderA} />
-    </div>
-  );
-}
-
-function CtaLink({ project, isBinderA }: { project: ProjectProps; isBinderA: boolean }) {
-  return (
-    <a
-      href={project.href}
-      className={clsx(
-        "inline-flex w-fit items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] opacity-90 outline-none transition-all duration-300",
-        "after:absolute after:inset-0 after:content-['']",
-        "focus-visible:opacity-100 focus-visible:outline focus-visible:outline-offset-4",
-        "group-hover:opacity-100",
-        isBinderA
-          ? "text-[#efe9db] outline-[#efe9db]"
-          : "rounded-full bg-[#141210] px-4 py-2 text-[#f3efe4] outline-[#141210] group-hover:bg-black"
-      )}
-    >
-      View project
-      <ArrowUpRight
-        aria-hidden="true"
-        className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
-      />
-    </a>
   );
 }

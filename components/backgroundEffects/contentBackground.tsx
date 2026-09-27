@@ -68,7 +68,7 @@ const config = {
     flowEnabled: true,
     enableProceduralTexture: false,
     transparentTextureVoid: false,
-    textureMode: 'bitmap',
+    textureMode: 'bitmap' as const,
     bakeEdgeSoftness: 1,
     textureVoidLikelihood: 0.29,
     textureVoidWidthMin: 120,

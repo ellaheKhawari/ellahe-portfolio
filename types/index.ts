@@ -1,6 +1,9 @@
 import type { Locale } from "@/lib/i18n/store";
+import { ProjectsWebGLEffectConfig, WebGLImageTarget } from "@/webGL";
 import type { LucideIcon } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
+import * as THREE from "three";
+import type { RefObject } from "react";
 
 export interface Project {
   id: string;
@@ -255,17 +258,6 @@ export interface CreateRowProps {
 
 export type BinderStyle = "binderA" | "binderB";
 
-export interface ProjectProps {
-  id: number;
-  number: string;
-  title: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  href: string;
-  style: BinderStyle;
-};
-
 export type CSSVars = CSSProperties & Record<string, string | number>;
 
 export type PositionLayout = {
@@ -274,3 +266,115 @@ export type PositionLayout = {
   y: number;
   rotate: number;
 };
+
+export interface ProjectProps {
+  id: string; // "01" – "05", also used as the React key
+  title: [string, string]; // two-line title, matches the reference's line breaks
+  category: string; // small metadata label, e.g. "FRONTEND / UI"
+  description: string;
+  tech: string[]; // short stack list shown as metadata
+  image: string; // swap this for your real asset
+  imageAlt: string;
+};
+
+export interface ProjectsWebGLImageProps {
+  target: WebGLImageTarget;
+  geometry: THREE.PlaneGeometry;
+  config: ProjectsWebGLEffectConfig;
+  velocityRef: React.MutableRefObject<number>;
+  viewportRef: React.MutableRefObject<{ width: number; height: number }>;
+};
+
+export interface ProjectsWebGLSceneProps {
+  images: WebGLImageTarget[];
+  config: ProjectsWebGLEffectConfig;
+  getScrollY?: () => number;
+  reducedQuality?: boolean;
+};
+
+export interface WebGLImageTarget {
+  id: string;
+  ref: RefObject<HTMLDivElement>;
+  src: string;
+};
+
+export interface ProjectsWebGLEffectConfig {
+  curlStrength: number;
+  distortionStrength: number;
+  velocityMultiplier: number;
+  velocitySmoothing: number;
+  velocityClamp: number;
+  chromaticAberration: number;
+  enterDuration: number;
+  restingLerp: number;
+};
+
+export interface ProjectsWebGLEffectProps {
+  images: WebGLImageTarget[];
+  config?: Partial<ProjectsWebGLEffectConfig>;
+  getScrollY?: () => number;
+  className?: string;
+};
+
+export interface ProjectCardProps {
+  project: ProjectProps;
+  index: number;
+};
+
+export const projectSection: ProjectProps[] = [
+  {
+    id: "01",
+    title: ["ELLARA", "ACADEMY"],
+    category: "PRODUCT DESIGN / FRONTEND",
+    description:
+      "A language-learning interface built around a playful, editorial visual system and a multilingual UX that never feels like an afterthought.",
+    tech: ["React", "TypeScript", "Framer Motion"],
+    image:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1400&auto=format&fit=crop",
+    imageAlt: "Modern architectural interior with strong geometric lines",
+  },
+  {
+    id: "02",
+    title: ["NOVA", "ADMIN"],
+    category: "DASHBOARD / DATA VIZ",
+    description:
+      "An internal analytics console rebuilt from the ground up — dense data made legible through type hierarchy instead of decoration.",
+    tech: ["Next.js", "D3", "Tailwind"],
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1400&auto=format&fit=crop",
+    imageAlt: "Close-up of a user interface on a laptop screen",
+  },
+  {
+    id: "03",
+    title: ["ESTATE", "IN"],
+    category: "WEB EXPERIENCE",
+    description:
+      "A real-estate discovery platform where listings are treated like editorial spreads — one property, one page, one statement.",
+    tech: ["React", "Three.js", "Sanity"],
+    image:
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1400&auto=format&fit=crop",
+    imageAlt: "Modernist white villa with clean architectural lines",
+  },
+  {
+    id: "04",
+    title: ["ELLARA", "SHOP"],
+    category: "E-COMMERCE",
+    description:
+      "The commerce counterpart to Ellara Academy — same visual language, tuned for browsing, comparison, and a fast, quiet checkout.",
+    tech: ["Next.js", "Stripe", "Tailwind"],
+    image:
+      "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1400&auto=format&fit=crop",
+    imageAlt: "Abstract minimal composition of geometric objects",
+  },
+  {
+    id: "05",
+    title: ["PORTFOLIO", "EXPERIMENT"],
+    category: "CASE STUDY",
+    description:
+      "A self-directed study in editorial grid systems on the web — this section is, in fact, one of its results.",
+    tech: ["React", "GLSL", "Lenis"],
+    image:
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1400&auto=format&fit=crop",
+    imageAlt: "Minimal modern workspace object on a neutral background",
+  },
+];

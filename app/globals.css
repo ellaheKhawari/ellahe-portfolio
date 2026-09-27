@@ -4,12 +4,11 @@
   --ink: #262626;
   --steel: #676b6c;
   --mist: #9dc4dd;
-  --darkMist: #87bee2;
-
-  --background: #0a0a0a;
-  --background-elevated: var(--ink);
   --foreground: #f2f3f3;
   --muted-foreground: #9ea3a4;
+  --background: #0a0a0a;
+  --darkMist: #87bee2;
+  --background-elevated: var(--ink);
   --border: #34363633;
   --border-strong: #3a3d3d;
   --accent: var(--mist);

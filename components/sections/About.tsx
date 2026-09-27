@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { useDictionary } from "@/lib/i18n/store";
 import { EASE_OUT } from "@/lib/utils";
 import { useRef } from "react";
-import { TextGenerate } from "../motion/TextGenerate";
+import { TextGenerate } from "../../motion/TextGenerate";
 
 export function About() {
   const { t } = useDictionary();
