@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { projectSection } from "@/types";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import styles from "@/webGL/projects.module.css";
 import { ProjectsWebGLEffect, WebGLImageTarget } from "@/webGL";
 
 export function ProjectGrid() {
@@ -18,7 +17,7 @@ export function ProjectGrid() {
   }));
 
   return (
-    <div className={styles.gridWrap}>
+    <div className="relative border-t border-[rgba(20,20,20,0.12)]">
       {projectSection.map((project, i) => (
         <ProjectCard key={project.id} project={project} index={i} ref={imageRefs[i]} />
       ))}

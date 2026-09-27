@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { ProjectsWebGLImage } from "./ProjectsWebGLImage";
+import { ProjectsWebGLImage } from "./ProjectsImage";
 import { ProjectsWebGLSceneProps } from "@/types";
 
 const CAMERA_DISTANCE = 900;
