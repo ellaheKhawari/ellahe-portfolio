@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { projectSection } from "@/types";
+import { projectSection } from "@/lib/mockData";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectsWebGLEffect, WebGLImageTarget } from "@/webGL";
 

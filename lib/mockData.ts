@@ -1,5 +1,10 @@
-import { Milestone, VerticalTab } from "@/types";
+import { Milestone, ProjectProps, VerticalTab } from "@/types";
 import { Activity, GitPullRequest, Rocket, ShieldCheck } from "lucide-react";
+import project1 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
+import project2 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
+import project3 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
+import project4 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
+import project5 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
 
 export const DEFAULT_MILESTONES: Milestone[] = [
   { date: "Q1 2025", title: "Foundation", description: "Architecture, design system, and tooling." },
@@ -83,3 +88,56 @@ export const MARQUEE_SKILLS = [
   'Framer Motion',
   'PostgreSQL',
 ].join('   ');
+
+export const projectSection: ProjectProps[] = [
+  {
+    id: "01",
+    title: ["ELLARA", "ACADEMY"],
+    category: "PRODUCT DESIGN / FRONTEND",
+    description:
+      "A language-learning interface built around a playful, editorial visual system and a multilingual UX that never feels like an afterthought.",
+    tech: ["React", "TypeScript", "Framer Motion"],
+    image: "/pictures/project2.png",
+    imageAlt: "Modern architectural interior with strong geometric lines",
+  },
+  {
+    id: "02",
+    title: ["NOVA", "ADMIN"],
+    category: "DASHBOARD / DATA VIZ",
+    description:
+      "An internal analytics console rebuilt from the ground up — dense data made legible through type hierarchy instead of decoration.",
+    tech: ["Next.js", "D3", "Tailwind"],
+    image: "/pictures/project2.png",
+    imageAlt: "Close-up of a user interface on a laptop screen",
+  },
+  {
+    id: "03",
+    title: ["ESTATE", "IN"],
+    category: "WEB EXPERIENCE",
+    description:
+      "A real-estate discovery platform where listings are treated like editorial spreads — one property, one page, one statement.",
+    tech: ["React", "Three.js", "Sanity"],
+    image: "/pictures/project2.png",
+    imageAlt: "Modernist white villa with clean architectural lines",
+  },
+  {
+    id: "04",
+    title: ["ELLARA", "SHOP"],
+    category: "E-COMMERCE",
+    description:
+      "The commerce counterpart to Ellara Academy — same visual language, tuned for browsing, comparison, and a fast, quiet checkout.",
+    tech: ["Next.js", "Stripe", "Tailwind"],
+    image: "/pictures/project2.png",
+    imageAlt: "Abstract minimal composition of geometric objects",
+  },
+  {
+    id: "05",
+    title: ["PORTFOLIO", "EXPERIMENT"],
+    category: "CASE STUDY",
+    description:
+      "A self-directed study in editorial grid systems on the web — this section is, in fact, one of its results.",
+    tech: ["React", "GLSL", "Lenis"],
+    image: "/pictures/project2.png",
+    imageAlt: "Minimal modern workspace object on a neutral background",
+  },
+];
