@@ -1,55 +1,44 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { vertexShader, fragmentShader } from "../webGL/shaders";
-import { ProjectsWebGLImageProps } from "@/types";
+import { vertexShader, fragmentShader } from "@/webGL/shaders";
+import type { ProjectsWebGLImageProps } from "@/types";
+
+type LoadState = "idle" | "loading" | "ready" | "failed";
 
 export function ProjectsWebGLImage({
   target,
   geometry,
   config,
-  velocityRef,
-  viewportRef,
+  motionRef,
 }: ProjectsWebGLImageProps) {
+  const gl = useThree((s) => s.gl);
   const meshRef = useRef<THREE.Mesh>(null);
-  const progressRef = useRef(0);
-  const hasEnteredRef = useRef(false);
-  const domHiddenRef = useRef(false);
-
-  const texture = useMemo(() => {
-    const loader = new THREE.TextureLoader();
-    const tex = loader.load(
-      target.src,
-      () => {
-        const el = target.ref.current;
-        if (el) {
-          el.style.opacity = "0";
-          domHiddenRef.current = true;
-        }
-      },
-      undefined,
-      () => {
-      }
-    );
-    tex.colorSpace = THREE.SRGBColorSpace;
-    tex.minFilter = THREE.LinearFilter;
-    tex.magFilter = THREE.LinearFilter;
-    return tex;
-  }, [target.src]);
+  const loadStateRef = useRef<LoadState>("idle");
+  const loadIdRef = useRef(0);
+  const textureRef = useRef<THREE.Texture | null>(null);
+  const imageAspectRef = useRef(1);
+  const fitRef = useRef<"cover" | "fill">("cover");
+  const hiddenRef = useRef<{
+    el: HTMLElement;
+    opacity: string;
+    transition: string;
+  } | null>(null);
 
   const uniforms = useMemo(
     () => ({
-      uTexture: { value: texture },
-      uTime: { value: 0 },
-      uProgress: { value: 0 },
-      uVelocity: { value: 0 },
-      uCurlStrength: { value: config.curlStrength },
-      uDistortionStrength: { value: config.distortionStrength },
-      uChromaticAberration: { value: config.chromaticAberration },
+      uTexture: { value: null as THREE.Texture | null },
+      uUvScale: { value: new THREE.Vector2(1, 1) },
+      uBend: { value: 0 },
+      uDir: { value: 0 },
+      uDepth: { value: 0 },
+      uHalfH: { value: 1 },
+      uFlat: { value: 0.05 },
+      uFull: { value: 1 },
     }),
-    [texture]
+    []
   );
 
   const material = useMemo(
@@ -58,64 +47,123 @@ export function ProjectsWebGLImage({
         vertexShader,
         fragmentShader,
         uniforms,
-        transparent: true,
-        depthWrite: false,
+        toneMapped: false,
       }),
     [uniforms]
   );
 
-  useEffect(() => {
-    const el = target.ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          hasEnteredRef.current = true;
-        } else if (hasEnteredRef.current) {
-          hasEnteredRef.current = false;
-          progressRef.current = 0;
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target.ref]);
-
-  useFrame((state, delta) => {
-    const el = target.ref.current;
-    const mesh = meshRef.current;
-    if (!el || !mesh) return;
-
-    const rect = el.getBoundingClientRect();
-    const { width: vw, height: vh } = viewportRef.current;
-    const x = rect.left - vw / 2 + rect.width / 2;
-    const y = -(rect.top - vh / 2 + rect.height / 2);
-
-    mesh.position.set(x, y, 0);
-    mesh.scale.set(Math.max(rect.width, 0.001), Math.max(rect.height, 0.001), 1);
-
-    if (hasEnteredRef.current && progressRef.current < 1) {
-      progressRef.current = Math.min(1, progressRef.current + delta / config.enterDuration);
-    }
-
-    uniforms.uTime.value = state.clock.elapsedTime;
-    uniforms.uProgress.value = progressRef.current;
-    uniforms.uVelocity.value = velocityRef.current;
-    mesh.visible = rect.width > 0 && rect.height > 0;
-  });
-
+  useEffect(() => () => material.dispose(), [material]);
   useEffect(() => {
     return () => {
-      const el = target.ref.current;
-      if (el && domHiddenRef.current) {
-        el.style.opacity = "1";
+      loadIdRef.current += 1;
+      const hidden = hiddenRef.current;
+      if (hidden) {
+        hidden.el.style.opacity = hidden.opacity;
+        hidden.el.style.transition = hidden.transition;
+        hiddenRef.current = null;
       }
-      material.dispose();
-      texture.dispose();
+      textureRef.current?.dispose();
+      textureRef.current = null;
+      uniforms.uTexture.value = null;
+      loadStateRef.current = "idle";
     };
-  }, [material, texture]);
+  }, [uniforms, target.src]);
 
-  return <mesh ref={meshRef} geometry={geometry} material={material} />;
+  const startLoad = () => {
+    loadStateRef.current = "loading";
+    const id = ++loadIdRef.current;
+    const loader = new THREE.TextureLoader();
+    loader.setCrossOrigin("anonymous");
+    loader.load(
+      target.src,
+      (tex) => {
+        if (id !== loadIdRef.current) {
+          tex.dispose();
+          return;
+        }
+        tex.colorSpace = THREE.NoColorSpace;
+        tex.anisotropy = Math.min(8, gl.capabilities.getMaxAnisotropy());
+        const source = tex.image as { width: number; height: number };
+        imageAspectRef.current =
+          source.width > 0 && source.height > 0 ? source.width / source.height : 1;
+        textureRef.current = tex;
+        uniforms.uTexture.value = tex;
+        loadStateRef.current = "ready";
+      },
+      undefined,
+      () => {
+        if (id === loadIdRef.current) loadStateRef.current = "failed";
+      }
+    );
+  };
+
+  const hideDom = (el: HTMLElement) => {
+    const img =
+      el instanceof HTMLImageElement ? el : el.querySelector("img");
+    const node: HTMLElement = img ?? el;
+    fitRef.current =
+      img && getComputedStyle(img).objectFit === "fill" ? "fill" : "cover";
+    hiddenRef.current = {
+      el: node,
+      opacity: node.style.opacity,
+      transition: node.style.transition,
+    };
+    node.style.transition = "none";
+    node.style.opacity = "0";
+  };
+
+  useFrame((state) => {
+    const mesh = meshRef.current;
+    const el = target.ref.current;
+    if (!mesh || !el) return;
+    const { width: vw, height: vh } = state.size;
+    const rect = el.getBoundingClientRect();
+    const valid = rect.width > 0 && rect.height > 0;
+    const inRange = (margin: number) =>
+      valid && rect.bottom > -vh * margin && rect.top < vh + vh * margin;
+    if (loadStateRef.current === "idle" && inRange(config.preloadMargin)) {
+      startLoad();
+    }
+
+    if (loadStateRef.current !== "ready" || !inRange(config.cullMargin)) {
+      mesh.visible = false;
+      return;
+    }
+    mesh.visible = true;
+    mesh.position.set(
+      rect.left + rect.width / 2 - vw / 2,
+      -(rect.top + rect.height / 2 - vh / 2),
+      0
+    );
+    mesh.scale.set(rect.width, rect.height, 1);
+    if (!hiddenRef.current) hideDom(el);
+    const planeAspect = rect.width / rect.height;
+    const imageAspect = imageAspectRef.current;
+    if (fitRef.current === "fill") {
+      uniforms.uUvScale.value.set(1, 1);
+    } else if (planeAspect > imageAspect) {
+      uniforms.uUvScale.value.set(1, imageAspect / planeAspect);
+    } else {
+      uniforms.uUvScale.value.set(planeAspect / imageAspect, 1);
+    }
+    const v = motionRef.current;
+    const bend = Math.abs(v);
+
+    uniforms.uBend.value = bend < 1e-4 ? 0 : bend;
+    uniforms.uDir.value = THREE.MathUtils.clamp(v * 4, -1, 1);
+    uniforms.uDepth.value = config.curlDepth * vh;
+    uniforms.uHalfH.value = vh / 2;
+    uniforms.uFlat.value = config.flatZone;
+    uniforms.uFull.value = config.fullZone;
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      geometry={geometry}
+      material={material}
+      frustumCulled={false}
+      visible={false}
+    />
+  );
 }

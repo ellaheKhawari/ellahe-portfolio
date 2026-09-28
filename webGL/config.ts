@@ -1,12 +1,15 @@
 import type { ProjectsWebGLEffectConfig } from "@/types";
 
 export const DEFAULT_CONFIG: ProjectsWebGLEffectConfig = {
-  curlStrength: 0.35,
-  distortionStrength: 0.16,
-  velocityMultiplier: 1.4,
-  velocitySmoothing: 0.08,
-  velocityClamp: 1.6,
-  chromaticAberration: 0.006,
-  enterDuration: 0.85,
-  restingLerp: 0.06,
+  curlDepth: 0.07,
+  cameraDistance: 1.4,
+  flatZone: 0.05,
+  fullZone: 1.0,
+  velocityReference: 2.2,
+  velocityWindow: 0.08,
+  attackTime: 0.07,
+  releaseTime: 0.5,
+  preloadMargin: 1.5,
+  cullMargin: 0.4,
+  zIndex: 1,
 };

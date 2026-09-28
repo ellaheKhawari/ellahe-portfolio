@@ -1,197 +1,74 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import type { ProjectsWebGLEffectProps } from "@/types";
+import { useEffect, useMemo, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { DEFAULT_CONFIG } from "./config";
+import { ProjectsWebGLScene } from "@/three/ProjectsScene";
+import { ProjectsWebGLErrorBoundary } from "./ProjectsErrorBoundary";
+import type {
+  ProjectsWebGLEffectConfig,
+  ProjectsWebGLEffectProps,
+} from "@/types";
 
 export function ProjectsWebGLEffect({
   images,
   config,
   getScrollY,
   className,
+  reducedQuality,
 }: ProjectsWebGLEffectProps) {
-  const velocityRef = useRef(0);
-  const lastScrollRef = useRef(0);
-  const rafRef = useRef<number | null>(null);
+  const [enabled, setEnabled] = useState(false);
+  const [lowQuality, setLowQuality] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setEnabled(!mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    setLowQuality(reducedQuality ?? (navigator.hardwareConcurrency ?? 8) <= 4);
+    return () => mq.removeEventListener("change", update);
+  }, [reducedQuality]);
 
-    const isReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  const merged = useMemo<ProjectsWebGLEffectConfig>(
+    () => ({ ...DEFAULT_CONFIG, ...config }),
+    [config]
+  );
 
-    if (isReducedMotion) return;
+  if (!enabled || images.length === 0) return null;
 
-    const elements = images
-      .map((target) => {
-        const container = target.ref.current;
-        if (!container) return null;
-
-        const image =
-          container.querySelector<HTMLElement>("img");
-
-        if (!image) return null;
-
-        image.style.transformOrigin = "50% 50%";
-        image.style.willChange = "transform, filter";
-        image.style.backfaceVisibility = "hidden";
-        image.style.transformStyle = "preserve-3d";
-
-        return {
-          container,
-          image,
-        };
-      })
-      .filter(Boolean) as {
-      container: HTMLElement;
-      image: HTMLElement;
-    }[];
-
-    if (!elements.length) return;
-
-    lastScrollRef.current = getScrollY
-      ? getScrollY()
-      : window.scrollY;
-
-    let currentVelocity = 0;
-    let targetVelocity = 0;
-
-    const clamp = (
-      value: number,
-      min: number,
-      max: number
-    ) => Math.min(Math.max(value, min), max);
-
-    const lerp = (
-      a: number,
-      b: number,
-      amount: number
-    ) => a + (b - a) * amount;
-
-    const update = () => {
-      const scrollY = getScrollY
-        ? getScrollY()
-        : window.scrollY;
-
-      const rawVelocity =
-        scrollY - lastScrollRef.current;
-
-      lastScrollRef.current = scrollY;
-
-      targetVelocity = clamp(
-        rawVelocity * 0.055,
-        -1.4,
-        1.4
-      );
-
-      currentVelocity = lerp(
-        currentVelocity,
-        targetVelocity,
-        0.12
-      );
-
-
-      targetVelocity *= 0.88;
-
-      elements.forEach(({ container, image }) => {
-        const rect = container.getBoundingClientRect();
-
-        const viewportHeight = window.innerHeight;
-
-        if (
-          rect.bottom < -150 ||
-          rect.top > viewportHeight + 150
-        ) {
-          return;
-        }
-        const center =
-          rect.top + rect.height / 2;
-
-        const progress =
-          (center - viewportHeight / 2) /
-          (viewportHeight / 2);
-
-        const proximity =
-          1 -
-          clamp(Math.abs(progress), 0, 1);
-        const velocity =
-          clamp(currentVelocity, -1, 1);
-
-        const rotateY =
-          velocity *
-          proximity *
-          2.2;
-
-        const rotateX =
-          -velocity *
-          proximity *
-          1.0;
-
-        const skew =
-          velocity *
-          proximity *
-          0.9;
-
-        const scaleX =
-          1 +
-          Math.abs(velocity) *
-          proximity *
-          0.008;
-
-        const scaleY =
-          1 -
-          Math.abs(velocity) *
-          proximity *
-          0.004;
-        const translateY =
-          velocity *
-          proximity *
-          1.5;
-
-        image.style.transform = `
-          perspective(1400px)
-          translate3d(0, ${translateY}px, 0)
-          rotateX(${rotateX}deg)
-          rotateY(${rotateY}deg)
-          skewX(${skew}deg)
-          scale3d(${scaleX}, ${scaleY}, 1)
-        `;
-
-        const blur =
-          Math.abs(velocity) *
-          proximity *
-          0.12;
-
-        image.style.filter =
-          `blur(${blur}px)`;
-      });
-
-      currentVelocity = lerp(
-        currentVelocity,
-        0,
-        0.075
-      );
-
-      rafRef.current =
-        requestAnimationFrame(update);
-    };
-
-    rafRef.current =
-      requestAnimationFrame(update);
-
-    return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-      }
-
-      elements.forEach(({ image }) => {
-        image.style.transform = "";
-        image.style.filter = "";
-        image.style.willChange = "";
-        image.style.backfaceVisibility = "";
-        image.style.transformStyle = "";
-      });
-    };
-  }, [images, getScrollY]);
-  return null;
+  return (
+    <div
+      aria-hidden="true"
+      className={className}
+      style={{
+        position: "fixed",
+        inset: 0,
+        pointerEvents: "none",
+        zIndex: merged.zIndex,
+      }}
+    >
+      <ProjectsWebGLErrorBoundary onError={() => setEnabled(false)}>
+        <Canvas
+          frameloop="always"
+          dpr={[1, 2]}
+          resize={{ scroll: false }}
+          camera={{ fov: 45, near: 10, far: 20000, position: [0, 0, 1000] }}
+          gl={{
+            alpha: true,
+            antialias: true,
+            powerPreference: "high-performance",
+          }}
+          style={{ width: "100%", height: "100%" }}
+          onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
+        >
+          <ProjectsWebGLScene
+            images={images}
+            config={merged}
+            getScrollY={getScrollY}
+            reducedQuality={lowQuality}
+          />
+        </Canvas>
+      </ProjectsWebGLErrorBoundary>
+    </div>
+  );
 }

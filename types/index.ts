@@ -3,6 +3,7 @@ import type { LucideIcon } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import * as THREE from "three";
 import type { RefObject } from "react";
+import { PlaneGeometry } from "three";
 
 export interface Project {
   id: string;
@@ -267,21 +268,20 @@ export type PositionLayout = {
 };
 
 export interface ProjectProps {
-  id: string; 
-  title: [string, string]; 
-  category: string; 
+  id: string;
+  title: [string, string];
+  category: string;
   description: string;
-  tech: string[]; 
-  image: string; 
+  tech: string[];
+  image: string;
   imageAlt: string;
 };
 
 export interface ProjectsWebGLImageProps {
   target: WebGLImageTarget;
-  geometry: THREE.PlaneGeometry;
+  geometry: PlaneGeometry;
   config: ProjectsWebGLEffectConfig;
-  velocityRef: React.MutableRefObject<number>;
-  viewportRef: React.MutableRefObject<{ width: number; height: number }>;
+  motionRef: { current: number };
 };
 
 export interface ProjectsWebGLSceneProps {
@@ -292,20 +292,23 @@ export interface ProjectsWebGLSceneProps {
 };
 
 export interface WebGLImageTarget {
-  id: string;
-  ref: RefObject<HTMLDivElement>;
+  id: string | number;
+  ref: RefObject<HTMLElement | null>;
   src: string;
 };
 
 export interface ProjectsWebGLEffectConfig {
-  curlStrength: number;
-  distortionStrength: number;
-  velocityMultiplier: number;
-  velocitySmoothing: number;
-  velocityClamp: number;
-  chromaticAberration: number;
-  enterDuration: number;
-  restingLerp: number;
+  curlDepth: number;
+  cameraDistance: number;
+  flatZone: number;
+  fullZone: number;
+  velocityReference: number;
+  velocityWindow: number;
+  attackTime: number;
+  releaseTime: number;
+  preloadMargin: number;
+  cullMargin: number;
+  zIndex: number;
 };
 
 export interface ProjectsWebGLEffectProps {
@@ -313,6 +316,7 @@ export interface ProjectsWebGLEffectProps {
   config?: Partial<ProjectsWebGLEffectConfig>;
   getScrollY?: () => number;
   className?: string;
+  reducedQuality?: boolean;
 };
 
 export interface ProjectCardProps {
