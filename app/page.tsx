@@ -6,6 +6,7 @@ import { Projects } from "@/components/sections/Projects";
 import { LearningJourney } from "@/components/sections/LearningJourney";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
+import { Spira } from "@/components/sections/Spira";
 
 export default function Home() {
   return (
@@ -18,7 +19,10 @@ export default function Home() {
           <Skills />
           <Projects />
         </div>
-        <LearningJourney />
+        <div className="relative">
+          <Spira />
+          <LearningJourney />
+        </div>
         <Contact />
       </main>
       <Footer />

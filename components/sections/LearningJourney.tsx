@@ -365,9 +365,6 @@ function HorizontalNode({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Vertical timeline — portrait phones / portrait tablets only               */
-/* -------------------------------------------------------------------------- */
 
 function TimelineVertical({
   milestones = DEFAULT_MILESTONES,
@@ -564,7 +561,7 @@ export function LearningJourney() {
     return (
       <section
         id="experience"
-        className="relative border-y border-border-strong bg-background"
+        className="relative z-10 border-y border-border-strong bg-background"
       >
         <div className="container-px mx-auto w-full max-w-6xl py-10">
           <TimelineVertical milestones={DEFAULT_MILESTONES} />

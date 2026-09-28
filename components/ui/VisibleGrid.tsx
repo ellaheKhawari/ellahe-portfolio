@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { projectSection } from "@/lib/mockData";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import { ProjectsWebGLEffect, WebGLImageTarget } from "@/webGL";
+import { ProjectsEffect, WebGLImageTarget } from "@/webGL";
 
 export function ProjectGrid() {
   const imageRefs = useRef(
@@ -21,7 +21,7 @@ export function ProjectGrid() {
       {projectSection.map((project, i) => (
         <ProjectCard key={project.id} project={project} index={i} ref={imageRefs[i]} />
       ))}
-      <ProjectsWebGLEffect images={webglTargets} />
+      <ProjectsEffect images={webglTargets} />
     </div>
   );
 }
