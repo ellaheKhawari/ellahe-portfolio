@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import clsx from "clsx";
 import { ArrowUpRight, Download, Link, Share, X } from "lucide-react";
-import { SiGithub, SiInstagram, SiTelegram, SiWhatsapp } from "react-icons/si"
+import { SiGithub, SiInstagram, SiTelegram, SiWhatsapp } from "react-icons/si";
 import { useDictionary, useLanguageStore } from "@/lib/i18n/store";
 import { Switch } from "@/components/ui/switch";
 
@@ -27,19 +28,19 @@ function BurgerIcon({ open }: { open: boolean }) {
   return (
     <span className="relative flex h-4 w-4 items-center justify-center">
       <motion.span
-        className="absolute h-0.5 w-4 rounded-full bg-foreground"
+        className="absolute h-0.5 w-4 rounded-full bg-current"
         variants={burgerBarVariants.top}
         animate={state}
         transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] }}
       />
       <motion.span
-        className="absolute h-0.5 w-4 rounded-full bg-foreground"
+        className="absolute h-0.5 w-4 rounded-full bg-current"
         variants={burgerBarVariants.middle}
         animate={state}
         transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
       />
       <motion.span
-        className="absolute h-0.5 w-4 rounded-full bg-foreground"
+        className="absolute h-0.5 w-4 rounded-full bg-current"
         variants={burgerBarVariants.bottom}
         animate={state}
         transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] }}
@@ -83,10 +84,34 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
 } as const;
 
+function useOverSection(selector: string) {
+  const [isOver, setIsOver] = useState(false);
+
+  useEffect(() => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsOver(entry.isIntersecting),
+      { rootMargin: "0px 0px -95% 0px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [selector]);
+
+  return isOver;
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { locale, setLocale } = useLanguageStore();
   const { t, dir } = useDictionary();
+  const onLight = useOverSection("#projects");
+  const switchLabelClass = clsx(
+    "text-[10px] font-semibold leading-none font-special-2 transition-colors duration-300",
+    onLight ? "text-white" : "text-background"
+  );
 
   const navLinks = [
     { href: "#about", label: t.nav.links.about },
@@ -125,10 +150,14 @@ export function Navbar() {
     <div dir={dir}>
       <nav
         dir="ltr"
-        className="fixed zoom-125 inset-x-0 top-0 z-30 flex items-center justify-between px-4 py-4 sm:px-8"
+        className={clsx(
+          "fixed zoom-125 inset-x-0 top-0 z-30 flex items-center justify-between px-4 py-4 sm:px-8",
+          "transition-colors duration-300",
+          onLight ? "text-ink" : "text-foreground"
+        )}
       >
-        <div className="flex items-center gap-2 text-foreground">
-          <span className="text-2xl font-special-2  ">Ellahe Khawari</span>
+        <div className="flex items-center gap-2">
+          <span className="text-2xl font-special-2">Ellahe Khawari</span>
         </div>
 
         <div className="flex items-center gap-3">
@@ -136,17 +165,24 @@ export function Navbar() {
             checked={locale === "fa"}
             onCheckedChange={(checked) => setLocale(checked ? "fa" : "en")}
             showIcons
-            checkedIcon={<span className="text-[10px] text-background font-semibold leading-none font-special-2">EN</span>}
-            uncheckedIcon={<span className="text-[10px] text-background font-semibold font-special-2 leading-none">FA</span>}
+            checkedIcon={<span className={switchLabelClass}>EN</span>}
+            uncheckedIcon={<span className={switchLabelClass}>FA</span>}
             aria-label={locale === "en" ? "Switch to English" : "تغییر زبان به فارسی"}
-            className="border-muted-foreground! bg-white/10 font-special-2"
+            className={clsx(
+              "border-muted-foreground! font-special-2 transition-colors duration-300",
+              onLight ? "bg-ink/10 [--switch-thumb:var(--ink)]" : "bg-white/10"
+            )}
           />
 
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? t.nav.close : "Open menu"}
-            className="flex h-9 items-center justify-center gap-2 rounded-full border-2 border-muted-foreground! bg-foreground/10 px-4 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-95"
+            className={clsx(
+              "flex h-9 items-center justify-center gap-2 rounded-full border-2 border-muted-foreground! px-4 text-sm font-medium",
+              "transition-[transform,background-color] duration-300 hover:scale-[1.03] active:scale-95",
+              onLight ? "bg-ink/10" : "bg-foreground/10"
+            )}
           >
             <BurgerIcon open={open} />
             {open && t.nav.close}
@@ -226,7 +262,7 @@ export function Navbar() {
               </motion.div>
 
               <motion.div variants={itemVariants} className="flex items-center gap-3">
-                 <a
+                <a
                   href="#"
                   aria-label="Whatsapp"
                   className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
@@ -240,7 +276,7 @@ export function Navbar() {
                 >
                   <SiTelegram size={18} />
                 </a>
-              
+
                 <a
                   href="#"
                   aria-label="Instegram"
@@ -280,5 +316,3 @@ export function Navbar() {
     </div>
   );
 }
-
-export default Navbar;

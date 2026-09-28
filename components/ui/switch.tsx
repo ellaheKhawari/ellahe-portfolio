@@ -6,7 +6,7 @@ import { Check, X } from "lucide-react";
 const SWITCH_THEME = {
   "--ease-spring": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
 } as React.CSSProperties;
-
+const THUMB_BG = "bg-[color:var(--switch-thumb,var(--foreground))]";
 const switchVariants = cva(
   "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50",
   {
@@ -33,14 +33,11 @@ const playHapticFeedback = (type: "heavy" | "light" | "none") => {
   try {
     const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContext) return;
-    
     const ctx = new AudioContext();
     const oscillator = ctx.createOscillator();
     const gainNode = ctx.createGain();
-
     oscillator.connect(gainNode);
     gainNode.connect(ctx.destination);
-
     const now = ctx.currentTime;
 
     if (type === "heavy") {
@@ -168,9 +165,8 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
               className={cn(
                 "absolute top-1/2 -translate-y-1/2 shadow-sm transition-all duration-300 flex items-center justify-center rounded-full left-0.5",
                 
-                isChecked 
-                  ? "bg-foreground" 
-                  : "bg-foreground text-muted",
+                THUMB_BG,
+                !isChecked && "text-muted",
 
                 isChecked && variant === "primary" && "text-primary",
                 isChecked && variant === "destructive" && "text-destructive",
@@ -216,7 +212,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
                     isSmall ? "w-8 h-8" : "w-10 h-10",
                     isChecked 
                       ? (variant === 'destructive' ? "bg-destructive" : "bg-primary") 
-                      : "bg-foreground",
+                      : THUMB_BG,
                     isPressed ? "opacity-10 scale-100" : isHovered ? "opacity-5 scale-100" : "opacity-0 scale-50",
                     isChecked ? "left-3.5" : (shouldRenderIcons && !isSmall) ? "left-3.5" : "left-2.5",
                     isSmall && (isChecked ? "left-2.5" : "left-2")
