@@ -3,20 +3,20 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { ProjectsWebGLImage } from "./ProjectsImage";
-import type { ProjectsWebGLSceneProps } from "@/types";
+import { ProjectsImage } from "./ProjectsImage";
+import type { ProjectsSceneProps } from "@/types";
 
 interface ScrollSample {
   t: number;
   y: number;
 }
 
-export function ProjectsWebGLScene({
+export function ProjectsScene({
   images,
   config,
   getScrollY,
   reducedQuality,
-}: ProjectsWebGLSceneProps) {
+}: ProjectsSceneProps) {
   const camera = useThree((s) => s.camera);
   const size = useThree((s) => s.size);
   const motionRef = useRef(0); 
@@ -74,7 +74,7 @@ export function ProjectsWebGLScene({
   return (
     <>
       {images.map((target) => (
-        <ProjectsWebGLImage
+        <ProjectsImage
           key={target.id}
           target={target}
           geometry={geometry}

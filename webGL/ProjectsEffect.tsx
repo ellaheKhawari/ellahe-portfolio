@@ -3,20 +3,20 @@
 import { useEffect, useMemo, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { DEFAULT_CONFIG } from "./config";
-import { ProjectsWebGLScene } from "@/three/ProjectsScene";
-import { ProjectsWebGLErrorBoundary } from "./ProjectsErrorBoundary";
+import { ProjectsScene } from "@/three/ProjectsScene";
+import { ProjectsErrorBoundary } from "./ProjectsErrorBoundary";
 import type {
-  ProjectsWebGLEffectConfig,
-  ProjectsWebGLEffectProps,
+  ProjectsEffectConfig,
+  ProjectsEffectProps,
 } from "@/types";
 
-export function ProjectsWebGLEffect({
+export function ProjectsEffect({
   images,
   config,
   getScrollY,
   className,
   reducedQuality,
-}: ProjectsWebGLEffectProps) {
+}: ProjectsEffectProps) {
   const [enabled, setEnabled] = useState(false);
   const [lowQuality, setLowQuality] = useState(false);
 
@@ -29,7 +29,7 @@ export function ProjectsWebGLEffect({
     return () => mq.removeEventListener("change", update);
   }, [reducedQuality]);
 
-  const merged = useMemo<ProjectsWebGLEffectConfig>(
+  const merged = useMemo<ProjectsEffectConfig>(
     () => ({ ...DEFAULT_CONFIG, ...config }),
     [config]
   );
@@ -47,7 +47,7 @@ export function ProjectsWebGLEffect({
         zIndex: merged.zIndex,
       }}
     >
-      <ProjectsWebGLErrorBoundary onError={() => setEnabled(false)}>
+      <ProjectsErrorBoundary onError={() => setEnabled(false)}>
         <Canvas
           frameloop="always"
           dpr={[1, 2]}
@@ -61,14 +61,14 @@ export function ProjectsWebGLEffect({
           style={{ width: "100%", height: "100%" }}
           onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
         >
-          <ProjectsWebGLScene
+          <ProjectsScene
             images={images}
             config={merged}
             getScrollY={getScrollY}
             reducedQuality={lowQuality}
           />
         </Canvas>
-      </ProjectsWebGLErrorBoundary>
+      </ProjectsErrorBoundary>
     </div>
   );
 }

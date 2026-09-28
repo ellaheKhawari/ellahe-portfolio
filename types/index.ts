@@ -277,16 +277,16 @@ export interface ProjectProps {
   imageAlt: string;
 };
 
-export interface ProjectsWebGLImageProps {
+export interface ProjectsImageProps {
   target: WebGLImageTarget;
   geometry: PlaneGeometry;
-  config: ProjectsWebGLEffectConfig;
+  config: ProjectsEffectConfig;
   motionRef: { current: number };
 };
 
-export interface ProjectsWebGLSceneProps {
+export interface ProjectsSceneProps {
   images: WebGLImageTarget[];
-  config: ProjectsWebGLEffectConfig;
+  config: ProjectsEffectConfig;
   getScrollY?: () => number;
   reducedQuality?: boolean;
 };
@@ -297,7 +297,7 @@ export interface WebGLImageTarget {
   src: string;
 };
 
-export interface ProjectsWebGLEffectConfig {
+export interface ProjectsEffectConfig {
   curlDepth: number;
   cameraDistance: number;
   flatZone: number;
@@ -311,9 +311,9 @@ export interface ProjectsWebGLEffectConfig {
   zIndex: number;
 };
 
-export interface ProjectsWebGLEffectProps {
+export interface ProjectsEffectProps {
   images: WebGLImageTarget[];
-  config?: Partial<ProjectsWebGLEffectConfig>;
+  config?: Partial<ProjectsEffectConfig>;
   getScrollY?: () => number;
   className?: string;
   reducedQuality?: boolean;

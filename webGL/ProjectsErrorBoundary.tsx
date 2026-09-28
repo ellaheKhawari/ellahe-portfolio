@@ -11,7 +11,7 @@ interface State {
   hasError: boolean;
 }
 
-export class ProjectsWebGLErrorBoundary extends Component<Props, State> {
+export class ProjectsErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false };
 
   static getDerivedStateFromError() {
@@ -19,7 +19,7 @@ export class ProjectsWebGLErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: unknown) {
-    console.warn("ProjectsWebGLEffect disabled itself after an error:", error);
+    console.warn("ProjectsEffect disabled itself after an error:", error);
     this.props.onError?.();
   }
 

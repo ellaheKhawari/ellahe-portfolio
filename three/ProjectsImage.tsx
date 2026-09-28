@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { vertexShader, fragmentShader } from "@/webGL/shaders";
-import type { ProjectsWebGLImageProps } from "@/types";
+import type { ProjectsImageProps } from "@/types";
 
 type LoadState = "idle" | "loading" | "ready" | "failed";
 
@@ -17,12 +17,12 @@ function parsePosition(token: string | undefined, freeSpace: number): number {
   return 0.5;
 }
 
-export function ProjectsWebGLImage({
+export function ProjectsImage({
   target,
   geometry,
   config,
   motionRef,
-}: ProjectsWebGLImageProps) {
+}: ProjectsImageProps) {
   const gl = useThree((s) => s.gl);
   const meshRef = useRef<THREE.Mesh>(null);
   const loadStateRef = useRef<LoadState>("idle");

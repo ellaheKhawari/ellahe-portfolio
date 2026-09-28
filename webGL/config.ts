@@ -1,6 +1,6 @@
-import type { ProjectsWebGLEffectConfig } from "@/types";
+import type { ProjectsEffectConfig } from "@/types";
 
-export const DEFAULT_CONFIG: ProjectsWebGLEffectConfig = {
+export const DEFAULT_CONFIG: ProjectsEffectConfig = {
   curlDepth: 0.08,
   cameraDistance: 1.4,
   flatZone: 0.05,
