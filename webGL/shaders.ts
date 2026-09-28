@@ -1,10 +1,10 @@
-export const vertexShader =  `
-  uniform float uBend;   // 0..1   |scroll velocity|
-  uniform float uDir;    // -1..1  +1 = scrolling down (content moving up)
-  uniform float uDepth;  // px     max forward displacement at velocity 1
-  uniform float uHalfH;  // px     half of the viewport height
-  uniform float uFlat;   // 0..1   flat dead zone around the viewport center
-  uniform float uFull;   // 0..1   distance where full depth is reached
+export const vertexShader = `
+  uniform float uBend;   
+  uniform float uDir;    
+  uniform float uDepth;  
+  uniform float uHalfH; 
+  uniform float uFlat;   
+  uniform float uFull;   
   varying vec2 vUv;
   void main() {
     vUv = uv;
@@ -18,13 +18,16 @@ export const vertexShader =  `
   }
 `;
 
-export const fragmentShader = `
+export const fragmentShader =  `
   uniform sampler2D uTexture;
-  uniform vec2 uUvScale;   // object-fit mapping (cover / fill)
+  uniform vec2 uFitScale;   
+  uniform vec2 uFitOffset; 
   varying vec2 vUv;
   void main() {
-    vec2 uv = (vUv - 0.5) * uUvScale + 0.5;
-    // Raw sRGB in, raw sRGB out: the flat state matches the DOM <img>.
-    gl_FragColor = vec4(texture2D(uTexture, uv).rgb, 1.0);
+    vec2 p = vec2(vUv.x, 1.0 - vUv.y);
+    vec2 t = (p - uFitOffset) / uFitScale;
+    vec4 color = texture2D(uTexture, vec2(t.x, 1.0 - t.y));
+    if (t.x < 0.0 || t.x > 1.0 || t.y < 0.0 || t.y > 1.0) discard;
+    gl_FragColor = vec4(color.rgb, 1.0);
   }
 `;
