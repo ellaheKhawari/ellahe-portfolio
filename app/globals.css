@@ -318,3 +318,45 @@ h6 {
 .cm-row:hover .cm-track {
   animation-play-state: paused;
 }
+
+:root {
+  --scrollbar-width: 8px;
+  --scrollbar-track: rgba(255, 255, 255, 0.25);
+  --scrollbar-thumb: #161616;
+  --scrollbar-thumb-hover: #000;
+  --scrollbar-thumb-radius: 999px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  html::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+  }
+  html::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  html::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--scrollbar-thumb-radius);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+  html::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+    background-clip: padding-box;
+  }
+  html::-webkit-scrollbar-button {
+    display: none; 
+  }
+}
+@supports not selector(::-webkit-scrollbar) {
+  @media (hover: hover) and (pointer: fine) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    }
+  }
+}
