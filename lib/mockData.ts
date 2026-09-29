@@ -1,10 +1,6 @@
 import { Milestone, ProjectProps, VerticalTab } from "@/types";
 import { Activity, GitPullRequest, Rocket, ShieldCheck } from "lucide-react";
-import project1 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
-import project2 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
-import project3 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
-import project4 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
-import project5 from "@/public/pictures/Screenshot 2026-09-28 063345.png"
+
 
 export const DEFAULT_MILESTONES: Milestone[] = [
   { date: "Q1 2025", title: "Foundation", description: "Architecture, design system, and tooling." },

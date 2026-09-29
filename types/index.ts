@@ -1,21 +1,8 @@
 import type { Locale } from "@/lib/i18n/store";
 import type { LucideIcon } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
-import * as THREE from "three";
 import type { RefObject } from "react";
 import { PlaneGeometry } from "three";
-
-export interface Project {
-  id: string;
-  number: string;
-  title: string;
-  category?: string;
-  description: Record<Locale, string>;
-  year: string;
-  technologies: string[];
-  href?: string;
-}
-
 export interface Dictionary {
   meta: { title: string; description: string };
   nav: {
@@ -52,16 +39,17 @@ export interface Dictionary {
     title2: string;
     groups: { name: string; items: string[] }[];
   };
-  projects: {
-    eyebrow: string;
-    title: string;
-    viewProject: string;
-    items: Array<{
-      title: string;
-      category: string;
-      description: string;
-    }>;
+  projects: { 
+    eyebrow: string ;
+    title: string ;
+    span: string;
+    desc1: string;
+    desc2: string;
+    desc3: string;
+    desc4: string;
+    desc5: string;
   };
+  projectsCard : VerticalTab[];
   experience: {
     eyebrow: string;
     title: string;
@@ -266,7 +254,6 @@ export type PositionLayout = {
   y: number;
   rotate: number;
 };
-
 export interface ProjectProps {
   id: string;
   title: [string, string];
@@ -311,6 +298,16 @@ export interface ProjectsEffectConfig {
   zIndex: number;
 };
 
+export interface Project {
+  id: string;
+  number: string;
+  title: string;
+  category?: string;
+  description: Record<Locale, string>;
+  year: string;
+  technologies: string[];
+  href?: string;
+}
 export interface ProjectsEffectProps {
   images: WebGLImageTarget[];
   config?: Partial<ProjectsEffectConfig>;
@@ -318,7 +315,6 @@ export interface ProjectsEffectProps {
   className?: string;
   reducedQuality?: boolean;
 };
-
 export interface ProjectCardProps {
   project: ProjectProps;
   index: number;

@@ -1,5 +1,5 @@
 import { Dictionary } from "@/types";
-import { title } from "process";
+import { Rocket, Activity, ShieldCheck, GitPullRequest } from "lucide-react";
 
 const en: Dictionary = {
   meta: {
@@ -58,39 +58,80 @@ const en: Dictionary = {
         items: ["Zustand", "Sonner", "Vite", "Git", "Figma"],
       },
     ],
-    title2:"State & Tooling",
+    title2: "State & Tooling",
   },
   projects: {
-    eyebrow: "Projects",
-    title: "Selected work.",
-    viewProject: "View project",
-    items: [
-      {
-        title: "Aurora Dashboard",
-        category: "SaaS · Data visualization",
-        description:
-          "A real-time analytics dashboard with a custom charting engine and buttery-smooth transitions.",
-      },
-      {
-        title: "Lumen Commerce",
-        category: "E-commerce · Storefront",
-        description:
-          "A headless storefront focused on speed, with an average Lighthouse score of 98.",
-      },
-      {
-        title: "Nova Studio",
-        category: "Agency · Marketing site",
-        description:
-          "An award-nominated agency site featuring a WebGL hero and scroll-driven storytelling.",
-      },
-      {
-        title: "Pulse Health",
-        category: "Health-tech · Product",
-        description:
-          "A patient-facing portal balancing accessibility with a warm, reassuring visual system.",
-      },
-    ],
+    eyebrow:"Selected works — 2026",
+    title : "PROJECTS",
+    span: "05 case studies, in build order",
+    desc1: "I build interfaces",
+    desc2:"the way this page is built —",
+    desc3: "on a grid you can feel",
+    desc4:"even when it stays out of sight. Structure first,",
+    desc5:"then character.",
   },
+  projectsCard: [
+    {
+      id: "deploy",
+      label: "Deployments",
+      hint: "Push to production",
+      icon: Rocket,
+      eyebrow: "Ship",
+      title: "Deploy every push in seconds",
+      body: "Every commit builds, previews, and promotes on its own. Instant rollbacks keep production one click from a known good release.",
+      points: [
+        "Immutable preview URL for every pull request",
+        "Atomic promotions with zero downtime",
+        "One-click rollback to any prior build",
+      ],
+      metric: { value: "12s", label: "median build to live" },
+    },
+    {
+      id: "observe",
+      label: "Observability",
+      hint: "Traces, logs, metrics",
+      icon: Activity,
+      eyebrow: "Watch",
+      title: "See every request as it happens",
+      body: "Traces, logs, and metrics stream into one timeline. Filter by route, region, or release to catch the slow path before users feel it.",
+      points: [
+        "Distributed traces across all services",
+        "Live tail with structured log search",
+        "Alerts wired to Slack and PagerDuty",
+      ],
+      metric: { value: "1.4M", label: "spans indexed per minute" },
+    },
+    {
+      id: "access",
+      label: "Access Control",
+      hint: "Roles and audit",
+      icon: ShieldCheck,
+      eyebrow: "Secure",
+      title: "Least-privilege access by default",
+      body: "Scoped tokens, SSO, and per-environment roles keep production locked down. Every action lands in an immutable audit log you can export.",
+      points: [
+        "SAML and SCIM for your identity provider",
+        "Fine-grained roles per project and environment",
+        "Signed audit trail retained for 90 days",
+      ],
+      metric: { value: "SOC 2", label: "Type II certified" },
+    },
+    {
+      id: "collab",
+      label: "Collaboration",
+      hint: "Review in the flow",
+      icon: GitPullRequest,
+      eyebrow: "Together",
+      title: "Review changes without leaving the PR",
+      body: "Preview links, inline comments, and deploy status land on the pull request. Required approvals gate promotion so nothing ships unseen.",
+      points: [
+        "Deploy status checks on every pull request",
+        "Comment threads pinned to a live preview",
+        "Required approvals before promote",
+      ],
+      metric: { value: "3x", label: "faster review cycles" },
+    },
+  ],
   experience: {
     eyebrow: "Experience",
     title: "Where I've been.",
