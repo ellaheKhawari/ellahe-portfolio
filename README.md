@@ -41,7 +41,7 @@ app/
   not-found.tsx       404 page
 components/
   navbar/             Fullscreen GSAP-driven navigation (+ navbar.css)
-  sections/           Hero, About, Skills, Projects, Experience, Contact, Footer
+  sections/           Hero, About, Skills, Projects, Learning Journey, Contact, Footer
   three/              Vanilla Three.js hero background scene
   ui/                 Small shared UI (404 glitch text, etc.)
 lib/

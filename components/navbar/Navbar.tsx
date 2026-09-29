@@ -117,7 +117,7 @@ export function Navbar() {
     { href: "#about", label: t.nav.links.about },
     { href: "#skills", label: t.nav.links.skills },
     { href: "#projects", label: t.nav.links.projects },
-    { href: "#experience", label: t.nav.links.experience },
+    { href: "#learningJourney", label: t.nav.links.learningJourney },
     { href: "#contact", label: t.nav.links.contact },
   ];
 

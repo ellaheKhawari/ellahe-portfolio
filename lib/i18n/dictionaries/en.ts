@@ -13,7 +13,7 @@ const en: Dictionary = {
       about: "About",
       skills: "Skills",
       projects: "Projects",
-      experience: "Experience",
+      learningJourney: "Learning Journey",
       contact: "Contact",
       waysToConnect: "Ways To Connect",
     },
@@ -132,7 +132,7 @@ const en: Dictionary = {
       metric: { value: "3x", label: "faster review cycles" },
     },
   ],
-  experience: {
+  learningJourney: {
     eyebrow: "Experience",
     title: "Where I've been.",
     items: [

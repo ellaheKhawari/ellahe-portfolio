@@ -13,7 +13,7 @@ const fa: Dictionary = {
       about: "درباره من",
       skills: "مهارت‌ها",
       projects: "نمونه‌کارها",
-      experience: "سوابق",
+      learningJourney: "سوابق",
       contact: "تماس",
       waysToConnect: "راه های ارتباط ",
     },
@@ -132,7 +132,7 @@ const fa: Dictionary = {
       metric: { value: "۳برابر", label: "چرخه‌ی ریویوی سریع‌تر" },
     },
   ],
-  experience: {
+  learningJourney: {
     eyebrow: "سوابق",
     title: "مسیر حرفه‌ای من.",
     items: [

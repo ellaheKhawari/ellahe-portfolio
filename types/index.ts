@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/i18n/store";
+import { MotionValue } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import type { RefObject } from "react";
@@ -11,7 +12,7 @@ export interface Dictionary {
       about: string;
       skills: string;
       projects: string;
-      experience: string;
+      learningJourney: string;
       contact: string;
       waysToConnect: string;
     };
@@ -50,7 +51,7 @@ export interface Dictionary {
     desc5: string;
   };
   projectsCard : VerticalTab[];
-  experience: {
+  learningJourney: {
     eyebrow: string;
     title: string;
     items: { year: string; role: string; org: string; description: string }[];
@@ -319,3 +320,35 @@ export interface ProjectCardProps {
   project: ProjectProps;
   index: number;
 };
+export interface SegmentOption {
+  id: string;
+  label: string;
+  icon?: LucideIcon;
+}
+export type ProjectYear = 2023 | 2024 | 2025 | 2026;
+export interface YearPanel extends SegmentOption {
+  year: ProjectYear;
+  value: string;
+  caption: string;
+  delta: string;
+  up: boolean;
+}
+export interface TimelineStage {
+  year: ProjectYear;
+  title: string;
+  description: string;
+}
+
+export interface ProjectTimelineProps {
+  stages: readonly TimelineStage[];
+  activeIndex: number;
+  fill: MotionValue<number>;
+  onSelect: (index: number) => void;
+  className?: string;
+}
+ export interface ProjectTimelineCardProps {
+  activeYear: ProjectYear;
+  progress: MotionValue<number>;
+  onSelectYear?: (year: ProjectYear) => void;
+  className?: string;
+}

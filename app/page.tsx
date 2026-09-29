@@ -19,10 +19,8 @@ export default function Home() {
           <Skills />
           <Projects />
         </div>
-        <div className="relative">
-          <Spira />
-          <LearningJourney />
-        </div>
+        <Spira />
+        <LearningJourney />
         <Contact />
       </main>
       <Footer />
