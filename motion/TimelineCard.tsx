@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, useTransform, type MotionValue} from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, type LucideIcon } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ProjectTimelineCardProps, ProjectYear, SegmentOption, YearPanel } from "@/types";
 
@@ -191,7 +191,7 @@ function ScrollChart({ progress }: { progress: MotionValue<number> }) {
         style={{ left: dotLeft, top: dotTop }}
         className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2"
       >
-        <span className="block h-2.5 w-2.5 rounded-full bg-[#9dc4dd] shadow-[0_0_10px_2px_rgba(135,190,226,0.55)]" />
+        <span className="block h-2.5 w-2.5 rounded-full bg-mist shadow-[0_0_10px_2px_rgba(135,190,226,0.55)]" />
       </motion.div>
     </div>
   );
@@ -204,7 +204,7 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
   return (
     <div
       className={cn(
-        "relative flex w-full max-w-100 flex-col overflow-hidden rounded-2xl border border-[#262626] bg-[#0a0a0a] p-5 sm:p-6",
+        "relative flex w-full max-w-100 flex-col overflow-hidden rounded-2xl border border-border bg-background p-5 sm:p-6",
         "shadow-[0_24px_60px_-24px_rgba(0,0,0,0.9)]",
         className
       )}
@@ -219,10 +219,10 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
       />
 
       <div className="relative flex items-center justify-between">
-        <span className="text-sm font-medium text-[#f2f3f3]">Revenue</span>
-        <div className="flex items-center gap-1.5 rounded-full border border-[#262626] px-2 py-0.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#9dc4dd]" />
-          <span className="text-[11px] font-medium text-[#9ea3a4]">Yearly</span>
+        <span className="text-sm font-medium text-foreground">Revenue</span>
+        <div className="flex items-center gap-1.5 rounded-full border border-border px-2 py-0.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-mist" />
+          <span className="text-[11px] font-medium text-muted-foreground">Yearly</span>
         </div>
       </div>
 
@@ -247,17 +247,17 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
             className="absolute inset-0 flex items-end justify-between"
           >
             <div>
-              <div className="text-3xl font-semibold tabular-nums tracking-tight text-[#f2f3f3]">
+              <div className="text-3xl font-semibold tabular-nums tracking-tight text-foreground">
                 {panel.value}
               </div>
-              <div className="mt-1 text-xs text-[#9ea3a4]">{panel.caption}</div>
+              <div className="mt-1 text-xs text-muted-foreground">{panel.caption}</div>
             </div>
             <div
               className={cn(
                 "flex items-center gap-1 rounded-full border px-2 py-1 text-xs font-medium tabular-nums",
                 panel.up
-                  ? "border-[#9dc4dd]/25 bg-[#9dc4dd]/10 text-[#9dc4dd]"
-                  : "border-[#676b6c]/40 bg-[#676b6c]/10 text-[#9ea3a4]"
+                  ? "border-mistext-mist/25 bg-mistext-mist/10 text-mist"
+                  : "border-steel/40 bg-steel/10 text-muted-foreground"
               )}
             >
               {panel.up ? (

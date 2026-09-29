@@ -26,7 +26,7 @@ export function AuroraBackground({
         className="pointer-events-none absolute inset-0 opacity-60"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgb(10, 10, 10), transparent 70%)",
+            "radial-(ellipse 80% 60% at 50% 0%, rgb(10, 10, 10), transparent 70%)",
         }}
       />
       <div className="relative z-10">{children}</div>

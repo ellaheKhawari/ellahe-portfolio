@@ -3,7 +3,6 @@
 import { motion} from "framer-motion";
 import type { ProjectTimelineProps } from "@/types";
 
-
 export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""}: ProjectTimelineProps) {
   return (
     <ol aria-label="Project timeline" className={`relative ${className}`}>
@@ -14,7 +13,7 @@ export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""
         <div className="absolute inset-0 opacity-60 [background:repeating-linear-gradient(to_bottom,#676b6c_0_4px,transparent_4px_9px)]" />
         <motion.div
           style={{ scaleY: fill }}
-          className="absolute inset-y-0 inset-x-[-0.5px] origin-top bg-linear-to-b from-[#9dc4dd] to-[#87bee2] will-change-transform"
+          className="absolute inset-y-0 inset-x-[-0.5px] origin-top bg-linear-to-b from-mist to-[#87bee2] will-change-transform"
         />
       </div>
 
@@ -27,11 +26,11 @@ export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""
               type="button"
               onClick={() => onSelect(i)}
               aria-current={isActive ? "step" : undefined}
-              className="group relative block w-full rounded-sm py-1.5 pl-7 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#9dc4dd]/60 sm:py-2.5 sm:pl-9"
+              className="group relative block w-full rounded-sm py-1.5 pl-7 text-left outline-none focus-visible:ring-2 focus-visible:ring-mist/60 sm:py-2.5 sm:pl-9"
             >
               <span
                 aria-hidden
-                className={`pointer-events-none absolute inset-y-0 left-0 w-0.5 bg-[#f2f3f3] transition-opacity duration-500 motion-reduce:transition-none ${
+                className={`pointer-events-none absolute inset-y-0 left-0 w-0.5 bg-mist transition-opacity duration-500 motion-reduce:transition-none ${
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -41,24 +40,24 @@ export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""
                   aria-hidden
                   className={`pointer-events-none absolute -left-7 top-1/2 z-10 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-[background-color,border-color,box-shadow] duration-500 motion-reduce:transition-none sm:-left-9 ${
                     isReached
-                      ? "border-[#9dc4dd] bg-[#9dc4dd]"
-                      : "border-[#676b6c] bg-[#0a0a0a]"
+                      ? "border-mist bg-mist"
+                      : "border-steel bg-background"
                   } ${
                     isActive ? "shadow-[0_0_0_4px_rgba(157,196,221,0.16)]" : ""
                   }`}
                 />
                 <span
-                  className={`font-serif text-xl tabular-nums transition-colors duration-500 motion-reduce:transition-none sm:text-3xl lg:text-4xl ${
+                  className={`text-xl tabular-nums transition-colors duration-500 motion-reduce:transition-none sm:text-3xl lg:text-4xl ${
                     isActive
-                      ? "text-[#f2f3f3]"
-                      : "text-[#676b6c] group-hover:text-[#9ea3a4]"
+                      ? "text-foreground"
+                      : "text-steel group-hover:text-muted-foreground"
                   }`}
                 >
                   {stage.year}
                 </span>
                 <span
                   className={`text-sm transition-colors duration-500 motion-reduce:transition-none ${
-                    isActive ? "text-[#9dc4dd]" : "text-[#676b6c]"
+                    isActive ? "text-mist" : "text-steel"
                   }`}
                 >
                   {stage.title}
@@ -72,7 +71,7 @@ export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""
                 }`}
               >
                 <span className="overflow-hidden">
-                  <span className="block max-w-[44ch] pt-2 text-[15px] leading-relaxed text-[#9ea3a4]">
+                  <span className="block max-w-[44ch] pt-2 text-[15px] leading-relaxed text-muted-foreground">
                     {stage.description}
                   </span>
                 </span>

@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import clsx from "clsx";
-import type { ProjectCardProps, ProjectProps } from "@/types";
+import type { ProjectCardProps} from "@/types";
 
 export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
   ({ project, index }, imageRef) => {
@@ -13,13 +13,13 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
           "grid-cols-[repeat(var(--col-count),1fr)] max-[900px]:grid-cols-4",
           "gap-x-[clamp(0.75rem,2vw,1.5rem)] gap-y-0",
           "border-b border-[rgba(20,20,20,0.12)] py-[clamp(1.5rem,4vw,2.75rem)]",
-          "transition-colors duration-[250ms] ease-[ease] hover:bg-[rgba(20,20,20,0.02)]",
+          "transition-colors duration-250 ease-[ease] hover:bg-[rgba(20,20,20,0.02)]",
           "motion-reduce:transition-none"
         )}
       >
   
         <div className="col-[1/2] flex flex-col gap-[0.15rem] pt-[0.2rem] text-[0.7rem] leading-[1.3] text-[#8a8a86] max-[900px]:col-[1/3] max-[900px]:flex-row max-[900px]:gap-[0.35rem]">
-          <span className="transition-colors duration-[250ms] ease-[ease] group-hover:text-ink motion-reduce:transition-none">
+          <span className="transition-colors duration-250 ease-[ease] group-hover:text-ink motion-reduce:transition-none">
             Project
           </span>
           <span className="transition-colors duration-250 ease-[ease] group-hover:text-ink motion-reduce:transition-none">

@@ -122,20 +122,16 @@ export function LearningJourney() {
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(60% 50% at 78% 50%, rgba(135,190,226,0.08), transparent 70%)",
-              }}
             />
 
             <div className="relative mx-auto grid h-full w-full max-w-7xl grid-rows-[auto_minmax(0,1fr)] gap-4 px-5 pb-5 pt-[max(1.25rem,env(safe-area-inset-top))] sm:gap-8 sm:px-8 md:pb-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:grid-rows-1 lg:gap-16 lg:px-12 lg:pb-0 lg:pt-0">
               <div className="flex min-w-0 flex-col lg:pt-[clamp(3rem,17dvh,10rem)]">
                 <h2
                   id="learningJourney-heading"
-                  className="font-serif text-[clamp(1.875rem,6vw,4.75rem)] leading-[1.03] tracking-tight text-[#f2f3f3]"
+                  className="text-[clamp(1.875rem,6vw,4.75rem)] leading-[1.03] tracking-tight text-foreground"
                 >
                   Selected work,
-                  <span className="block italic">year by year.</span>
+                  <span className="block">year by year.</span>
                 </h2>
 
                 <p className="sr-only" aria-live="polite">
