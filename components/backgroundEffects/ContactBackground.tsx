@@ -18,15 +18,15 @@ type BeamConfig = {
 const BEAMS: BeamConfig[] = [
   {
     side: "left",
-    color: "rgba(91, 140, 255, 0.30)",
-    core: "rgba(147, 190, 255, 0.5)",
+    color: "rgba(135, 190, 226, 0.30)",
+    core: "rgb(157, 196, 221)",
     rotate: 24,
     delay: 0,
   },
   {
     side: "right",
-    color: "rgba(91, 140, 255, 0.30)",
-    core: "rgba(147, 190, 255, 0.5)",
+    color: "rgba(135, 190, 226, 0.30)",
+    core: "rgb(157, 196, 221)",
     rotate: -24,
     delay: 1.6,
   },
@@ -79,7 +79,7 @@ function Beam({ side, color, core, rotate, delay }: BeamConfig) {
   );
 }
 
-export function SpotlightNew({
+export function ContactBackground({
   children,
   className,
 }: {
@@ -103,7 +103,7 @@ export function SpotlightNew({
   return (
     <div
       className={cn(
-        "relative isolate h-full w-full overflow-hidden bg-background",
+        "relative isolate h-dvh w-full overflow-hidden bg-background",
         className
       )}
     >
@@ -128,7 +128,7 @@ export function SpotlightNew({
         className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[70%] -translate-x-1/2"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(124,108,255,0.22), transparent 68%)",
+            "radial-gradient(ellipse at center, rgba(135, 190, 226,0.22), transparent 68%)",
           filter: "blur(24px)",
         }}
       />

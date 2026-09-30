@@ -19,7 +19,7 @@ export function Footer() {
   ];
 
   return (
-    <section className="flex justify-end items-end h-dvh">  
+    <section className="flex justify-end items-end h-screen">  
       <footer
       className="relative mx-auto flex w-full min-h-[75vh] flex-row items-center justify-center rounded-t-[50px] border-t px-6 py-12 md:rounded-t-6xl md:py-8 md:px-8 "
       style={{

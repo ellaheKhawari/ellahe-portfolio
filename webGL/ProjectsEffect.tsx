@@ -58,7 +58,7 @@ export function ProjectsEffect({
             antialias: true,
             powerPreference: "high-performance",
           }}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: "100%", pointerEvents: "none" }}
           onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
         >
           <ProjectsScene

@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type React from "react";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import { toast } from "sonner";
 import { useDictionary } from "@/lib/i18n/store";
-import ContentBackground from "@/components/backgroundEffects/contentBackground";
-import { SpotlightNew } from "../backgroundEffects/contactBg";
+import { ContactBackground } from "../backgroundEffects/ContactBackground";
 
 export function Contact() {
   const { t } = useDictionary();
@@ -15,10 +13,11 @@ export function Contact() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClick = () => {
+    if (isClicked) return;
+
     setIsClicked(true);
-    window.setTimeout(() => setShowSuccess(true), 500);
+    setShowSuccess(true);
   };
 
   const handleBookCall = () => {
@@ -27,8 +26,8 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="reveal-group relative flex min-h-screen px-6 py-6">
-      <SpotlightNew className="absolute inset-0">
+    <section id="contact" className="relative z-10 flex h-dvh px-6 py-6 top-0">
+      <ContactBackground className="absolute inset-0">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-700 ">
           <div
             className="absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -38,7 +37,7 @@ export function Contact() {
               pointerEvents: showSuccess ? "auto" : "none",
             }}
           >
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col justify-center items-center gap-2">
               <span
                 className="text-md md:text-lg mb-3 font-medium uppercase tracking-[0.3em] text-muted-foreground transition-all duration-500"
                 style={{
@@ -50,7 +49,7 @@ export function Contact() {
                 {t.contact.available}
               </span>
               <h3
-                className="text-6xl mb-5 font-light tracking-tight text-foreground transition-all duration-500 text-center"
+                className="text-6xl mb-4 font-light tracking-tight text-foreground transition-all duration-500 text-center"
                 style={{
                   transform: showSuccess ? "translateY(0)" : "translateY(10px)",
                   opacity: showSuccess ? 1 : 0,
@@ -122,7 +121,16 @@ export function Contact() {
           </div>
 
           <div
-            className="group cursor-pointer"
+            role="button"
+            tabIndex={isClicked ? -1 : 0}
+            aria-disabled={isClicked}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleClick();
+              }
+            }}
+            className="group cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-foreground"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={handleClick}
@@ -154,7 +162,7 @@ export function Contact() {
                 </span>
               </h2>
 
-              <div className="relative mt-8 mb-3 flex items-center justify-center size-23 md:size-28">
+              <div className="relative mt-7 mb-3 flex items-center justify-center size-23 md:size-28">
                 <div
                   className="pointer-events-none absolute inset-0 rounded-full border transition-all ease-out"
                   style={{
@@ -192,7 +200,7 @@ export function Contact() {
             </span>
           </div>
         </div>
-      </SpotlightNew>
+      </ContactBackground>
     </section>
   );
 }
