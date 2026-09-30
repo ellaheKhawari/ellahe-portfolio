@@ -2,8 +2,8 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
-import  ProjectTimelineCard from "@/motion/TimelineCard";
-import { ProjectTimeline} from "@/motion/Timeline";
+import ProjectTimelineCard from "@/motion/TimelineCard";
+import { ProjectTimeline } from "@/motion/Timeline";
 import { AuroraBackground } from "../backgroundEffects/AuraBackground";
 import { ProjectYear, TimelineStage } from "@/types";
 
@@ -35,6 +35,12 @@ const STAGES: readonly TimelineStage[] = [
 ];
 
 const SCROLL_PER_STAGE_DVH = 100;
+const END_HOLD_DVH = 100;
+const CONTACT_REVEAL_DVH = 100;
+const TIMELINE_SCROLL_DVH = STAGES.length * SCROLL_PER_STAGE_DVH;
+const SCROLL_RANGE_DVH =
+  TIMELINE_SCROLL_DVH + END_HOLD_DVH + CONTACT_REVEAL_DVH;
+const TIMELINE_END_PROGRESS = TIMELINE_SCROLL_DVH / SCROLL_RANGE_DVH;
 const LINE_FILL_START = 0.06;
 const LINE_FILL_END = 0.9;
 const CARD_PROGRESS_START = 0.12;
@@ -71,17 +77,22 @@ export function LearningJourney() {
     target: trackRef,
     offset: ["start start", "end end"],
   });
-  useMotionValueEvent(scrollYProgress, "change", (p) => {
+  const timelineProgress = useTransform(
+    scrollYProgress,
+    [0, TIMELINE_END_PROGRESS],
+    [0, 1]
+  );
+  useMotionValueEvent(timelineProgress, "change", (p) => {
     setActiveIndex(stageFromProgress(p));
   });
   const lineFill = useSmoothedRange(
-    scrollYProgress,
+    timelineProgress,
     LINE_FILL_START,
     LINE_FILL_END,
     !reduced
   );
   const cardProgress = useSmoothedRange(
-    scrollYProgress,
+    timelineProgress,
     CARD_PROGRESS_START,
     CARD_PROGRESS_END,
     !reduced
@@ -92,7 +103,11 @@ export function LearningJourney() {
       if (!el) return;
       const top = el.getBoundingClientRect().top + window.scrollY;
       const distance = el.offsetHeight - window.innerHeight;
-      const target = top + distance * ((index + 0.5) / STAGES.length);
+      const target =
+        top +
+        distance *
+          TIMELINE_END_PROGRESS *
+          ((index + 0.5) / STAGES.length);
       window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
     },
     [reduced]
@@ -110,12 +125,14 @@ export function LearningJourney() {
     <section
       id="learningJourney"
       aria-labelledby="learningJourney-heading"
-      className="sticky"
+      className="sticky top-0 z-0 w-full"
     >
       <div
         ref={trackRef}
         className="relative"
-        style={{ height: `${STAGES.length * SCROLL_PER_STAGE_DVH}dvh` }}
+        style={{
+          height: `${SCROLL_RANGE_DVH + SCROLL_PER_STAGE_DVH}dvh`,
+        }}
       >
         <div className="sticky top-0 h-dvh overflow-hidden">
           <AuroraBackground>
@@ -125,7 +142,7 @@ export function LearningJourney() {
             />
 
             <div className="relative mx-auto grid h-full w-full max-w-7xl grid-rows-[auto_minmax(0,1fr)] gap-4 px-5 pb-5 pt-[max(1.25rem,env(safe-area-inset-top))] sm:gap-8 sm:px-8 md:pb-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:grid-rows-1 lg:gap-16 lg:px-12 lg:pb-0 lg:pt-0">
-              <div className="flex min-w-0 flex-col lg:pt-[clamp(3rem,17dvh,10rem)]">
+              <div className="flex min-w-0 flex-col lg:pt-[clamp(2rem,17dvh,4rem)]">
                 <h2
                   id="learningJourney-heading"
                   className="text-[clamp(1.875rem,6vw,4.75rem)] leading-[1.03] tracking-tight text-foreground"

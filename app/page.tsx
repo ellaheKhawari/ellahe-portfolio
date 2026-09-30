@@ -20,8 +20,10 @@ export default function Home() {
           <Projects />
         </div>
         <Spira />
-        <LearningJourney />
-        <Contact />
+        <div className="relative">
+          <LearningJourney />
+          <Contact />
+        </div>
       </main>
       <Footer />
     </>

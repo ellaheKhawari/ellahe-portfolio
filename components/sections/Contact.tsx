@@ -26,7 +26,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative z-10 flex h-dvh px-6 py-6 top-0">
+    <section id="contact" className="sticky top-0 z-10 flex h-dvh px-6 py-6">
       <ContactBackground className="absolute inset-0">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-700 ">
           <div
