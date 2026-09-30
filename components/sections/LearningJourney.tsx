@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import ProjectTimelineCard from "@/motion/TimelineCard";
 import { ProjectTimeline } from "@/motion/Timeline";
@@ -38,18 +38,16 @@ const SCROLL_PER_STAGE_DVH = 100;
 const END_HOLD_DVH = 100;
 const CONTACT_REVEAL_DVH = 100;
 const TIMELINE_SCROLL_DVH = STAGES.length * SCROLL_PER_STAGE_DVH;
-const SCROLL_RANGE_DVH =
-  TIMELINE_SCROLL_DVH + END_HOLD_DVH + CONTACT_REVEAL_DVH;
+const SCROLL_RANGE_DVH = TIMELINE_SCROLL_DVH + END_HOLD_DVH + CONTACT_REVEAL_DVH;
 const TIMELINE_END_PROGRESS = TIMELINE_SCROLL_DVH / SCROLL_RANGE_DVH;
 const LINE_FILL_START = 0.06;
 const LINE_FILL_END = 0.9;
 const CARD_PROGRESS_START = 0.12;
 const CARD_PROGRESS_END = 0.92;
-const STAGE_THRESHOLDS: readonly number[] = STAGES.map(
-  (_, i) => i / STAGES.length
-);
-
+const STAGE_THRESHOLDS: readonly number[] = STAGES.map((_, i) => i / STAGES.length);
 const SPRING = { stiffness: 110, damping: 26, mass: 0.5 } as const;
+const REVEAL_DELAY_MS = 2000;
+const NEAR_TOP_PROGRESS = 0.04;
 
 function stageFromProgress(p: number): number {
   for (let i = STAGE_THRESHOLDS.length - 1; i >= 0; i--) {
@@ -73,6 +71,15 @@ export function LearningJourney() {
   const trackRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion() ?? false;
   const [activeIndex, setActiveIndex] = useState(0);
+  const [bgRevealed, setBgRevealed] = useState(false);
+  const startedRef = useRef(false);
+  const bgRevealedRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prevProgressRef = useRef(0);
+  const setBg = useCallback((v: boolean) => {
+    bgRevealedRef.current = v;
+    setBgRevealed(v);
+  }, []);
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start start", "end end"],
@@ -106,8 +113,8 @@ export function LearningJourney() {
       const target =
         top +
         distance *
-          TIMELINE_END_PROGRESS *
-          ((index + 0.5) / STAGES.length);
+        TIMELINE_END_PROGRESS *
+        ((index + 0.5) / STAGES.length);
       window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
     },
     [reduced]
@@ -120,6 +127,49 @@ export function LearningJourney() {
     [scrollToStage]
   );
   const active = STAGES[activeIndex];
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    if (reduced) {
+      startedRef.current = true;
+      setBg(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!startedRef.current) {
+            startedRef.current = true;
+            timerRef.current = setTimeout(() => setBg(true), REVEAL_DELAY_MS);
+          }
+        } else {
+          if (timerRef.current) clearTimeout(timerRef.current);
+          startedRef.current = false;
+          setBg(false);
+        }
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [reduced, setBg]);
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    const goingUp = p < prevProgressRef.current;
+    prevProgressRef.current = p;
+    if (!reduced && goingUp && p <= NEAR_TOP_PROGRESS && bgRevealedRef.current) {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      startedRef.current = false;
+      setBg(false);
+    }
+  });
+
 
   return (
     <section
@@ -135,7 +185,7 @@ export function LearningJourney() {
         }}
       >
         <div className="sticky top-0 h-dvh overflow-hidden">
-          <AuroraBackground>
+          <AuroraBackground revealed={bgRevealed}>
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0"
