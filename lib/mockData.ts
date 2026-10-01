@@ -1,6 +1,6 @@
 import { Milestone, ProjectProps, VerticalTab } from "@/types";
 import { Activity, GitPullRequest, Rocket, ShieldCheck } from "lucide-react";
-
+import type { ProjectBase, ProjectYear, YearPanel } from "@/types";
 
 export const DEFAULT_MILESTONES: Milestone[] = [
   { date: "Q1 2025", title: "Foundation", description: "Architecture, design system, and tooling." },
@@ -85,55 +85,41 @@ export const MARQUEE_SKILLS = [
   'PostgreSQL',
 ].join('   ');
 
-export const projectSection: ProjectProps[] = [
+export const projectSection: ProjectBase[] = [
   {
     id: "01",
-    title: ["ELLARA", "ACADEMY"],
-    category: "PRODUCT DESIGN / FRONTEND",
-    description:
-      "A language-learning interface built around a playful, editorial visual system and a multilingual UX that never feels like an afterthought.",
     tech: ["React", "TypeScript", "Framer Motion"],
     image: "/pictures/project2.png",
-    imageAlt: "Modern architectural interior with strong geometric lines",
   },
   {
     id: "02",
-    title: ["NOVA", "ADMIN"],
-    category: "DASHBOARD / DATA VIZ",
-    description:
-      "An internal analytics console rebuilt from the ground up — dense data made legible through type hierarchy instead of decoration.",
     tech: ["Next.js", "D3", "Tailwind"],
     image: "/pictures/project2.png",
-    imageAlt: "Close-up of a user interface on a laptop screen",
   },
   {
     id: "03",
-    title: ["ESTATE", "IN"],
-    category: "WEB EXPERIENCE",
-    description:
-      "A real-estate discovery platform where listings are treated like editorial spreads — one property, one page, one statement.",
     tech: ["React", "Three.js", "Sanity"],
     image: "/pictures/project2.png",
-    imageAlt: "Modernist white villa with clean architectural lines",
   },
   {
     id: "04",
-    title: ["ELLARA", "SHOP"],
-    category: "E-COMMERCE",
-    description:
-      "The commerce counterpart to Ellara Academy — same visual language, tuned for browsing, comparison, and a fast, quiet checkout.",
     tech: ["Next.js", "Stripe", "Tailwind"],
     image: "/pictures/project2.png",
-    imageAlt: "Abstract minimal composition of geometric objects",
   },
   {
     id: "05",
-    title: ["PORTFOLIO", "EXPERIMENT"],
-    category: "CASE STUDY",
-    description:
-      "A self-directed study in editorial grid systems on the web — this section is, in fact, one of its results.",
     tech: ["React", "GLSL", "Lenis"],
     image: "/pictures/project2.png",
-    imageAlt: "Minimal modern workspace object on a neutral background",
   },
 ];
+
+export const YEAR_PANELS: YearPanel[] = [
+  { id: "2023", year: 2023, label: "2023", delta: "12%", up: true },
+  { id: "2024", year: 2024, label: "2024", delta: "231%", up: true },
+  { id: "2025", year: 2025, label: "2025", delta: "328%", up: true },
+  { id: "2026", year: 2026, label: "2026", delta: "174%", up: true },
+];
+
+export const THUMB_SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.9 } as const;
+
+export const STAGE_YEARS = [2023, 2024, 2025, 2026] as const satisfies readonly ProjectYear[];

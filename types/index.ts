@@ -40,21 +40,34 @@ export interface Dictionary {
     title2: string;
     groups: { name: string; items: string[] }[];
   };
-  projects: { 
-    eyebrow: string ;
-    title: string ;
+  projects: {
+    eyebrow: string;
+    title: string;
     span: string;
     desc1: string;
     desc2: string;
     desc3: string;
     desc4: string;
     desc5: string;
+    // متن‌های قابل‌ترجمه‌ی هر پروژه، با کلید id (داده‌های ثابت در mockData می‌مونن)
+    items: Record<ProjectId, ProjectCopy>;
   };
-  projectsCard : VerticalTab[];
+  projectsCard: VerticalTab[];
   learningJourney: {
     eyebrow: string;
     title: string;
     items: { year: string; role: string; org: string; description: string }[];
+    heading: { line1: string; line2: string };
+    timelineLabel: string;
+    // با کلید سال، تا سال‌ها بین زبان‌ها هیچ‌وقت از هم جدا نشن
+    stages: Record<ProjectYear, StageCopy>;
+    card: {
+      title: string;
+      badge: string;
+      yearsLabel: string;
+      chartLabel: string;
+      panels: Record<ProjectYear, YearPanelCopy>;
+    };
   };
   contact: {
     eyebrow: string;
@@ -255,6 +268,10 @@ export type PositionLayout = {
   y: number;
   rotate: number;
 };
+
+// ── Projects ───────────────────────────────────────────────────────────────
+export type ProjectId = "01" | "02" | "03" | "04" | "05";
+
 export interface ProjectProps {
   id: string;
   title: [string, string];
@@ -264,6 +281,19 @@ export interface ProjectProps {
   image: string;
   imageAlt: string;
 };
+
+// داده‌های غیرمتنی هر پروژه (mockData)
+export interface ProjectBase {
+  id: ProjectId;
+  tech: string[];
+  image: string;
+}
+
+// متن‌های قابل‌ترجمه‌ی هر پروژه (دیکشنری en / fa)
+export type ProjectCopy = Pick<
+  ProjectProps,
+  "title" | "category" | "description" | "imageAlt"
+>;
 
 export interface ProjectsImageProps {
   target: WebGLImageTarget;
@@ -325,19 +355,26 @@ export interface SegmentOption {
   label: string;
   icon?: LucideIcon;
 }
+
+// ── Learning journey ───────────────────────────────────────────────────────
 export type ProjectYear = 2023 | 2024 | 2025 | 2026;
+
+// داده‌های غیرمتنی هر سال (value و caption به دیکشنری رفتن)
 export interface YearPanel extends SegmentOption {
   year: ProjectYear;
-  value: string;
-  caption: string;
   delta: string;
   up: boolean;
+}
+export interface YearPanelCopy {
+  value: string;
+  caption: string;
 }
 export interface TimelineStage {
   year: ProjectYear;
   title: string;
   description: string;
 }
+export type StageCopy = Pick<TimelineStage, "title" | "description">;
 
 export interface ProjectTimelineProps {
   stages: readonly TimelineStage[];
@@ -346,7 +383,7 @@ export interface ProjectTimelineProps {
   onSelect: (index: number) => void;
   className?: string;
 }
- export interface ProjectTimelineCardProps {
+export interface ProjectTimelineCardProps {
   activeYear: ProjectYear;
   progress: MotionValue<number>;
   onSelectYear?: (year: ProjectYear) => void;

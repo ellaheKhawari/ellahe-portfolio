@@ -1,50 +1,26 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import ProjectTimelineCard from "@/motion/TimelineCard";
 import { ProjectTimeline } from "@/motion/Timeline";
 import { AuroraBackground } from "../ui/backgroundEffects/AuraBackground";
-import { ProjectYear, TimelineStage } from "@/types";
+import { useDictionary } from "@/lib/i18n/store";
+import type { ProjectYear, TimelineStage } from "@/types";
+import { STAGE_YEARS } from "@/lib/mockData";
 
-const STAGES: readonly TimelineStage[] = [
-  {
-    year: 2023 satisfies ProjectYear,
-    title: "Foundations",
-    description:
-      "First shipped projects: learning the craft in public and building a base of reusable interface work.",
-  },
-  {
-    year: 2024,
-    title: "Momentum",
-    description:
-      "Larger client builds, tighter design systems, and the first products used by real teams every day.",
-  },
-  {
-    year: 2025,
-    title: "Depth",
-    description:
-      "Fewer, more ambitious projects with performance, motion and accessibility treated as core features.",
-  },
-  {
-    year: 2026,
-    title: "Direction",
-    description:
-      "Leading end-to-end work: from concept and art direction to production-ready code.",
-  },
-];
-
+const STAGE_COUNT = STAGE_YEARS.length;
 const SCROLL_PER_STAGE_DVH = 100;
 const END_HOLD_DVH = 100;
 const CONTACT_REVEAL_DVH = 100;
-const TIMELINE_SCROLL_DVH = STAGES.length * SCROLL_PER_STAGE_DVH;
+const TIMELINE_SCROLL_DVH = STAGE_COUNT * SCROLL_PER_STAGE_DVH;
 const SCROLL_RANGE_DVH = TIMELINE_SCROLL_DVH + END_HOLD_DVH + CONTACT_REVEAL_DVH;
 const TIMELINE_END_PROGRESS = TIMELINE_SCROLL_DVH / SCROLL_RANGE_DVH;
 const LINE_FILL_START = 0.06;
 const LINE_FILL_END = 0.9;
 const CARD_PROGRESS_START = 0.12;
 const CARD_PROGRESS_END = 0.92;
-const STAGE_THRESHOLDS: readonly number[] = STAGES.map((_, i) => i / STAGES.length);
+const STAGE_THRESHOLDS: readonly number[] = STAGE_YEARS.map((_, i) => i / STAGE_COUNT);
 const SPRING = { stiffness: 110, damping: 26, mass: 0.5 } as const;
 const REVEAL_DELAY_MS = 2000;
 const NEAR_TOP_PROGRESS = 0.04;
@@ -68,6 +44,13 @@ function useSmoothedRange(
 }
 
 export function LearningJourney() {
+  const { t } = useDictionary();
+  const copy = t.learningJourney;
+  const stages = useMemo<readonly TimelineStage[]>(
+    () => STAGE_YEARS.map((year) => ({ year, ...copy.stages[year] })),
+    [copy.stages]
+  );
+
   const trackRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion() ?? false;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -114,19 +97,19 @@ export function LearningJourney() {
         top +
         distance *
         TIMELINE_END_PROGRESS *
-        ((index + 0.5) / STAGES.length);
+        ((index + 0.5) / STAGE_COUNT);
       window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
     },
     [reduced]
   );
   const handleSelectYear = useCallback(
     (year: ProjectYear) => {
-      const i = STAGES.findIndex((s) => s.year === year);
+      const i = STAGE_YEARS.indexOf(year);
       if (i >= 0) scrollToStage(i);
     },
     [scrollToStage]
   );
-  const active = STAGES[activeIndex];
+  const active = stages[activeIndex];
 
   useEffect(() => {
     const el = trackRef.current;
@@ -197,8 +180,8 @@ export function LearningJourney() {
                   id="learningJourney-heading"
                   className="text-[clamp(1.875rem,6vw,4.75rem)] leading-[1.03] tracking-tight text-foreground"
                 >
-                  Selected work,
-                  <span className="block">year by year.</span>
+                  {copy.heading.line1}
+                  <span className="block">{copy.heading.line2}</span>
                 </h2>
 
                 <p className="sr-only" aria-live="polite">
@@ -206,7 +189,7 @@ export function LearningJourney() {
                 </p>
 
                 <ProjectTimeline
-                  stages={STAGES}
+                  stages={stages}
                   activeIndex={activeIndex}
                   fill={lineFill}
                   onSelect={scrollToStage}

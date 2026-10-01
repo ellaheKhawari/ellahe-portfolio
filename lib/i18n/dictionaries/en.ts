@@ -61,14 +61,51 @@ const en: Dictionary = {
     title2: "State & Tooling",
   },
   projects: {
-    eyebrow:"Selected works — 2026",
-    title : "PROJECTS",
+    eyebrow: "Selected works — 2026",
+    title: "PROJECTS",
     span: "05 case studies, in build order",
     desc1: "I build interfaces",
-    desc2:"the way this page is built —",
+    desc2: "the way this page is built —",
     desc3: "on a grid you can feel",
-    desc4:"even when it stays out of sight. Structure first,",
-    desc5:"then character.",
+    desc4: "even when it stays out of sight. Structure first,",
+    desc5: "then character.",
+    items: {
+      "01": {
+        title: ["ELLARA", "ACADEMY"],
+        category: "PRODUCT DESIGN / FRONTEND",
+        description:
+          "A language-learning interface built around a playful, editorial visual system and a multilingual UX that never feels like an afterthought.",
+        imageAlt: "Modern architectural interior with strong geometric lines",
+      },
+      "02": {
+        title: ["NOVA", "ADMIN"],
+        category: "DASHBOARD / DATA VIZ",
+        description:
+          "An internal analytics console rebuilt from the ground up — dense data made legible through type hierarchy instead of decoration.",
+        imageAlt: "Close-up of a user interface on a laptop screen",
+      },
+      "03": {
+        title: ["ESTATE", "IN"],
+        category: "WEB EXPERIENCE",
+        description:
+          "A real-estate discovery platform where listings are treated like editorial spreads — one property, one page, one statement.",
+        imageAlt: "Modernist white villa with clean architectural lines",
+      },
+      "04": {
+        title: ["ELLARA", "SHOP"],
+        category: "E-COMMERCE",
+        description:
+          "The commerce counterpart to Ellara Academy — same visual language, tuned for browsing, comparison, and a fast, quiet checkout.",
+        imageAlt: "Abstract minimal composition of geometric objects",
+      },
+      "05": {
+        title: ["PORTFOLIO", "EXPERIMENT"],
+        category: "CASE STUDY",
+        description:
+          "A self-directed study in editorial grid systems on the web — this section is, in fact, one of its results.",
+        imageAlt: "Minimal modern workspace object on a neutral background",
+      },
+    },
   },
   projectsCard: [
     {
@@ -164,6 +201,45 @@ const en: Dictionary = {
         description: "Graduated with a focus on human-computer interaction.",
       },
     ],
+    heading: {
+      line1: "Selected work,",
+      line2: "year by year.",
+    },
+    timelineLabel: "Project timeline",
+    stages: {
+      2023: {
+        title: "Foundations",
+        description:
+          "First shipped projects: learning the craft in public and building a base of reusable interface work.",
+      },
+      2024: {
+        title: "Momentum",
+        description:
+          "Larger client builds, tighter design systems, and the first products used by real teams every day.",
+      },
+      2025: {
+        title: "Depth",
+        description:
+          "Fewer, more ambitious projects with performance, motion and accessibility treated as core features.",
+      },
+      2026: {
+        title: "Direction",
+        description:
+          "Leading end-to-end work: from concept and art direction to production-ready code.",
+      },
+    },
+    card: {
+      title: "Revenue",
+      badge: "Yearly",
+      yearsLabel: "Project year",
+      chartLabel: "Growth chart that fills as you scroll through the timeline",
+      panels: {
+        2023: { value: "hello", caption: "first full year" },
+        2024: { value: "hello", caption: "number two" },
+        2025: { value: "hello", caption: "what's up" },
+        2026: { value: "goodbye", caption: "next time" },
+      },
+    },
   },
   contact: {
     eyebrow: "Contact",

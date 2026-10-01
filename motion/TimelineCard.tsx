@@ -4,9 +4,9 @@ import { useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, useTransform, type MotionValue} from "framer-motion";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useDictionary } from "@/lib/i18n/store";
 import { ProjectTimelineCardProps, ProjectYear, SegmentOption, YearPanel } from "@/types";
-
-const THUMB_SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.9 } as const;
+import { THUMB_SPRING, YEAR_PANELS } from "@/lib/mockData";
 
 export function SegmentedControl({
   options,
@@ -98,13 +98,6 @@ export function SegmentedControl({
   );
 }
 
-const YEAR_PANELS: YearPanel[] = [
-  { id: "2023", year: 2023, label: "2023", value: "$38K", caption: "first full year", delta: "12%", up: true },
-  { id: "2024", year: 2024, label: "2024", value: "$126K", caption: "vs 2023", delta: "231%", up: true },
-  { id: "2025", year: 2025, label: "2025", value: "$540K", caption: "vs 2024", delta: "328%", up: true },
-  { id: "2026", year: 2026, label: "2026", value: "$1.48M", caption: "vs 2025", delta: "174%", up: true },
-];
-
 const EASE = [0.16, 1, 0.3, 1] as const;
 const CHART_W = 320;
 const CHART_H = 110;
@@ -132,7 +125,13 @@ const CURVE = (() => {
   };
 })();
 
-function ScrollChart({ progress }: { progress: MotionValue<number> }) {
+function ScrollChart({
+  progress,
+  label,
+}: {
+  progress: MotionValue<number>;
+  label: string;
+}) {
   const gid = useId().replace(/:/g, "");
   const clipW = useTransform(progress, (v) => v * CHART_W);
   const dotLeft = useTransform(progress, (v) => `${v * 100}%`);
@@ -141,7 +140,7 @@ function ScrollChart({ progress }: { progress: MotionValue<number> }) {
   return (
     <div
       role="img"
-      aria-label="Growth chart that fills as you scroll through the timeline"
+      aria-label={label}
       className="relative h-30 w-full"
     >
       <svg
@@ -198,8 +197,11 @@ function ScrollChart({ progress }: { progress: MotionValue<number> }) {
 }
 
 export default function ProjectTimelineCard({ activeYear, progress, onSelectYear, className }: ProjectTimelineCardProps) {
+  const { t } = useDictionary();
+  const card = t.learningJourney.card;
   const reduced = useReducedMotion();
   const panel = YEAR_PANELS.find((p) => p.year === activeYear) ?? YEAR_PANELS[0];
+  const copy = card.panels[panel.year];
 
   return (
     <div
@@ -219,10 +221,10 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
       />
 
       <div className="relative flex items-center justify-between">
-        <span className="text-sm font-medium text-foreground">Revenue</span>
+        <span className="text-sm font-medium text-foreground">{card.title}</span>
         <div className="flex items-center gap-1.5 rounded-full border border-border px-2 py-0.5">
           <span className="h-1.5 w-1.5 rounded-full bg-mist" />
-          <span className="text-[11px] font-medium text-muted-foreground">Yearly</span>
+          <span className="text-[11px] font-medium text-muted-foreground">{card.badge}</span>
         </div>
       </div>
 
@@ -232,7 +234,7 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
           value={panel.id}
           onChange={(id) => onSelectYear?.(Number(id) as ProjectYear)}
           fluid
-          ariaLabel="Project year"
+          ariaLabel={card.yearsLabel}
         />
       </div>
 
@@ -248,9 +250,9 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
           >
             <div>
               <div className="text-3xl font-semibold tabular-nums tracking-tight text-foreground">
-                {panel.value}
+                {copy.value}
               </div>
-              <div className="mt-1 text-xs text-muted-foreground">{panel.caption}</div>
+              <div className="mt-1 text-xs text-muted-foreground">{copy.caption}</div>
             </div>
             <div
               className={cn(
@@ -272,7 +274,7 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
       </div>
 
       <div className="relative mt-4">
-        <ScrollChart progress={progress} />
+        <ScrollChart progress={progress} label={card.chartLabel} />
       </div>
     </div>
   );

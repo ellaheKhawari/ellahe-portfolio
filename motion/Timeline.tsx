@@ -1,11 +1,14 @@
 "use client";
 
 import { motion} from "framer-motion";
+import { useDictionary } from "@/lib/i18n/store";
 import type { ProjectTimelineProps } from "@/types";
 
 export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""}: ProjectTimelineProps) {
+  const { t } = useDictionary();
+
   return (
-    <ol aria-label="Project timeline" className={`relative ${className}`}>
+    <ol aria-label={t.learningJourney.timelineLabel} className={`relative ${className}`}>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-0 w-px"
