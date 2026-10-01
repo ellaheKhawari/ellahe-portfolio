@@ -19,8 +19,6 @@ function Ribbon({
     ribbonColor,
     textColor,
     animationName,
-    mobileFontSize,
-    mobileRibbonHeight,
 }: RibbonProps) {
     const units = Array.from({ length: repeatCount * 2 }, (_, i) => i);
 
@@ -111,7 +109,6 @@ function MarqueeCross({
     const activeRibbonHeight = isMobile ? mobileRibbonHeight : ribbonHeight;
     const activeFontSize = isMobile ? mobileFontSize : fontSize;
     const activeAngle = isMobile ? (mobileAngle ?? angle) : angle;
-
     const animationName = 'mqx-scroll';
 
     return (

@@ -3,9 +3,9 @@ import { Rocket, Activity, ShieldCheck, GitPullRequest } from "lucide-react";
 
 const en: Dictionary = {
   meta: {
-    title: "Portfolio — Designer & Developer",
+    title: "Ellahe Khawari — Frontend Developer",
     description:
-      "A modern, bilingual portfolio built with Next.js, React, TypeScript and Tailwind CSS.",
+      "The portfolio of Ellahe Khawari, a Frontend Developer focused on modern interfaces, thoughtful user experiences, motion, and the details that make a website feel complete.",
   },
   nav: {
     close: "Close",
@@ -14,36 +14,34 @@ const en: Dictionary = {
       skills: "Skills",
       projects: "Projects",
       learningJourney: "Learning Journey",
-      contact: "Contact",
+      contact: "Contact with me",
       waysToConnect: "Ways To Connect",
     },
   },
   hero: {
     eyebrow: "Available for new projects",
-    title1: "Builder of modern",
-    title2: "web experience",
+    title1: "Building web experiences",
+    title2: "that feel as good as they look.",
     subtitle:
-      "I care about clean interfaces, thoughtful interactions and the deatlis that make a digital experience memorable ",
-    cta: "See my work",
+      "I’m a Frontend Developer who has been seriously pursuing web development for the past two years. To me, a website is more than its code and pages — its visual language, interactions, details, and overall feel all shape the experience.",
+    cta: "View my works",
     ctaSecondary: "Get in touch",
     scroll: "Scroll",
-    skills: "React TypeScript  Next.js  Three.js",
+    skills: "React TypeScript  Next.js  Three.js . webGL",
   },
   about: {
-    eyebrow: "About",
-    title: "A little about how I work.",
-    body: "I care about the details most people skip: the timing of a transition, the weight of a headline, the way a page breathes on a small screen. My process starts with the content and the constraints, not a template — every project gets its own visual language.",
-    body2:
-      "Outside of client work, I spend time exploring motion design, WebGL, and design systems that hold up at scale.",
+    eyebrow: "About me",
+    title: "A little about me",
+    body: "I'm Ellahe Khawari and I’ve been seriously pursuing web development for the past three years. I started with structured courses and training, then continued learning on my own through tutorials, experiments and—most importantly—building things. I enjoy creating something people can actually see, use, and connect with. Visual design matters a lot to me, but I don’t see it as separate from usability or performance. A good interface should feel thoughtful, responsive, accessible, and natural to use.",
     stats: [
-      { value: "6+", label: "Years building products" },
-      { value: "40+", label: "Projects shipped" },
-      { value: "12", label: "Industries served" },
+      { value: "", label: "" },
+      { value: "", label: "" },
+      { value: "", label: "" },
     ],
   },
   skills: {
-    eyebrow: "My Skills",
-    title1: "Frontend, Motion & 3D",
+    eyebrow: "My skills",
+    title1: "Frontend",
     groups: [
       {
         name: "",
@@ -61,35 +59,35 @@ const en: Dictionary = {
     title2: "State & Tooling",
   },
   projects: {
-    eyebrow: "Selected works — 2026",
+    eyebrow: "Selected projects",
     title: "PROJECTS",
-    span: "05 case studies, in build order",
-    desc1: "I build interfaces",
-    desc2: "the way this page is built —",
-    desc3: "on a grid you can feel",
-    desc4: "even when it stays out of sight. Structure first,",
-    desc5: "then character.",
+    span: "Ideas turned into hands-on experience.",
+    desc1: "",
+    desc2: "",
+    desc3: "",
+    desc4: "",
+    desc5: "",
     items: {
       "01": {
         title: ["ELLARA", "ACADEMY"],
-        category: "PRODUCT DESIGN / FRONTEND",
+        category: "Language Learning Platform",
         description:
-          "A language-learning interface built around a playful, editorial visual system and a multilingual UX that never feels like an afterthought.",
-        imageAlt: "Modern architectural interior with strong geometric lines",
+          "A multilingual language-learning platform built with a modern interface and a structure inspired by real-world products. The project includes simulated authentication, a student dashboard, Persian and English support, automatic RTL/LTR direction changes, and light and dark themes.",
+        imageAlt: "ELLARA ACADEMY",
       },
       "02": {
         title: ["NOVA", "ADMIN"],
-        category: "DASHBOARD / DATA VIZ",
+        category: "Admin Dashboard",
         description:
-          "An internal analytics console rebuilt from the ground up — dense data made legible through type hierarchy instead of decoration.",
-        imageAlt: "Close-up of a user interface on a laptop screen",
+          "An admin dashboard designed around a realistic product structure, with a focus on practical interface patterns and data management. It includes simulated authentication and a product management area with search, filtering, sorting, and full create, edit, and delete operations.",
+        imageAlt: "NOVA panel",
       },
       "03": {
-        title: ["ESTATE", "IN"],
-        category: "WEB EXPERIENCE",
+        title: ["ESTATEIN", ""],
+        category: "Real Estate Platform",
         description:
-          "A real-estate discovery platform where listings are treated like editorial spreads — one property, one page, one statement.",
-        imageAlt: "Modernist white villa with clean architectural lines",
+          "A real-estate platform focused on presenting and managing property listings through clear search and filtering experiences. The project includes simulated authentication and a responsive interface designed for both desktop and mobile, with a structure that can be extended as the product grows.",
+        imageAlt: "",
       },
       "04": {
         title: ["ELLARA", "SHOP"],
@@ -107,177 +105,101 @@ const en: Dictionary = {
       },
     },
   },
-  projectsCard: [
-    {
-      id: "deploy",
-      label: "Deployments",
-      hint: "Push to production",
-      icon: Rocket,
-      eyebrow: "Ship",
-      title: "Deploy every push in seconds",
-      body: "Every commit builds, previews, and promotes on its own. Instant rollbacks keep production one click from a known good release.",
-      points: [
-        "Immutable preview URL for every pull request",
-        "Atomic promotions with zero downtime",
-        "One-click rollback to any prior build",
-      ],
-      metric: { value: "12s", label: "median build to live" },
-    },
-    {
-      id: "observe",
-      label: "Observability",
-      hint: "Traces, logs, metrics",
-      icon: Activity,
-      eyebrow: "Watch",
-      title: "See every request as it happens",
-      body: "Traces, logs, and metrics stream into one timeline. Filter by route, region, or release to catch the slow path before users feel it.",
-      points: [
-        "Distributed traces across all services",
-        "Live tail with structured log search",
-        "Alerts wired to Slack and PagerDuty",
-      ],
-      metric: { value: "1.4M", label: "spans indexed per minute" },
-    },
-    {
-      id: "access",
-      label: "Access Control",
-      hint: "Roles and audit",
-      icon: ShieldCheck,
-      eyebrow: "Secure",
-      title: "Least-privilege access by default",
-      body: "Scoped tokens, SSO, and per-environment roles keep production locked down. Every action lands in an immutable audit log you can export.",
-      points: [
-        "SAML and SCIM for your identity provider",
-        "Fine-grained roles per project and environment",
-        "Signed audit trail retained for 90 days",
-      ],
-      metric: { value: "SOC 2", label: "Type II certified" },
-    },
-    {
-      id: "collab",
-      label: "Collaboration",
-      hint: "Review in the flow",
-      icon: GitPullRequest,
-      eyebrow: "Together",
-      title: "Review changes without leaving the PR",
-      body: "Preview links, inline comments, and deploy status land on the pull request. Required approvals gate promotion so nothing ships unseen.",
-      points: [
-        "Deploy status checks on every pull request",
-        "Comment threads pinned to a live preview",
-        "Required approvals before promote",
-      ],
-      metric: { value: "3x", label: "faster review cycles" },
-    },
-  ],
   learningJourney: {
-    eyebrow: "Experience",
-    title: "Where I've been.",
-    items: [
-      {
-        year: "2024 — Present",
-        role: "Senior Front-End Engineer",
-        org: "Nova Studio",
-        description:
-          "Leading front-end architecture for client engagements, mentoring two engineers.",
-      },
-      {
-        year: "2022 — 2024",
-        role: "Front-End Engineer",
-        org: "Lumen Labs",
-        description:
-          "Built the design system and storefront that powers 30+ e-commerce brands.",
-      },
-      {
-        year: "2020 — 2022",
-        role: "Web Developer",
-        org: "Freelance",
-        description:
-          "Designed and built marketing sites and small products for startups.",
-      },
-      {
-        year: "2019",
-        role: "B.Sc. Computer Science",
-        org: "University",
-        description: "Graduated with a focus on human-computer interaction.",
-      },
-    ],
     heading: {
-      line1: "Selected work,",
-      line2: "year by year.",
+      line1: "My learning journey ",
+      line2: "so far",
     },
-    timelineLabel: "Project timeline",
+    timelineLabel: "My learning and growth",
     stages: {
-      2023: {
-        title: "Foundations",
+      1: {
+        title: "Professional Frontend Web Development Course",
         description:
-          "First shipped projects: learning the craft in public and building a base of reusable interface work.",
+          "A structured foundation in frontend development, helping me understand core concepts and apply them through practical projects.",
       },
-      2024: {
-        title: "Momentum",
+      2: {
+        title: "Advanced React.js Course",
         description:
-          "Larger client builds, tighter design systems, and the first products used by real teams every day.",
+          "A deeper focus on React and modern frontend techniques for building more complex and maintainable user interfaces.",
       },
-      2025: {
-        title: "Depth",
+      3: {
+        title: "Independent Learning & Building",
         description:
-          "Fewer, more ambitious projects with performance, motion and accessibility treated as core features.",
+          "I continued learning beyond courses, exploring Next.js, Three.js, and WebGL through personal projects, online resources, and hands-on problem-solving.",
       },
-      2026: {
-        title: "Direction",
+      4: {
+        title: "Continuing to Learn & Explore",
         description:
-          "Leading end-to-end work: from concept and art direction to production-ready code.",
+          "I keep building personal projects, refining my skills, and exploring new technologies. Each project brings new questions, ideas, and opportunities to learn.",
       },
     },
     card: {
-      title: "Revenue",
-      badge: "Yearly",
-      yearsLabel: "Project year",
-      chartLabel: "Growth chart that fills as you scroll through the timeline",
+      title: "Learning & Growth",
+      badge: "My journey",
+      yearsLabel: "Learning stage",
+      chartLabel: "How my learning has developed over time",
+
       panels: {
-        2023: { value: "hello", caption: "first full year" },
-        2024: { value: "hello", caption: "number two" },
-        2025: { value: "hello", caption: "what's up" },
-        2026: { value: "goodbye", caption: "next time" },
+        1: {
+          value: "Mar 2025 — Sep 2025",
+          caption: "Barnamenevis Academy · Instructor: Ahmad Badpi",
+        },
+
+        2: {
+          value: "Nov 2025 — Jun 2026",
+          caption:
+            "Barnamenevis Academy · Instructor: Morteza Ghorbanalizadeh",
+        },
+
+        3: {
+          value: "Beyond the courses",
+          caption: "Independent practice and exploration",
+        },
+
+        4: {
+          value: "Ongoing",
+          caption: "Continuous learning and improvement",
+        },
       },
     },
   },
   contact: {
-    eyebrow: "Contact",
-    title1: "Let's work",
-    title2: "together.",
-    body: "Have a project in mind? I'd love to hear about it. Let's create something exceptional together.",
-    available: "Available for projects",
-    book: "Book a call",
-    duration: "15 min intro call",
+    eyebrow: "Contact with me",
+    title1: "Have a project in mind?",
+    title2: "I’d be happy to hear about it.",
+    body: "You can contact me via email or book a brief meeting to discuss the project and potential collaboration terms.",
+    available: "Open to conversations about new projects",
+    book: "Book a conversation",
+    duration: "Short intro call",
     email: "ellahe.khawari@gmail.com",
   },
   footer: {
-    tagline: "Designing and building thoughtful digital products.",
+    tagline: "Building with care, learning with curiosity, and always leaving room to grow.",
     sections: {
       product: {
-        label: "Product",
-        links: ["Features", "Pricing", "Testimonials", "Integrations"],
+        label: "Explore",
+        links: ["About me", "Skills", "Projects", "Learning Journey"],
       },
       company: {
-        label: "Company",
-        links: ["FAQs", "About", "Privacy Policy", "Terms of Service"],
+        label: "Quick Links",
+        links: ["Home", "About This Site", "Project Guide", "FAQs"],
       },
       resources: {
-        label: "Resources",
-        links: ["Blog", "Changelog", "Brand", "Help"],
+        label: "Find Me Online",
+        links: ["Instagram", "GitHub", "LinkedIn"],
       },
       social: {
-        label: "Social",
-        links: ["Facebook", "Instagram", "YouTube", "LinkedIn"],
+        label: "Ways to Connect",
+        links: ["Email", "Telegram", "WhatsApp", "Bale", "Phone Number"],
       },
     },
     rights: "All rights reserved.",
   },
   notFound: {
     title: "Page not found",
-    description: "The page you are looking for does not exist or has been moved.",
-    home: "Go home",
-    browse: "Browse pages",
+    description: "The page you are looking for does not exist.",
+    home: "Back home",
+    browse: "Browse projects",
   },
 };
 

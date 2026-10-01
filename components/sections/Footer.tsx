@@ -30,7 +30,7 @@ export function Footer() {
     >
       <div className="grid w-full gap-8 xl:gap-8">
         <AnimatedContainer className="space-y-4">
-          <Hexagon className="size-12 text-mist" strokeWidth={1.5} />
+          <h3 className="text-3xl md:text-4xl font-medium text-foreground font-special-2!">Ellahe khawari</h3>
           <p className="mt-8 text-sm xl:text-lg text-muted-foreground md:mt-0">
             © {year} Portfolio. {t.footer.rights}
           </p>

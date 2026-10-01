@@ -6,7 +6,7 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDictionary } from "@/lib/i18n/store";
 import { ProjectTimelineCardProps, ProjectYear, SegmentOption, YearPanel } from "@/types";
-import { THUMB_SPRING, YEAR_PANELS } from "@/lib/mockData";
+import { getYearPanels, THUMB_SPRING } from "@/lib/mockData";
 
 export function SegmentedControl({
   options,
@@ -197,10 +197,11 @@ function ScrollChart({
 }
 
 export default function ProjectTimelineCard({ activeYear, progress, onSelectYear, className }: ProjectTimelineCardProps) {
-  const { t } = useDictionary();
+  const { t, locale } = useDictionary();
   const card = t.learningJourney.card;
   const reduced = useReducedMotion();
-  const panel = YEAR_PANELS.find((p) => p.year === activeYear) ?? YEAR_PANELS[0];
+  const yearPanels = getYearPanels(locale);
+  const panel = yearPanels.find((p) => p.year === activeYear) ?? yearPanels[0];
   const copy = card.panels[panel.year];
 
   return (
@@ -230,7 +231,7 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
 
       <div className="relative mt-4">
         <SegmentedControl
-          options={YEAR_PANELS}
+          options={yearPanels}
           value={panel.id}
           onChange={(id) => onSelectYear?.(Number(id) as ProjectYear)}
           fluid

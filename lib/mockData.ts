@@ -113,13 +113,17 @@ export const projectSection: ProjectBase[] = [
   },
 ];
 
-export const YEAR_PANELS: YearPanel[] = [
-  { id: "2023", year: 2023, label: "2023", delta: "12%", up: true },
-  { id: "2024", year: 2024, label: "2024", delta: "231%", up: true },
-  { id: "2025", year: 2025, label: "2025", delta: "328%", up: true },
-  { id: "2026", year: 2026, label: "2026", delta: "174%", up: true },
-];
+export function getYearPanels(locale: "en" | "fa" = "en"): YearPanel[] {
+  return [
+    { id: "step1", year: 1, label: locale === "fa" ? "قدم 1" : "step 1", delta: "12%", up: true },
+    { id: "step2", year: 2, label: locale === "fa" ? "قدم 2" : "step 2", delta: "231%", up: true },
+    { id: "step3", year: 3, label: locale === "fa" ? "قدم 3" : "step 3", delta: "328%", up: true },
+    { id: "step4", year: 4, label: locale === "fa" ? "قدم 4" : "step 4", delta: "174%", up: true },
+  ];
+}
+
+export const YEAR_PANELS = getYearPanels();
 
 export const THUMB_SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.9 } as const;
 
-export const STAGE_YEARS = [2023, 2024, 2025, 2026] as const satisfies readonly ProjectYear[];
+export const STAGE_YEARS = [ 1 , 2, 3, 4] as const satisfies readonly ProjectYear[];

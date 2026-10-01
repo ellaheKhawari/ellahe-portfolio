@@ -1,17 +1,17 @@
 "use client";
 
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { useDictionary } from "@/lib/i18n/store";
 import type { ProjectTimelineProps } from "@/types";
 
-export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""}: ProjectTimelineProps) {
+export function ProjectTimeline({ stages, activeIndex, fill, onSelect, className = "" }: ProjectTimelineProps) {
   const { t } = useDictionary();
 
   return (
     <ol aria-label={t.learningJourney.timelineLabel} className={`relative ${className}`}>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 w-px"
+        className="pointer-events-none absolute inset-y-0 inset-s-0 w-px"
       >
         <div className="absolute inset-0 opacity-60 [background:repeating-linear-gradient(to_bottom,#676b6c_0_4px,transparent_4px_9px)]" />
         <motion.div
@@ -29,11 +29,11 @@ export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""
               type="button"
               onClick={() => onSelect(i)}
               aria-current={isActive ? "step" : undefined}
-              className="group relative block w-full rounded-sm py-1.5 pl-7 text-left outline-none focus-visible:ring-2 focus-visible:ring-mist/60 sm:py-2.5 sm:pl-9"
+              className="group relative block w-full rounded-sm py-1.5 ps-7 text-start outline-none focus-visible:ring-2 focus-visible:ring-mist/60 sm:py-2.5 sm:ps-9"
             >
               <span
                 aria-hidden
-                className={`pointer-events-none absolute inset-y-0 left-0 w-0.5 bg-mist transition-opacity duration-500 motion-reduce:transition-none ${
+                className={`pointer-events-none absolute inset-y-0 inset-s-0 w-0.5 bg-mist transition-opacity duration-500 motion-reduce:transition-none ${
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -41,7 +41,7 @@ export function ProjectTimeline({stages,activeIndex,fill,onSelect,className = ""
               <span className="relative flex items-center gap-3">
                 <span
                   aria-hidden
-                  className={`pointer-events-none absolute -left-7 top-1/2 z-10 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-[background-color,border-color,box-shadow] duration-500 motion-reduce:transition-none sm:-left-9 ${
+                  className={`pointer-events-none absolute -inset-s-7 top-1/2 z-10 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2 rounded-full border transition-[background-color,border-color,box-shadow] duration-500 motion-reduce:transition-none sm:-inset-s-9 ${
                     isReached
                       ? "border-mist bg-mist"
                       : "border-steel bg-background"

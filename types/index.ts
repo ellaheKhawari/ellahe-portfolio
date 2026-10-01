@@ -31,7 +31,6 @@ export interface Dictionary {
     eyebrow: string;
     title: string;
     body: string;
-    body2: string;
     stats: { value: string; label: string }[];
   };
   skills: {
@@ -49,17 +48,11 @@ export interface Dictionary {
     desc3: string;
     desc4: string;
     desc5: string;
-    // متن‌های قابل‌ترجمه‌ی هر پروژه، با کلید id (داده‌های ثابت در mockData می‌مونن)
     items: Record<ProjectId, ProjectCopy>;
   };
-  projectsCard: VerticalTab[];
   learningJourney: {
-    eyebrow: string;
-    title: string;
-    items: { year: string; role: string; org: string; description: string }[];
     heading: { line1: string; line2: string };
     timelineLabel: string;
-    // با کلید سال، تا سال‌ها بین زبان‌ها هیچ‌وقت از هم جدا نشن
     stages: Record<ProjectYear, StageCopy>;
     card: {
       title: string;
@@ -356,10 +349,7 @@ export interface SegmentOption {
   icon?: LucideIcon;
 }
 
-// ── Learning journey ───────────────────────────────────────────────────────
-export type ProjectYear = 2023 | 2024 | 2025 | 2026;
-
-// داده‌های غیرمتنی هر سال (value و caption به دیکشنری رفتن)
+export type ProjectYear = 1 | 2 | 3 | 4;
 export interface YearPanel extends SegmentOption {
   year: ProjectYear;
   delta: string;
