@@ -1,12 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowDown, ArrowUpRight, Space } from "lucide-react";
 import { useDictionary } from "@/lib/i18n/store";
 import { EASE_OUT } from "@/lib/utils";
-import { HeroBackground } from "../backgroundEffects/heroBg";
-import { MARQUEE_SKILLS } from "@/lib/mockData";
-import MarqueeCross from "../ui/marquees/MarqueeCross";
+import { HeroBackground } from "../ui/backgroundEffects/heroBg";
 import ScrollIndicator from "../ui/ScrollIndicator";
 import { useRef } from "react";
 

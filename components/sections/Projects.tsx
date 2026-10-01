@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { ProjectGrid } from "../ui/VisibleGrid";
+import { ProjectGrid } from "../ui/backgroundEffects/VisibleGrid";
 import { useDictionary } from "@/lib/i18n/store";
 
 export function Projects() {

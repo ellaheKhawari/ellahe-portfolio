@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import ProjectTimelineCard from "@/motion/TimelineCard";
 import { ProjectTimeline } from "@/motion/Timeline";
-import { AuroraBackground } from "../backgroundEffects/AuraBackground";
+import { AuroraBackground } from "../ui/backgroundEffects/AuraBackground";
 import { ProjectYear, TimelineStage } from "@/types";
 
 const STAGES: readonly TimelineStage[] = [

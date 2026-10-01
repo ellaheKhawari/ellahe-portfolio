@@ -5,7 +5,7 @@ import { LocaleProvider } from "@/providers/LocaleProvider";
 import { ThemeRegistry } from "@/providers/ThemeRegistry";
 import { Toaster } from "sonner";
 import { CursorTrailProvider } from "@/providers/CursorTrailProvider";
-import CursorTrailBackground from "@/components/backgroundEffects/cursorTrailBackground";
+import CursorTrailBackground from "@/components/ui/backgroundEffects/cursorTrailBackground";
 
 export const metadata: Metadata = {
   title: "Portfolio — Designer & Developer",

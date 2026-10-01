@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import { toast } from "sonner";
 import { useDictionary } from "@/lib/i18n/store";
-import { ContactBackground } from "../backgroundEffects/ContactBackground";
+import { ContactBackground } from "../ui/backgroundEffects/ContactBackground";
 
 export function Contact() {
   const { t } = useDictionary();
