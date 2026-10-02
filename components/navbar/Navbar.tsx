@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
-import { ArrowUpRight, Download, Link, Share, X } from "lucide-react";
+import { ArrowUpRight, Download, Link, X } from "lucide-react";
 import { SiGithub, SiInstagram, SiTelegram, SiWhatsapp } from "react-icons/si";
 import { useDictionary, useLanguageStore } from "@/lib/i18n/store";
 import { Switch } from "@/components/ui/switch";

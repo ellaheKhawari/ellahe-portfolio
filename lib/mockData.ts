@@ -1,76 +1,29 @@
-import { Milestone, ProjectProps, VerticalTab } from "@/types";
-import { Activity, GitPullRequest, Rocket, ShieldCheck } from "lucide-react";
-import type { ProjectBase, ProjectYear, YearPanel } from "@/types";
+import * as React from "react";
+import type { FooterLinkItem, ProjectBase, ProjectYear, YearPanel } from "@/types";
+import { AtSign, Link2, Mail, Phone, Video } from "lucide-react";
+import { SiGithub, SiInstagram, SiTelegram, SiWhatsapp } from "react-icons/si";
 
-export const DEFAULT_MILESTONES: Milestone[] = [
-  { date: "Q1 2025", title: "Foundation", description: "Architecture, design system, and tooling." },
-  { date: "Q2 2025", title: "Prototype", description: "First product flow and user validation." },
-  { date: "Q3 2025", title: "Alpha", description: "Internal rollout with analytics and feedback loops." },
-  { date: "Q1 2026", title: "Beta", description: "Expanded onboarding and production readiness." },
-];
+const BaleIcon = ({ className }: { className?: string }) =>
+  React.createElement("img", {
+    src: "/baleIcon.png",
+    alt: "Bale",
+    className,
+    style: { filter: "brightness(0) invert(1)" },
+  });
 
-export const DEMO_TABS: VerticalTab[] = [
-  {
-    id: "deploy",
-    label: "Deployments",
-    hint: "Push to production",
-    icon: Rocket,
-    eyebrow: "Ship",
-    title: "Deploy every push in seconds",
-    body: "Every commit builds, previews, and promotes on its own. Instant rollbacks keep production one click from a known good release.",
-    points: [
-      "Immutable preview URL for every pull request",
-      "Atomic promotions with zero downtime",
-      "One-click rollback to any prior build",
-    ],
-    metric: { value: "12s", label: "median build to live" },
-  },
-  {
-    id: "observe",
-    label: "Observability",
-    hint: "Traces, logs, metrics",
-    icon: Activity,
-    eyebrow: "Watch",
-    title: "See every request as it happens",
-    body: "Traces, logs, and metrics stream into one timeline. Filter by route, region, or release to catch the slow path before users feel it.",
-    points: [
-      "Distributed traces across all services",
-      "Live tail with structured log search",
-      "Alerts wired to Slack and PagerDuty",
-    ],
-    metric: { value: "1.4M", label: "spans indexed per minute" },
-  },
-  {
-    id: "access",
-    label: "Access Control",
-    hint: "Roles and audit",
-    icon: ShieldCheck,
-    eyebrow: "Secure",
-    title: "Least-privilege access by default",
-    body: "Scoped tokens, SSO, and per-environment roles keep production locked down. Every action lands in an immutable audit log you can export.",
-    points: [
-      "SAML and SCIM for your identity provider",
-      "Fine-grained roles per project and environment",
-      "Signed audit trail retained for 90 days",
-    ],
-    metric: { value: "SOC 2", label: "Type II certified" },
-  },
-  {
-    id: "collab",
-    label: "Collaboration",
-    hint: "Review in the flow",
-    icon: GitPullRequest,
-    eyebrow: "Together",
-    title: "Review changes without leaving the PR",
-    body: "Preview links, inline comments, and deploy status land on the pull request. Required approvals gate promotion so nothing ships unseen.",
-    points: [
-      "Deploy status checks on every pull request",
-      "Comment threads pinned to a live preview",
-      "Required approvals before promote",
-    ],
-    metric: { value: "3x", label: "faster review cycles" },
-  },
-];
+const LinkedinIcon = ({ className }: { className?: string }) =>
+  React.createElement(
+    "svg",
+    {
+      viewBox: "0 0 24 24",
+      fill: "currentColor",
+      className,
+      "aria-hidden": "true",
+    },
+    React.createElement("path", {
+      d: "M6.94 8.5A1.56 1.56 0 1 1 6.94 5.4a1.56 1.56 0 0 1 0 3.1ZM5.5 9.8h2.9v9.2H5.5V9.8Zm5.05 0h2.77v1.27h.04c.39-.73 1.34-1.5 2.76-1.5 2.96 0 3.51 1.94 3.51 4.48v6.95h-2.9v-6.52c0-1.55-.03-3.55-2.17-3.55-2.18 0-2.5 1.7-2.5 3.45v6.62H10.55V9.8Z",
+    })
+  );
 
 export const MARQUEE_SKILLS = [
   'React',
@@ -127,3 +80,19 @@ export const YEAR_PANELS = getYearPanels();
 export const THUMB_SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.9 } as const;
 
 export const STAGE_YEARS = [ 1 , 2, 3, 4] as const satisfies readonly ProjectYear[];
+
+export const socialIcons = [Mail, AtSign, Video, Link2];
+
+export const socialItems: FooterLinkItem[] = [
+  { href: "https://www.instagram.com/ellh.khawari/", icon: SiInstagram },
+  { href: "https://github.com/ellakha", icon: SiGithub },
+  { href: "https://www.linkedin.com/in/ellahe-khawari/", icon: LinkedinIcon },
+];
+
+export const contactItems: FooterLinkItem[] = [
+  { href: "mailto:ellahe.khawari@gmail.com", icon: Mail },
+  { href: "https://t.me/ellahekhawari", icon: SiTelegram },
+  { href: "https://wa.me/989000000000", icon: SiWhatsapp },
+  { href: "https://bale.ai/", icon: BaleIcon },
+  { href: "tel:+989000000000", icon: Phone, dir: "ltr" },
+];

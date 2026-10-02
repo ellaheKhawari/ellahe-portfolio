@@ -178,7 +178,7 @@ export function LearningJourney() {
               <div className="flex min-w-0 flex-col lg:pt-[clamp(2rem,17dvh,4rem)]">
                 <h2
                   id="learningJourney-heading"
-                  className="text-[clamp(1.875rem,6vw,4.75rem)] leading-[1.03] tracking-tight text-foreground"
+                  className="text-[clamp(2rem,6vw,4rem)] leading-[1.03] tracking-tight text-foreground"
                 >
                   {copy.heading.line1}
                   <span className="block">{copy.heading.line2}</span>

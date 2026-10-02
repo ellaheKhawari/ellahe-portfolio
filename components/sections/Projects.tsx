@@ -29,7 +29,7 @@ export function Projects() {
           </h2>
 
           <span
-            className="mt-[0.6rem] block text-[0.7rem] italic text-[#8a8a86] sm:absolute sm:right-0 sm:bottom-[0.4rem] sm:mt-0 sm:max-w-64 sm:text-right"
+            className="mt-[0.6rem] block text-[0.7rem] italic text-[#8a8a86] sm:absolute sm:end-0 sm:bottom-[0.4rem] sm:mt-0 sm:max-w-64 sm:text-end"
           >
             {t.projects.span}
           </span>

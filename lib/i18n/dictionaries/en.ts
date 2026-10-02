@@ -62,11 +62,11 @@ const en: Dictionary = {
     eyebrow: "Selected projects",
     title: "PROJECTS",
     span: "Ideas turned into hands-on experience.",
-    desc1: "",
-    desc2: "",
-    desc3: "",
-    desc4: "",
-    desc5: "",
+    desc1: "These are parts of my",
+    desc2: "frontend journey",
+    desc3: " — projects built",
+    desc4: " to learn, experiment",
+    desc5: "and find better ways to create .",
     items: {
       "01": {
         title: ["ELLARA", "ACADEMY"],
@@ -176,21 +176,21 @@ const en: Dictionary = {
   footer: {
     tagline: "Building with care, learning with curiosity, and always leaving room to grow.",
     sections: {
-      product: {
+      explore: {
         label: "Explore",
         links: ["About me", "Skills", "Projects", "Learning Journey"],
       },
-      company: {
+      quickLinks: {
         label: "Quick Links",
         links: ["Home", "About This Site", "Project Guide", "FAQs"],
       },
-      resources: {
+      social: {
         label: "Find Me Online",
         links: ["Instagram", "GitHub", "LinkedIn"],
       },
-      social: {
+      contact: {
         label: "Ways to Connect",
-        links: ["Email", "Telegram", "WhatsApp", "Bale", "Phone Number"],
+        links: ["Email", "Telegram", "WhatsApp", "Bale", "+98 933 567 8545"],
       },
     },
     rights: "All rights reserved.",

@@ -1,7 +1,7 @@
 import type { Locale } from "@/lib/i18n/store";
 import { MotionValue } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import type { CSSProperties, ReactNode } from "react";
+import type { ComponentType, CSSProperties, ReactNode } from "react";
 import type { RefObject } from "react";
 import { PlaneGeometry } from "three";
 export interface Dictionary {
@@ -75,10 +75,10 @@ export interface Dictionary {
   footer: {
     tagline: string;
     sections: {
-      product: { label: string; links: string[] };
-      company: { label: string; links: string[] };
-      resources: { label: string; links: string[] };
+      explore: { label: string; links: string[] };
+      quickLinks: { label: string; links: string[] };
       social: { label: string; links: string[] };
+      contact: { label: string; links: string[] };
     };
     rights: string;
   };
@@ -379,3 +379,10 @@ export interface ProjectTimelineCardProps {
   onSelectYear?: (year: ProjectYear) => void;
   className?: string;
 }
+
+export interface FooterLinkItem {
+  label?: string;
+  href: string;
+  icon?: ComponentType<{ className?: string }>;
+  dir?: "ltr" | "rtl";
+};
