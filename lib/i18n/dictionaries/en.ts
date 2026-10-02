@@ -352,6 +352,10 @@ const en: Dictionary = {
             text: "There is no real backend behind the login form. Any email and password combination allows access to the dashboard, making it easy to explore the interface without creating a real account.",
           },
           {
+            type: "code",
+            code: "email: demo@admin.com\npassword: demo1234",
+          },
+          {
             type: "links",
             items: [
               {
