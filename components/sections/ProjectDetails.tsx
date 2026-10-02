@@ -1,0 +1,156 @@
+"use client";
+
+import { ArrowUpRight } from "lucide-react";
+import { BackToProjects } from "../ui/buttons/backButton";
+import { Block, projects } from "@/lib/mockData";
+import { DeviceShowcase } from "@/motion/DeviceShowcase";
+
+// متن‌های ثابت UI؛ اگه خواستی بذارشون تو دیکشنری i18n خودت
+const L = { project: "Project", back: "Back to projects" };
+
+const BORDER = "border-[rgba(20,20,20,0.12)]";
+const linkCls =
+  "inline-flex items-baseline gap-0.5 font-medium text-ink underline decoration-ink/40 underline-offset-4 transition-colors hover:decoration-ink";
+
+function ExtLink({ href, className, children }: { href: string; className: string; children: React.ReactNode }) {
+  const external = /^https?:/.test(href);
+  return (
+    <a href={href} className={className} {...(external && { target: "_blank", rel: "noopener noreferrer" })}>
+      {children}
+      <ArrowUpRight className="size-[0.9em] shrink-0 self-center rtl:-scale-x-100" aria-hidden />
+    </a>
+  );
+}
+
+// [متن](لینک)  `کد`  **بولد**
+function RichText({ text }: { text: string }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|`[^`]+`|\*\*[^*]+\*\*)/g);
+  return (
+    <>
+      {parts.map((p, i) => {
+        const a = p.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (a) return <ExtLink key={i} href={a[2]} className={linkCls}>{a[1]}</ExtLink>;
+        if (p.startsWith("`")) return <code key={i} dir="ltr" className="rounded bg-ink/[0.07] px-1.5 py-0.5 font-mono text-[0.85em]">{p.slice(1, -1)}</code>;
+        if (p.startsWith("**")) return <strong key={i} className="font-bold text-ink">{p.slice(2, -2)}</strong>;
+        return p;
+      })}
+    </>
+  );
+}
+
+// دسکتاپ: جدول معمولی | موبایل: هر ردیف تبدیل می‌شه به کارت با برچسب ستون
+// فقط از کلاس‌های logical (text-start, ps/pe) استفاده شده تا در RTL درست باشه
+function DataTable({ caption, columns, rows }: { caption?: string; columns: string[]; rows: string[][] }) {
+  return (
+    <div className={`overflow-x-auto rounded-2xl border ${BORDER} bg-white/50`}>
+      <table className="w-full border-collapse text-start text-sm">
+        {caption && <caption className="px-5 pt-4 pb-2 text-start text-xs text-steel">{caption}</caption>}
+        <thead className="max-sm:sr-only">
+          <tr className={`border-b ${BORDER} bg-ink/[0.04]`}>
+            {columns.map((c) => (
+              <th key={c} scope="col" className="px-5 py-3 text-start text-xs font-semibold text-steel">{c}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={i} className="border-b border-[rgba(20,20,20,0.08)] last:border-0 max-sm:block max-sm:p-4">
+              {row.map((cell, j) => {
+                const Tag = j === 0 ? "th" : "td";
+                return (
+                  <Tag
+                    key={j}
+                    {...(j === 0 && { scope: "row" })}
+                    data-label={columns[j]}
+                    className={`px-5 py-3.5 text-start align-top leading-relaxed before:shrink-0 before:basis-28 before:text-xs before:font-semibold before:text-steel before:content-[attr(data-label)] max-sm:flex max-sm:gap-3 max-sm:px-0 max-sm:py-1.5 sm:before:hidden ${j === 0 ? "font-semibold text-ink max-sm:text-base" : "text-[#55554f]"}`}
+                  >
+                    <bdi className="min-w-0"><RichText text={cell} /></bdi>
+                  </Tag>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function BlockView({ b }: { b: Block }) {
+  switch (b.type) {
+    case "heading":
+      return <h3 className={`mt-[clamp(1.5rem,4vw,3rem)] border-t ${BORDER} pt-6 font-heading text-[clamp(1.5rem,3.6vw,2.5rem)] leading-[1.1] font-bold`}>{b.text}</h3>;
+    case "paragraph":
+      return <p className="max-w-[68ch] text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.8] text-[#55554f]"><RichText text={b.text} /></p>;
+    case "list":
+      return (
+        <ul className="max-w-[68ch] list-disc space-y-2 ps-5 leading-[1.7] text-[#55554f] marker:text-ink">
+          {b.items.map((it, i) => <li key={i}><RichText text={it} /></li>)}
+        </ul>
+      );
+    case "table":
+      return <DataTable {...b} />;
+    case "code":
+      return <pre dir="ltr" className="overflow-x-auto rounded-2xl bg-[#141414] p-5 text-start text-sm leading-relaxed text-[#e8e8e4]"><code>{b.code}</code></pre>;
+    case "links":
+      return (
+        <div className="flex flex-wrap gap-3">
+          {b.items.map((l) => (
+            <ExtLink key={l.href + l.label} href={l.href} className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-ink hover:text-foreground">
+              {l.label}
+            </ExtLink>
+          ))}
+        </div>
+      );
+  }
+}
+
+export function ProjectDetails() {
+  return (
+    <main>
+      {projects.map((p) => (
+        <section
+          key={p.id}
+          id={p.id}
+          className="relative z-10 w-full bg-foreground text-ink first:rounded-t-4xl [--col-count:8] [--grid-line:rgba(20,20,20,0.12)]
+            bg-[repeating-linear-gradient(to_right,var(--grid-line)_0,var(--grid-line)_1px,transparent_1px,transparent_calc(100%/var(--col-count)))]
+            max-[900px]:[--col-count:4]"
+        >
+          <div className="mx-auto px-[clamp(1rem,4vw,2rem)] py-[clamp(3rem,8vw,7rem)]">
+            <span className="mb-2 block text-xs tracking-[0.02em] text-steel">{L.project} {p.number}</span>
+
+            <div className="flex items-end justify-between gap-6">
+              <h2 className="font-heading text-[clamp(2.5rem,9vw,8rem)] leading-[0.9] font-bold tracking-[-0.01em] uppercase">{p.title}</h2>
+              <span className="font-heading text-[clamp(2rem,5vw,3.5rem)] leading-none font-bold">{p.number}</span>
+            </div>
+            <p className="mt-4 text-sm text-[#8a8a86] italic">{p.subtitle}</p>
+
+            <DeviceShowcase name={p.title} images={p.images} />
+
+            <dl className={`grid grid-cols-2 gap-x-6 gap-y-5 border-t ${BORDER} pt-6 md:grid-cols-4`}>
+              {p.meta.map((m) => (
+                <div key={m.label}>
+                  <dt className="text-xs text-steel">{m.label}</dt>
+                  <dd className="mt-1 font-medium"><bdi>{m.value}</bdi></dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              {p.links.map((l) => (
+                <ExtLink key={l.href} href={l.href} className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-foreground transition-opacity hover:opacity-80">
+                  {l.label}
+                </ExtLink>
+              ))}
+            </div>
+
+            <div className="mt-[clamp(1.5rem,4vw,3rem)] flex flex-col gap-6">
+              {p.blocks.map((b, i) => <BlockView key={i} b={b} />)}
+            </div>
+          </div>
+        </section>
+      ))}
+      <BackToProjects label={L.back} />
+    </main>
+  );
+}
