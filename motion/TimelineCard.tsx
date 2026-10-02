@@ -250,7 +250,7 @@ export default function ProjectTimelineCard({ activeYear, progress, onSelectYear
             className="absolute inset-0 flex items-end justify-between"
           >
             <div>
-              <div className="text-3xl font-semibold tabular-nums tracking-tight text-foreground">
+              <div className="text-xl font-semibold tabular-nums tracking-tight text-foreground">
                 {copy.value}
               </div>
               <div className="mt-1 text-xs text-muted-foreground">{copy.caption}</div>

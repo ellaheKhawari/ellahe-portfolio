@@ -1,10 +1,12 @@
 import { forwardRef } from "react";
 import clsx from "clsx";
 import type { ProjectCardProps} from "@/types";
+import { useDictionary } from "@/lib/i18n/store";
 
 export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
   ({ project, index }, imageRef) => {
     const wide = index % 2 === 1;
+    const { t } = useDictionary();
 
     return (
       <div
@@ -18,9 +20,9 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
         )}
       >
   
-        <div className="col-[1/2] flex flex-col gap-[0.15rem] pt-[0.2rem] text-[0.7rem] leading-[1.3] text-[#8a8a86] max-[900px]:col-[1/3] max-[900px]:flex-row max-[900px]:gap-[0.35rem]">
+        <div className="col-[1/2] flex flex-col gap-[0.15rem] pt-[0.2rem] text-[0.8rem] leading-[1.3] text-[#8a8a86] max-[900px]:col-[1/3] max-[900px]:flex-row max-[900px]:gap-[0.35rem]">
           <span className="transition-colors duration-250 ease-[ease] group-hover:text-ink motion-reduce:transition-none">
-            Project
+            {t.projects.span2}
           </span>
           <span className="transition-colors duration-250 ease-[ease] group-hover:text-ink motion-reduce:transition-none">
             {project.id}

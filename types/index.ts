@@ -43,6 +43,7 @@ export interface Dictionary {
     eyebrow: string;
     title: string;
     span: string;
+    span2: string;
     desc1: string;
     desc2: string;
     desc3: string;

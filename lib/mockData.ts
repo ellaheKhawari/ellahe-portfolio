@@ -68,10 +68,10 @@ export const projectSection: ProjectBase[] = [
 
 export function getYearPanels(locale: "en" | "fa" = "en"): YearPanel[] {
   return [
-    { id: "step1", year: 1, label: locale === "fa" ? "قدم 1" : "step 1", delta: "12%", up: true },
-    { id: "step2", year: 2, label: locale === "fa" ? "قدم 2" : "step 2", delta: "231%", up: true },
-    { id: "step3", year: 3, label: locale === "fa" ? "قدم 3" : "step 3", delta: "328%", up: true },
-    { id: "step4", year: 4, label: locale === "fa" ? "قدم 4" : "step 4", delta: "174%", up: true },
+    { id: "step1", year: 1, label: locale === "fa" ? "قدم 1" : "step 1", delta: "30%", up: true },
+    { id: "step2", year: 2, label: locale === "fa" ? "قدم 2" : "step 2", delta: "90%", up: true },
+    { id: "step3", year: 3, label: locale === "fa" ? "قدم 3" : "step 3", delta: "120%", up: true },
+    { id: "step4", year: 4, label: locale === "fa" ? "قدم 4" : "step 4", delta: "188%", up: true },
   ];
 }
 
@@ -84,15 +84,15 @@ export const STAGE_YEARS = [ 1 , 2, 3, 4] as const satisfies readonly ProjectYea
 export const socialIcons = [Mail, AtSign, Video, Link2];
 
 export const socialItems: FooterLinkItem[] = [
-  { href: "https://www.instagram.com/ellh.khawari/", icon: SiInstagram },
-  { href: "https://github.com/ellakha", icon: SiGithub },
+  { href: "https://www.instagram.com/ellahe_khawari/", icon: SiInstagram },
+  { href: "https://github.com/ellaheKhawari", icon: SiGithub },
   { href: "https://www.linkedin.com/in/ellahe-khawari/", icon: LinkedinIcon },
 ];
 
 export const contactItems: FooterLinkItem[] = [
   { href: "mailto:ellahe.khawari@gmail.com", icon: Mail },
-  { href: "https://t.me/ellahekhawari", icon: SiTelegram },
-  { href: "https://wa.me/989000000000", icon: SiWhatsapp },
-  { href: "https://bale.ai/", icon: BaleIcon },
-  { href: "tel:+989000000000", icon: Phone, dir: "ltr" },
+  { href: "https://t.me/ellahe_khawari", icon: SiTelegram },
+  { href: "https://wa.me/+989335678545", icon: SiWhatsapp },
+  { href: "https://ble.ir/ellahe_khawari", icon: BaleIcon },
+  { href: "tel:+989335678545", icon: Phone, dir: "ltr" },
 ];

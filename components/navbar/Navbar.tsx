@@ -263,14 +263,14 @@ export function Navbar() {
 
               <motion.div variants={itemVariants} className="flex items-center gap-3">
                 <a
-                  href="#"
+                  href="https://wa.me/+989335678545"
                   aria-label="Whatsapp"
                   className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
                 >
                   <SiWhatsapp size={18} />
                 </a>
                 <a
-                  href="#"
+                  href="https://t.me/ellahe_khawari"
                   aria-label="Telegram"
                   className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
                 >
@@ -278,14 +278,14 @@ export function Navbar() {
                 </a>
 
                 <a
-                  href="#"
-                  aria-label="Instegram"
+                  href="https://www.instagram.com/ellahe_khawari/"
+                  aria-label="Instagram"
                   className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
                 >
                   <SiInstagram size={18} />
                 </a>
                 <a
-                  href="#"
+                  href="https://github.com/ellaheKhawari"
                   aria-label="GitHub"
                   className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
                 >
