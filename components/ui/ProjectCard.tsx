@@ -1,12 +1,18 @@
+"use client";
+
 import { forwardRef } from "react";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
-import type { ProjectCardProps} from "@/types";
+import type { ProjectCardProps } from "@/types";
 import { useDictionary } from "@/lib/i18n/store";
+import { projectHref } from "@/types/index";
+import { ShimmerButton } from "./buttons/shimmerButton";
 
 export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
   ({ project, index }, imageRef) => {
     const wide = index % 2 === 1;
     const { t } = useDictionary();
+    const router = useRouter();
 
     return (
       <div
@@ -19,7 +25,7 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
           "motion-reduce:transition-none"
         )}
       >
-  
+
         <div className="col-[1/2] flex flex-col gap-[0.15rem] pt-[0.2rem] text-[0.8rem] leading-[1.3] text-[#8a8a86] max-[900px]:col-[1/3] max-[900px]:flex-row max-[900px]:gap-[0.35rem]">
           <span className="transition-colors duration-250 ease-[ease] group-hover:text-ink motion-reduce:transition-none">
             {t.projects.span2}
@@ -86,9 +92,14 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
             {project.tech.join(" / ")}
           </p>
 
-          <p className="m-0 text-[0.7rem] text-[#8a8a86] transition-colors duration-250 ease-[ease] group-hover:text-ink motion-reduce:transition-none">
+          <p className="m-0 text-[0.7rem] text-[#8a8a86] mb-2 transition-colors duration-250 ease-[ease] group-hover:text-ink motion-reduce:transition-none">
             {project.category}
           </p>
+
+          <ShimmerButton variant="dark" onClick={() => router.push(projectHref(project.id))}>
+            {t.button.seeMore}
+          </ShimmerButton> 
+          
         </div>
       </div>
     );

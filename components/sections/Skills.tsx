@@ -10,7 +10,7 @@ export function Skills() {
   const { t } = useDictionary();
 
   return (
-    <section className="sticky top-0 z-0 mb-15 flex h-dvh w-full flex-col items-center justify-center overflow-hidden py-10 md:py-14">
+    <section id="skills" className="sticky top-0 z-0 mb-15 flex h-dvh w-full flex-col items-center justify-center overflow-hidden py-10 md:py-14">
       <div className="flex w-full flex-col items-center justify-around gap-8">
         <motion.h4 className="px-2 font-medium font text-2xl bg-ink text-mist">
           {t.skills.eyebrow}

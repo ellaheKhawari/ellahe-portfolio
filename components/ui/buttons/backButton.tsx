@@ -35,7 +35,7 @@ export function BackToProjects({ label = "Back to projects" }: { label?: string 
           setOpen(true);
         }
       }}
-      className="group fixed end-[clamp(1rem,3vw,2rem)] bottom-[clamp(1rem,3vw,2rem)] z-50 flex h-12 items-center rounded-full bg-ink px-3.5 text-foreground shadow-lg outline-offset-2 transition-transform hover:scale-105 focus-visible:outline-2"
+      className="group fixed inset-e-[clamp(1rem,3vw,2rem)] bottom-[clamp(1rem,3vw,2rem)] z-50 flex h-12 items-center rounded-full bg-ink px-3.5 text-foreground shadow-lg outline-offset-2 transition-transform hover:scale-105 focus-visible:outline-2"
     >
       <House className="size-5 shrink-0" aria-hidden />
       <span className="max-w-0 overflow-hidden text-sm whitespace-nowrap opacity-0 transition-all duration-300 group-hover:ms-2 group-hover:max-w-48 group-hover:opacity-100 group-focus-visible:ms-2 group-focus-visible:max-w-48 group-focus-visible:opacity-100 group-data-[open=true]:ms-2 group-data-[open=true]:max-w-48 group-data-[open=true]:opacity-100">

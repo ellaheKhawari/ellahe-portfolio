@@ -96,7 +96,6 @@ h6 {
 .reveal-group > *:nth-child(4) { animation-delay: .8s; }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -357,6 +356,19 @@ h6 {
     html {
       scrollbar-width: thin;
       scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    }
+  }
+}
+
+@theme {
+  --animate-shimmer: shimmer 3s linear infinite;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
     }
   }
 }

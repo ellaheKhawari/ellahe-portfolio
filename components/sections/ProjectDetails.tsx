@@ -1,18 +1,17 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { BackToProjects } from "../ui/buttons/backButton";
-import { Block, projects } from "@/lib/mockData";
+import { useDictionary, dictionaries } from "@/lib/i18n/store";
 import { DeviceShowcase } from "@/motion/DeviceShowcase";
-
-// متن‌های ثابت UI؛ اگه خواستی بذارشون تو دیکشنری i18n خودت
-const L = { project: "Project", back: "Back to projects" };
+import type { Block } from "@/types";
 
 const BORDER = "border-[rgba(20,20,20,0.12)]";
 const linkCls =
   "inline-flex items-baseline gap-0.5 font-medium text-ink underline decoration-ink/40 underline-offset-4 transition-colors hover:decoration-ink";
 
-function ExtLink({ href, className, children }: { href: string; className: string; children: React.ReactNode }) {
+function ExtLink({ href, className, children }: { href: string; className: string; children: ReactNode }) {
   const external = /^https?:/.test(href);
   return (
     <a href={href} className={className} {...(external && { target: "_blank", rel: "noopener noreferrer" })}>
@@ -22,7 +21,6 @@ function ExtLink({ href, className, children }: { href: string; className: strin
   );
 }
 
-// [متن](لینک)  `کد`  **بولد**
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(\[[^\]]+\]\([^)]+\)|`[^`]+`|\*\*[^*]+\*\*)/g);
   return (
@@ -38,15 +36,13 @@ function RichText({ text }: { text: string }) {
   );
 }
 
-// دسکتاپ: جدول معمولی | موبایل: هر ردیف تبدیل می‌شه به کارت با برچسب ستون
-// فقط از کلاس‌های logical (text-start, ps/pe) استفاده شده تا در RTL درست باشه
 function DataTable({ caption, columns, rows }: { caption?: string; columns: string[]; rows: string[][] }) {
   return (
     <div className={`overflow-x-auto rounded-2xl border ${BORDER} bg-white/50`}>
       <table className="w-full border-collapse text-start text-sm">
         {caption && <caption className="px-5 pt-4 pb-2 text-start text-xs text-steel">{caption}</caption>}
         <thead className="max-sm:sr-only">
-          <tr className={`border-b ${BORDER} bg-ink/[0.04]`}>
+          <tr className={`border-b ${BORDER} bg-ink/4`}>
             {columns.map((c) => (
               <th key={c} scope="col" className="px-5 py-3 text-start text-xs font-semibold text-steel">{c}</th>
             ))}
@@ -89,7 +85,7 @@ function BlockView({ b }: { b: Block }) {
         </ul>
       );
     case "table":
-      return <DataTable {...b} />;
+      return <DataTable caption={b.caption} columns={b.columns} rows={b.rows} />;
     case "code":
       return <pre dir="ltr" className="overflow-x-auto rounded-2xl bg-[#141414] p-5 text-start text-sm leading-relaxed text-[#e8e8e4]"><code>{b.code}</code></pre>;
     case "links":
@@ -106,18 +102,23 @@ function BlockView({ b }: { b: Block }) {
 }
 
 export function ProjectDetails() {
+  const { t } = useDictionary();
+  const { ui, items } = t.projectsDetails ?? dictionaries.en.projectsDetails;
+
   return (
-    <main>
-      {projects.map((p) => (
+    <main id="project-details" className="overflow-x-clip">
+      {items.map((p) => (
         <section
-          key={p.id}
-          id={p.id}
-          className="relative z-10 w-full bg-foreground text-ink first:rounded-t-4xl [--col-count:8] [--grid-line:rgba(20,20,20,0.12)]
+          key={p.number}
+          id={`project-${p.number}`}
+          className="relative z-10 w-full bg-foreground text-ink [--col-count:7] [--grid-line:rgba(20,20,20,0.12)]
             bg-[repeating-linear-gradient(to_right,var(--grid-line)_0,var(--grid-line)_1px,transparent_1px,transparent_calc(100%/var(--col-count)))]
             max-[900px]:[--col-count:4]"
         >
           <div className="mx-auto px-[clamp(1rem,4vw,2rem)] py-[clamp(3rem,8vw,7rem)]">
-            <span className="mb-2 block text-xs tracking-[0.02em] text-steel">{L.project} {p.number}</span>
+            <span className="mb-2 block text-xs tracking-[0.02em] text-steel">
+              {ui.project} {p.number}
+            </span>
 
             <div className="flex items-end justify-between gap-6">
               <h2 className="font-heading text-[clamp(2.5rem,9vw,8rem)] leading-[0.9] font-bold tracking-[-0.01em] uppercase">{p.title}</h2>
@@ -150,7 +151,7 @@ export function ProjectDetails() {
           </div>
         </section>
       ))}
-      <BackToProjects label={L.back} />
+      <BackToProjects label={ui.back} />
     </main>
   );
 }

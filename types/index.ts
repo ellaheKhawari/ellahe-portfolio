@@ -89,6 +89,10 @@ export interface Dictionary {
     home: string;
     browse: string;
   };
+  button: {
+    seeMore: string;
+  };
+  projectsDetails: ProjectsDetailsCopy;
 }
 export interface Milestone {
   date: string;
@@ -263,7 +267,6 @@ export type PositionLayout = {
   rotate: number;
 };
 
-// ── Projects ───────────────────────────────────────────────────────────────
 export type ProjectId = "01" | "02" | "03" | "04" | "05";
 
 export interface ProjectProps {
@@ -275,15 +278,12 @@ export interface ProjectProps {
   image: string;
   imageAlt: string;
 };
-
-// داده‌های غیرمتنی هر پروژه (mockData)
 export interface ProjectBase {
   id: ProjectId;
   tech: string[];
   image: string;
 }
 
-// متن‌های قابل‌ترجمه‌ی هر پروژه (دیکشنری en / fa)
 export type ProjectCopy = Pick<
   ProjectProps,
   "title" | "category" | "description" | "imageAlt"
@@ -386,4 +386,34 @@ export interface FooterLinkItem {
   href: string;
   icon?: ComponentType<{ className?: string }>;
   dir?: "ltr" | "rtl";
+};
+
+export const projectHref = (id: string) => `/projects#${id}`;
+
+export type Block =
+  | { type: "heading"; text: string }
+  | { type: "paragraph"; text: string }
+  | { type: "list"; items: string[] }
+  | { type: "table"; caption?: string; columns: string[]; rows: string[][] }
+  | { type: "code"; code: string }
+  | { type: "links"; items: { label: string; href: string }[] };
+
+export interface ProjectDetailsItem {
+  number: ProjectId; // همون کلید "01" تا "05"، انکر هم میشه project-01
+  title: string;
+  subtitle: string;
+  meta: { label: string; value: string }[];
+  links: { label: string; href: string }[];
+  images: { desktop: string; tablet: string; mobile: string };
+  blocks: Block[];
+}
+
+export interface ProjectsDetailsCopy {
+  ui: { project: string; back: string };
+  items: ProjectDetailsItem[];
+}
+
+export interface DeviceShowcase {
+  name: string;
+  images: { desktop: string; tablet: string; mobile: string };
 };

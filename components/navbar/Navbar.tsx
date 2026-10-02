@@ -88,15 +88,22 @@ function useOverSection(selector: string) {
   const [isOver, setIsOver] = useState(false);
 
   useEffect(() => {
-    const el = document.querySelector(selector);
-    if (!el) return;
+    const elements = document.querySelectorAll(selector);
+    if (!elements.length) return;
+    const intersecting = new Set<Element>();
 
     const observer = new IntersectionObserver(
-      ([entry]) => setIsOver(entry.isIntersecting),
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) intersecting.add(entry.target);
+          else intersecting.delete(entry.target);
+        });
+        setIsOver(intersecting.size > 0);
+      },
       { rootMargin: "0px 0px -95% 0px" }
     );
 
-    observer.observe(el);
+    elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, [selector]);
 
@@ -107,18 +114,18 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const { locale, setLocale } = useLanguageStore();
   const { t, dir } = useDictionary();
-  const onLight = useOverSection("#projects");
+  const onLight = useOverSection("#projects, #project-details");
   const switchLabelClass = clsx(
     "text-[10px] font-semibold leading-none font-special-2 transition-colors duration-300",
     onLight ? "text-white" : "text-background"
   );
 
   const navLinks = [
-    { href: "#about", label: t.nav.links.about },
-    { href: "#skills", label: t.nav.links.skills },
-    { href: "#projects", label: t.nav.links.projects },
-    { href: "#learningJourney", label: t.nav.links.learningJourney },
-    { href: "#contact", label: t.nav.links.contact },
+    { href: "/#about", label: t.nav.links.about },
+    { href: "/#skills", label: t.nav.links.skills },
+    { href: "/#projects", label: t.nav.links.projects },
+    { href: "/#learningJourney", label: t.nav.links.learningJourney },
+    { href: "/#contact", label: t.nav.links.contact },
   ];
 
   const socialLinks = t.footer.sections.social.links.map((label) => ({
