@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  motion,
-  useAnimationFrame,
-  useMotionTemplate,
-  useMotionValue,
-  useSpring,
-  type Transition,
-} from "motion/react";
+import { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useSpring, type Transition } from "motion/react";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import type { Dot, ParticlesProps, RGB } from "@/types/index";
@@ -20,7 +13,7 @@ const seeded = (i: number) =>
 
 const DEFAULT_PALETTE: RGB[] = [
   [135, 190, 226],
-  [135, 190, 226],
+  [242, 243, 243],
   [157, 196, 221],
 ];
 
@@ -444,7 +437,7 @@ export function HeroBackground({
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(var(--mist) 1px, transparent 1px)",
+              "radial-gradient(var(--foreground) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
             WebkitMaskImage: dotMask,
             maskImage: dotMask,

@@ -137,7 +137,7 @@ export function ContactBackground({
         <motion.span
           key={m.id}
           aria-hidden
-          className="absolute rounded-full bg-white"
+          className="absolute rounded-full bg-foreground"
           style={{
             left: `${m.left}%`,
             top: `${m.top}%`,
@@ -156,6 +156,7 @@ export function ContactBackground({
           }}
         />
       ))}
+
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
@@ -165,7 +166,9 @@ export function ContactBackground({
         }}
       />
 
-      <div className="relative z-10 h-full w-full">{children}</div>
+      <div className="relative z-10 h-full w-full">
+        {children}
+      </div>
     </div>
   );
 }

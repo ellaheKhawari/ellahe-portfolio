@@ -42,19 +42,22 @@ export const MARQUEE_SKILLS = [
   'AI Tools & Agents —',
 ].join('   ');
 
-export const RowOne = [
-  'HTML5',
-  'Next.js', 
-  'Tailwind CSS',
-  'TypeScript',
-  'React',
-  'Framer Motion',
-].join('   ');
-
-export const RowTwo = [
-  
-].join('   ');
-
+export const STAGE_YEARS = [ 1 , 2, 3, 4] as const satisfies readonly ProjectYear[];
+export const STAGE_COUNT = STAGE_YEARS.length;
+export const SCROLL_PER_STAGE_DVH = 100;
+export const END_HOLD_DVH = 100;
+export const CONTACT_REVEAL_DVH = 100;
+export const TIMELINE_SCROLL_DVH = STAGE_COUNT * SCROLL_PER_STAGE_DVH;
+export const SCROLL_RANGE_DVH = TIMELINE_SCROLL_DVH + END_HOLD_DVH + CONTACT_REVEAL_DVH;
+export const TIMELINE_END_PROGRESS = TIMELINE_SCROLL_DVH / SCROLL_RANGE_DVH;
+export const LINE_FILL_START = 0.06;
+export const LINE_FILL_END = 0.9;
+export const CARD_PROGRESS_START = 0.12;
+export const CARD_PROGRESS_END = 0.92;
+export const STAGE_THRESHOLDS: readonly number[] = STAGE_YEARS.map((_, i) => i / STAGE_COUNT);
+export const SPRING = { stiffness: 110, damping: 26, mass: 0.5 } as const;
+export const REVEAL_DELAY_MS = 2000;
+export const NEAR_TOP_PROGRESS = 0.04;
 
 export const projectSection: ProjectBase[] = [
   {
@@ -94,11 +97,8 @@ export function getYearPanels(locale: "en" | "fa" = "en"): YearPanel[] {
 }
 
 export const YEAR_PANELS = getYearPanels();
-
 export const THUMB_SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.9 } as const;
-
-export const STAGE_YEARS = [ 1 , 2, 3, 4] as const satisfies readonly ProjectYear[];
-
+export const linkCls ="inline-flex items-baseline gap-0.5 font-medium text-ink underline decoration-ink/40 underline-offset-4 transition-colors hover:decoration-ink";
 export const socialIcons = [Mail, AtSign, Video, Link2];
 
 export const socialItems: FooterLinkItem[] = [

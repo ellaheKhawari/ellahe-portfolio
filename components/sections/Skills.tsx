@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { MARQUEE_SKILLS, RowOne } from "@/lib/mockData";
+import { MARQUEE_SKILLS } from "@/lib/mockData";
 import { useDictionary } from "@/lib/i18n/store";
 import CreativeMarquee from "../ui/marquees/CreativeMarquee";
 import MarqueeCross from "../ui/marquees/MarqueeCross";

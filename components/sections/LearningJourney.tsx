@@ -7,23 +7,7 @@ import { ProjectTimeline } from "@/motion/Timeline";
 import { AuroraBackground } from "../ui/backgroundEffects/AuraBackground";
 import { useDictionary } from "@/lib/i18n/store";
 import type { ProjectYear, TimelineStage } from "@/types";
-import { STAGE_YEARS } from "@/lib/mockData";
-
-const STAGE_COUNT = STAGE_YEARS.length;
-const SCROLL_PER_STAGE_DVH = 100;
-const END_HOLD_DVH = 100;
-const CONTACT_REVEAL_DVH = 100;
-const TIMELINE_SCROLL_DVH = STAGE_COUNT * SCROLL_PER_STAGE_DVH;
-const SCROLL_RANGE_DVH = TIMELINE_SCROLL_DVH + END_HOLD_DVH + CONTACT_REVEAL_DVH;
-const TIMELINE_END_PROGRESS = TIMELINE_SCROLL_DVH / SCROLL_RANGE_DVH;
-const LINE_FILL_START = 0.06;
-const LINE_FILL_END = 0.9;
-const CARD_PROGRESS_START = 0.12;
-const CARD_PROGRESS_END = 0.92;
-const STAGE_THRESHOLDS: readonly number[] = STAGE_YEARS.map((_, i) => i / STAGE_COUNT);
-const SPRING = { stiffness: 110, damping: 26, mass: 0.5 } as const;
-const REVEAL_DELAY_MS = 2000;
-const NEAR_TOP_PROGRESS = 0.04;
+import { CARD_PROGRESS_END, CARD_PROGRESS_START, LINE_FILL_END, LINE_FILL_START, NEAR_TOP_PROGRESS, REVEAL_DELAY_MS, SCROLL_PER_STAGE_DVH, SCROLL_RANGE_DVH, SPRING, STAGE_COUNT, STAGE_THRESHOLDS, STAGE_YEARS, TIMELINE_END_PROGRESS } from "@/lib/mockData";
 
 function stageFromProgress(p: number): number {
   for (let i = STAGE_THRESHOLDS.length - 1; i >= 0; i--) {
@@ -114,7 +98,6 @@ export function LearningJourney() {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-
     if (reduced) {
       startedRef.current = true;
       setBg(true);
@@ -143,6 +126,7 @@ export function LearningJourney() {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [reduced, setBg]);
+
   useMotionValueEvent(scrollYProgress, "change", (p) => {
     const goingUp = p < prevProgressRef.current;
     prevProgressRef.current = p;
@@ -152,7 +136,6 @@ export function LearningJourney() {
       setBg(false);
     }
   });
-
 
   return (
     <section

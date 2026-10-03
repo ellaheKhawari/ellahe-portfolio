@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { BackToProjects } from "../ui/buttons/backButton";
@@ -7,9 +8,33 @@ import { useDictionary, dictionaries } from "@/lib/i18n/store";
 import { DeviceShowcase } from "@/motion/DeviceShowcase";
 import type { Block } from "@/types";
 import { ShimmerButton } from "../ui/buttons/shimmerButton";
+import { linkCls } from "@/lib/mockData";
 
 const BORDER = "border-[rgba(20,20,20,0.12)]";
-const linkCls ="inline-flex items-baseline gap-0.5 font-medium text-ink underline decoration-ink/40 underline-offset-4 transition-colors hover:decoration-ink";
+const SETTLE_MS = 2500;
+const USER_EVENTS = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
+
+function useScrollToHash() {
+  useEffect(() => {
+    const hash = decodeURIComponent(window.location.hash.slice(1));
+    if (!hash) return;
+    const find = () => document.getElementById(`project-${hash}`) ?? document.getElementById(hash);
+    const align = () => { find()?.scrollIntoView({ behavior: "instant", block: "start" });};
+    const observer = new ResizeObserver(align);
+    const timer = window.setTimeout(() => stop(), SETTLE_MS);
+
+    function stop() {
+      observer.disconnect();
+      window.clearTimeout(timer);
+      USER_EVENTS.forEach((e) => window.removeEventListener(e, stop));
+    }
+    observer.observe(document.body);
+    USER_EVENTS.forEach((e) => window.addEventListener(e, stop, { passive: true }));
+    align();
+    return stop;
+  }, []);
+}
+
 function ExtLink({ href, className, children }: { href: string; className: string; children: ReactNode }) {
   const external = /^https?:/.test(href);
   return (
@@ -103,6 +128,8 @@ function BlockView({ b }: { b: Block }) {
 export function ProjectDetails() {
   const { t } = useDictionary();
   const { ui, items } = t.projectsDetails ?? dictionaries.en.projectsDetails;
+
+  useScrollToHash();
 
   return (
     <main id="project-details" className="overflow-x-clip">

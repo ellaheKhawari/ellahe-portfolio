@@ -64,41 +64,6 @@ export function Hero() {
             onClick={handleScrollToNext}
           />
         </motion.div>
-        {/* <motion.h3 
-          className="mt-8 font-special-2! text-xl"
-        >
-         {t.hero.skills}  
-        </motion.h3> */}
-        {/* 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.25 }}
-          className="absolute bottom-6 left-6 mt-5 max-w-10/12 md:max-w-3/12 text-start text-base leading-relaxed text-muted-foreground md:text-lg"
-        >
-          {t.hero.subtitle}
-        </motion.p> */}
-
-        {/* <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.35 }}
-          className="mt-10 flex flex-wrap justify-center gap-4"
-        >
-          <a
-            href="#projects"
-            className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-transform active:scale-[0.97]"
-          >
-            {t.hero.cta}
-            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-border-strong px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-mist hover:text-mist"
-          >
-            {t.hero.ctaSecondary}
-          </a>
-          </motion.div> */}
       </div>
     </section>
 
