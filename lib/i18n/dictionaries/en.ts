@@ -1,8 +1,4 @@
 import { Dictionary } from "@/types";
-import { Rocket, Activity, ShieldCheck, GitPullRequest } from "lucide-react";
-
-const LOREM =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud exercitation.";
 
 const en: Dictionary = {
   meta: {
@@ -44,22 +40,8 @@ const en: Dictionary = {
   },
   skills: {
     eyebrow: "My skills",
-    title1: "Frontend",
-    groups: [
-      {
-        name: "",
-        items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "MUI"],
-      },
-      {
-        name: "",
-        items: ["Motion (Framer)", "GSAP", "Three.js", "WebGL"],
-      },
-      {
-        name: "",
-        items: ["Zustand", "Sonner", "Vite", "Git", "Figma"],
-      },
-    ],
-    title2: "State & Tooling",
+    title1: "Frontend Development",
+    title2: "Tools & Interactive Technologies",
   },
   projects: {
     eyebrow: "Selected projects",

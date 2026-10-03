@@ -38,22 +38,8 @@ const fa: Dictionary = {
   },
   skills: {
     eyebrow: "مهارت ها",
-    title1: "فرانت‌اند",
-    groups: [
-      {
-        name: "",
-        items: ["React", "HTML5", "Next.js", "TypeScript", "Tailwind CSS", "MUI", "CSS/SCSS/SASS", "JavaScript", "jQuery"],
-      },
-      {
-        name: "",
-        items: ["Motion (Framer)", "GSAP", "Three.js", "WebGL"],
-      },
-      {
-        name: "",
-        items: ["Zustand", "Sonner", "Vite", "Git", "Figma"],
-      },
-    ],
-    title2: "مدیریت وضعیت و ابزارها",
+    title1: "توسعه و ساخت رابط کاربری",
+    title2: "ابزارها و فناوری‌های تعاملی",
   },
   projects: {
     eyebrow: "پروژه‌های منتخب",

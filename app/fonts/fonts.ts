@@ -55,7 +55,6 @@ export const zeyada = Zeyada({
   display: "swap",
 });
 
-
 export const fontVariables = [
   balooBhaijaan2.variable,
   varelaRound.variable,

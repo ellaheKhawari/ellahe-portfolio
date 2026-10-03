@@ -59,12 +59,7 @@ body {
   font-family: var(--font-body);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
 
@@ -139,7 +134,6 @@ h6 {
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
@@ -152,7 +146,6 @@ h6 {
     transition: none !important;
   }
 }
-
 
 .mqx-container {
   position: relative;
@@ -240,7 +233,6 @@ h6 {
   from {
     transform: translate3d(0, 0, 0);
   }
-
   to {
     transform: translate3d(-50%, 0, 0);
   }
@@ -265,6 +257,7 @@ h6 {
 .cm-font-b {
   font-family: "Special3", ui-sans-serif, system-ui, sans-serif;
 }
+
 .cm-track {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -273,6 +266,7 @@ h6 {
   will-change: transform;
   backface-visibility: hidden;
 }
+
 .cm-track[data-direction="left"] {
   animation-name: cm-scroll-left;
 }
@@ -351,6 +345,7 @@ h6 {
     display: none; 
   }
 }
+
 @supports not selector(::-webkit-scrollbar) {
   @media (hover: hover) and (pointer: fine) {
     html {
@@ -362,7 +357,6 @@ h6 {
 
 @theme {
   --animate-shimmer: shimmer 3s linear infinite;
-
   @keyframes shimmer {
     0% {
       background-position: 200% 0;

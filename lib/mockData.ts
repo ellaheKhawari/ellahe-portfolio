@@ -26,17 +26,35 @@ const LinkedinIcon = ({ className }: { className?: string }) =>
   );
 
 export const MARQUEE_SKILLS = [
-  'React',
-  'TypeScript',
-  'Tailwind CSS',
-  'Next.js',
-  'Node.js',
-  'Git',
-  'REST API',
-  'Figma',
-  'Framer Motion',
-  'PostgreSQL',
+  'Vite —',
+  'Motion —',
+  'Zustand —',
+  'Node.js —',
+  'WebGL —',
+  'Git/GitHub —',
+  'REST API —',
+  'Three.js —',
+  'Figma —',
+  'TanStack Query —',
+  'React Hook Forms —',
+  'React Router —',
+  'Prompt Engineering —',
+  'AI Tools & Agents —',
 ].join('   ');
+
+export const RowOne = [
+  'HTML5',
+  'Next.js', 
+  'Tailwind CSS',
+  'TypeScript',
+  'React',
+  'Framer Motion',
+].join('   ');
+
+export const RowTwo = [
+  
+].join('   ');
+
 
 export const projectSection: ProjectBase[] = [
   {

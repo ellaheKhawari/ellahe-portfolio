@@ -37,7 +37,6 @@ export interface Dictionary {
     eyebrow: string;
     title1: string;
     title2: string;
-    groups: { name: string; items: string[] }[];
   };
   projects: {
     eyebrow: string;
@@ -232,7 +231,6 @@ export interface CreativeMarqueeProps {
   speed?: number;
   direction?: creativeMarqueeDirection;
   separator?: string;
-  hoverSlowdown?: number;
   outlineWidth?: number;
   repeat?: number;
   sizeClassName?: string;
@@ -250,7 +248,6 @@ export interface CreateRowProps {
   separator: string;
   direction: creativeMarqueeDirection;
   speed: number;
-  hoverSlowdown: number;
   outlineWidth: number;
   repeat: number;
   sizeClassName: string;

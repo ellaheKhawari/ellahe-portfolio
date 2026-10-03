@@ -117,7 +117,7 @@ export function Navbar() {
   const onLight = useOverSection("#projects, #project-details");
   const switchLabelClass = clsx(
     "text-[10px] font-semibold leading-none font-special-2 transition-colors duration-300",
-    onLight ? "text-white" : "text-background"
+    onLight ? "text-foreground" : "text-background"
   );
 
   const navLinks = [
@@ -127,11 +127,6 @@ export function Navbar() {
     { href: "/#learningJourney", label: t.nav.links.learningJourney },
     { href: "/#contact", label: t.nav.links.contact },
   ];
-
-  const socialLinks = t.footer.sections.social.links.map((label) => ({
-    href: "#",
-    label,
-  }));
 
   const downloadLabel = locale === "fa" ? "دانلود رزومه" : "Download CV";
 
@@ -177,7 +172,7 @@ export function Navbar() {
             aria-label={locale === "en" ? "Switch to English" : "تغییر زبان به فارسی"}
             className={clsx(
               "border-muted-foreground! font-special-2 transition-colors duration-300",
-              onLight ? "bg-ink/10 [--switch-thumb:var(--ink)]" : "bg-white/10"
+              onLight ? "bg-ink/10 [--switch-thumb:var(--ink)]" : "bg-foreground/10"
             )}
           />
 
@@ -229,7 +224,7 @@ export function Navbar() {
                 type="button"
                 onClick={closeMenu}
                 aria-label={t.nav.close}
-                className="absolute top-4 inset-e-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-foreground transition-colors hover:bg-white/10 active:bg-white/10"
+                className="absolute top-4 inset-e-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-foreground/10 active:bg-foreground/10"
               >
                 <X size={18} />
               </button>
@@ -247,7 +242,7 @@ export function Navbar() {
                   >
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0 origin-left scale-x-0 rounded-2xl bg-white/5 transition-transform duration-300 ease-out group-hover:scale-x-100 group-active:scale-x-100"
+                      className="absolute inset-0 origin-left scale-x-0 rounded-2xl bg-foreground/5 transition-transform duration-300 ease-out group-hover:scale-x-100 group-active:scale-x-100"
                     />
                     <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-active:translate-x-1">
                       {link.label}
@@ -272,14 +267,14 @@ export function Navbar() {
                 <a
                   href="https://wa.me/+989335678545"
                   aria-label="Whatsapp"
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-foreground transition-colors hover:bg-foreground/10 active:bg-foreground/10"
                 >
                   <SiWhatsapp size={18} />
                 </a>
                 <a
                   href="https://t.me/ellahe_khawari"
                   aria-label="Telegram"
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-foreground transition-colors hover:bg-foreground/10 active:bg-foreground/10"
                 >
                   <SiTelegram size={18} />
                 </a>
@@ -287,21 +282,21 @@ export function Navbar() {
                 <a
                   href="https://www.instagram.com/ellahe_khawari/"
                   aria-label="Instagram"
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-foreground transition-colors hover:bg-foreground/10 active:bg-foreground/10"
                 >
                   <SiInstagram size={18} />
                 </a>
                 <a
                   href="https://github.com/ellaheKhawari"
                   aria-label="GitHub"
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-foreground transition-colors hover:bg-foreground/10 active:bg-foreground/10"
                 >
                   <SiGithub size={18} />
                 </a>
                 <a
                   href="#"
                   aria-label="Linkdin"
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white transition-colors hover:bg-white/10 active:bg-white/10"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-foreground transition-colors hover:bg-foreground/10 active:bg-foreground/10"
                 >
                   <Link size={18} />
                 </a>
@@ -311,7 +306,7 @@ export function Navbar() {
                 variants={itemVariants}
                 href="#"
                 whileTap={{ scale: 0.97 }}
-                className="mt-6 flex items-center justify-between rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-white transition-colors bg-white/5"
+                className="mt-6 flex items-center justify-between rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-foreground transition-colors bg-foreground/5"
               >
                 {downloadLabel}
                 <Download size={16} />

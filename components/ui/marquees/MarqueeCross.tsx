@@ -20,7 +20,7 @@ function Ribbon({
     textColor,
     animationName,
 }: RibbonProps) {
-    const units = Array.from({ length: repeatCount * 2 }, (_, i) => i);
+    const units = Array.from({ length: repeatCount * 1 }, (_, i) => i);
 
     return (
         <div

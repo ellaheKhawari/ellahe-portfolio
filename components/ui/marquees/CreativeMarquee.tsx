@@ -30,7 +30,6 @@ function MarqueeRow({
   separator,
   direction,
   speed,
-  hoverSlowdown,
   outlineWidth,
   repeat,
   sizeClassName,
@@ -45,7 +44,7 @@ function MarqueeRow({
     [words, separator, repeat]
   );
 
-  const duration = hovering ? Math.max(speed * hoverSlowdown, 0.1) : Math.max(speed, 0.1);
+  const duration = Math.max(speed, 0.1);
 
   const renderCopy = (copyIndex: number) => (
     <div className="flex shrink-0 items-center" aria-hidden="true">
@@ -62,7 +61,7 @@ function MarqueeRow({
             key={`${copyIndex}-${t.key}`}
             className={
               t.variant === "filled"
-                ? "cm-font-a px-[0.02em] font-bold text-white"
+                ? "cm-font-a px-[0.02em] font-bold text-foreground"
                 : "cm-font-b cm-outline px-[0.02em] font-bold"
             }
           >
@@ -108,7 +107,6 @@ export default function CreativeMarquee({
   speed = 32,
   direction = "left",
   separator = "✦",
-  hoverSlowdown = 1.6,
   outlineWidth = 2,
   repeat = 3,
   sizeClassName = DEFAULT_SIZE_CLASSNAME,
@@ -120,7 +118,7 @@ export default function CreativeMarquee({
   return (
     <section
       dir="ltr"
-      className={`relative w-full select-none overflow-x-hidden bg-background py-8 sm:py-10 md:py-14 ${className}`}
+      className={`relative w-full select-none overflow-x-hidden bg-background py-8 md:py-8 ${className}`}
     >
       <div className="flex flex-col gap-1 sm:gap-2 md:gap-3">
         <MarqueeRow
@@ -129,7 +127,6 @@ export default function CreativeMarquee({
           separator={separator}
           direction={direction}
           speed={speed}
-          hoverSlowdown={hoverSlowdown}
           outlineWidth={outlineWidth}
           repeat={repeat}
           sizeClassName={sizeClassName}
@@ -140,7 +137,6 @@ export default function CreativeMarquee({
           separator={separator}
           direction={oppositeDirection}
           speed={speed}
-          hoverSlowdown={hoverSlowdown}
           outlineWidth={outlineWidth}
           repeat={repeat}
           sizeClassName={sizeClassName}

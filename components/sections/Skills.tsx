@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { MARQUEE_SKILLS } from "@/lib/mockData";
+import { MARQUEE_SKILLS, RowOne } from "@/lib/mockData";
 import { useDictionary } from "@/lib/i18n/store";
 import CreativeMarquee from "../ui/marquees/CreativeMarquee";
 import MarqueeCross from "../ui/marquees/MarqueeCross";
@@ -11,19 +11,16 @@ export function Skills() {
 
   return (
     <section id="skills" className="sticky top-0 z-0 mb-15 flex h-dvh w-full flex-col items-center justify-center overflow-hidden py-10 md:py-14">
-      <div className="flex w-full flex-col items-center justify-around gap-8">
-        <motion.h4 className="px-2 font-medium font text-2xl bg-ink text-mist">
-          {t.skills.eyebrow}
-        </motion.h4>
-        <h2 className="text-3xl md:text-6xl">{t.skills.title1}</h2>
+      <div className="flex w-full flex-col items-center justify-around text-center gap-7">
+        <h2 className="text-[clamp(2.7rem,9vw,4rem)] px-4">{t.skills.title1}</h2>
         <CreativeMarquee
-          rowOne={["FUTURE", "CRAFTED", "PRECISE"]}
-          rowTwo={["DIGITAL", "TIMELESS", "REFINED"]}
-          speed={45}
+          rowOne={['HTML5','Bootstrap', 'Tailwind CSS','TypeScript','React','jQuery',]}
+          rowTwo={['JavaScript','MUI','Responsive Design','Next.js','CSS3/Sass(SCSS)','Framer Motion']}
+          speed={65}
           direction="right"
           outlineWidth={2.5}
         />
-        <h2 className="text-3xl md:text-6xl">{t.skills.title2}</h2>
+        <h2 className="text-[clamp(2.7rem,9vw,4rem)] px-4">{t.skills.title2}</h2>
         <MarqueeCross
           text={MARQUEE_SKILLS}
           separator="✦"
@@ -31,11 +28,11 @@ export function Skills() {
           topDirection="left"
           angle={0}
           rotate={0}
-          ribbonHeight={30}
-          mobileRibbonHeight={30}
+          ribbonHeight={40}
+          mobileRibbonHeight={60}
           fontSize={38}
-          mobileFontSize={30}
-          height={30}
+          mobileFontSize={45}
+          height={40}
         />
       </div>
     </section>

@@ -12,17 +12,15 @@ export function Contact() {
   const [isClicked, setIsClicked] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
-
   const handleClick = () => {
     if (isClicked) return;
-
     setIsClicked(true);
     setShowSuccess(true);
   };
 
   const handleBookCall = () => {
     toast.success(t.contact.book, { description: t.contact.duration });
-    window.open("https://cal.com/", "_blank");
+    window.open("mailto:ellahe.khawari@gmail.com", "_blank");
   };
 
   return (
