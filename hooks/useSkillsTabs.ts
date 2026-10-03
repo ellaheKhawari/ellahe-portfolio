@@ -2,7 +2,6 @@
 
 import { useMotionValue } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-
 import type { VerticalTab } from "@/types";
 
 export function useSkillsTabs(tabs: VerticalTab[], interval = 4200) {
@@ -11,7 +10,6 @@ export function useSkillsTabs(tabs: VerticalTab[], interval = 4200) {
   const activeRef = useRef(0);
   const elapsedRef = useRef(0);
   const pausedRef = useRef(false);
-
   const current = tabs[active] ?? tabs[0];
 
   useEffect(() => {

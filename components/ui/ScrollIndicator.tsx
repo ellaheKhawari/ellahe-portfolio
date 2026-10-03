@@ -9,9 +9,7 @@ function circlePathD(cx: number, cy: number, r: number) {
 
 const VB = 260;
 const CENTER = VB / 2;
-
-const RESPONSIVE_SIZE_CLASSES =
-    "w-[150px] h-[150px] sm:w-[185px] sm:h-[185px] md:w-[220px] md:h-[220px] lg:w-[260px] lg:h-[260px]";
+const RESPONSIVE_SIZE_CLASSES ="w-[150px] h-[150px] sm:w-[185px] sm:h-[185px] md:w-[220px] md:h-[220px] lg:w-[260px] lg:h-[260px]";
 
 export default function ScrollIndicator({
     text = "SCROLL DOWN",

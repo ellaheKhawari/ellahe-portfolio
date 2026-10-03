@@ -100,7 +100,6 @@ export interface Milestone {
 };
 
 export type RGB = [number, number, number];
-
 export interface Dot {
   x: number;
   y: number;

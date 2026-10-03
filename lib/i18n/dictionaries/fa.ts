@@ -1,5 +1,4 @@
 import { Dictionary } from "@/types";
-import { Rocket, Activity, ShieldCheck, GitPullRequest } from "lucide-react";
 
 const fa: Dictionary = {
   meta: {

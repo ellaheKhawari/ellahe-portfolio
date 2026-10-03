@@ -5,10 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { DEFAULT_CONFIG } from "./config";
 import { ProjectsScene } from "@/three/ProjectsScene";
 import { ProjectsErrorBoundary } from "./ProjectsErrorBoundary";
-import type {
-  ProjectsEffectConfig,
-  ProjectsEffectProps,
-} from "@/types";
+import type { ProjectsEffectConfig, ProjectsEffectProps } from "@/types";
 
 export function ProjectsEffect({
   images,

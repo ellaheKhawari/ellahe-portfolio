@@ -3,9 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 
-const SWITCH_THEME = {
-  "--ease-spring": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-} as React.CSSProperties;
+const SWITCH_THEME = {"--ease-spring": "cubic-bezier(0.175, 0.885, 0.32, 1.275)"} as React.CSSProperties;
 const THUMB_BG = "bg-[color:var(--switch-thumb,var(--foreground))]";
 const switchVariants = cva(
   "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50",
