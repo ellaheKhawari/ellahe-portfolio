@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
-import type {DeviceShowcase} from "@/types/index";
+import type {DeviceShowcaseProps} from "@/types/index";
 
 const shot = (src: string, alt: string, sizes: string) => (
   <Image src={src} alt={alt} fill sizes={sizes} className="object-cover object-top" />
@@ -12,8 +12,8 @@ const shot = (src: string, alt: string, sizes: string) => (
 function Laptop({ src, alt, className }: { src: string; alt: string; className: string }) {
   return (
     <div className={className}>
-      <div className="rounded-t-[1.1rem] border-2 border-[#3a3a3a] bg-background p-[1.6%] pb-[1.2%]">
-        <div className="relative aspect-16/10 overflow-hidden rounded-[3px]">
+      <div className="rounded-t-[1.1rem] border-2 border-[#3a3a3a]  bg-background p-[1.6%] pb-[1.2%]">
+        <div className="relative aspect-video overflow-hidden rounded-[3px]">
           {shot(src, alt, "(min-width:1024px) 55vw, 90vw")}
           <span className="absolute top-0 left-1/2 z-10 h-[3.5%] w-[8%] -translate-x-1/2 rounded-b-md bg-background" />
         </div>
@@ -48,7 +48,7 @@ function Phone({ src, alt, className }: { src: string; alt: string; className: s
 
 const LABELS = ["Laptop", "Tablet", "Phone"];
 
-export function DeviceShowcase({ name, images }: DeviceShowcase ) {
+export function DeviceShowcase({ name, images }: DeviceShowcaseProps ) {
   const wrap = useRef<HTMLDivElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const lastTouch = useRef(0);

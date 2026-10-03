@@ -73,18 +73,18 @@ const en: Dictionary = {
     desc5: "and find better ways to create .",
     items: {
       "01": {
-        title: ["ELLARA", "ACADEMY"],
-        category: "Language Learning Platform",
-        description:
-          "A multilingual language-learning platform built with a modern interface and a structure inspired by real-world products. The project includes simulated authentication, a student dashboard, Persian and English support, automatic RTL/LTR direction changes, and light and dark themes.",
-        imageAlt: "ELLARA ACADEMY",
-      },
-      "02": {
         title: ["NOVA", "ADMIN"],
         category: "Admin Dashboard",
         description:
           "An admin dashboard designed around a realistic product structure, with a focus on practical interface patterns and data management. It includes simulated authentication and a product management area with search, filtering, sorting, and full create, edit, and delete operations.",
         imageAlt: "NOVA panel",
+      },
+      "02": {
+        title: ["ELLARA", "ACADEMY"],
+        category: "Language Learning Platform",
+        description:
+          "A multilingual language-learning platform built with a modern interface and a structure inspired by real-world products. The project includes simulated authentication, a student dashboard, Persian and English support, automatic RTL/LTR direction changes, and light and dark themes.",
+        imageAlt: "ELLARA ACADEMY",
       },
       "03": {
         title: ["ESTATEIN", ""],
@@ -217,81 +217,6 @@ const en: Dictionary = {
     items: [
       {
         number: "01",
-        title: "Ellara Academy",
-        subtitle: "A multilingual platform for learning languages",
-        meta: [
-          { label: "Role", value: "Frontend Design & Development" },
-          { label: "Year", value: "2026" },
-          { label: "Stack", value: "React 19 / TypeScript / Vite" },
-          { label: "Type", value: "Language Learning Platform" },
-        ],
-        links: [
-          {
-            label: "Live demo",
-            href: "https://ellara-academy.ellahe-khawari.workers.dev/",
-          },
-        ],
-        images: {
-          desktop: "/projects/EllaraAcademy1.png",
-          tablet: "/projects/EllaraAcademy3.png",
-          mobile: "/projects/EllaraAcademy5.png",
-        },
-        blocks: [
-          { type: "heading", text: "About the project" },
-          {
-            type: "paragraph",
-            text: "Ellara Academy is a frontend project for a language-learning platform offering English, Chinese, Korean, Spanish, and Persian courses. I built a responsive landing page, a simulated authentication flow, and a student dashboard with charts and data tables. The project gave me an opportunity to bring several parts of a platform together while paying attention to layout, interaction, and usability. Authentication and data are simulated on the client side; there is no real backend.",
-          },
-          { type: "heading", text: "Key features" },
-          {
-            type: "list",
-            items: [
-              "Responsive landing page with animated sections and a reviews carousel",
-              "Simulated login, registration, password recovery, and session persistence",
-              "Student dashboard with charts and data tables",
-              "English and Persian language support with automatic RTL/LTR switching",
-              "Dark and light themes",
-              "Responsive layouts for mobile, tablet, and desktop",
-            ],
-          },
-          { type: "heading", text: "Tech stack" },
-          {
-            type: "table",
-            columns: ["Category", "Technology", "Purpose"],
-            rows: [
-              ["Core", "React 19, TypeScript, Vite", "Application structure and development"],
-              ["Styling", "Tailwind CSS v4", "Responsive layouts and styling"],
-              ["Routing", "React Router", "Page navigation and protected routes"],
-              ["State / Data", "Zustand, TanStack React Query", "Authentication state and mock data handling"],
-              ["Forms", "TanStack Form", "Form state and validation"],
-              ["UI", "MUI, MUI X Data Grid", "Dashboard components and data tables"],
-              ["Charts", "Recharts", "Dashboard visualizations"],
-              ["Animation", "Framer Motion", "Scroll animations and interactions"],
-              ["Other", "next-themes, Embla Carousel, Sonner, Lucide React", "Themes, carousel, notifications, and icons"],
-            ],
-          },
-          { type: "heading", text: "Demo account" },
-          {
-            type: "paragraph",
-            text: "You can use the demo account below or register a new account. Authentication is simulated, and account data is stored in the browser.",
-          },
-          {
-            type: "code",
-            code: "email: demo@lingova.com\npassword: demo1234",
-          },
-          {
-            type: "links",
-            items: [
-              {
-                label: "Open live demo",
-                href: "https://ellara-academy.ellahe-khawari.workers.dev/",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        number: "02",
         title: "Nova Admin",
         subtitle: "An interactive dashboard for product management",
         meta: [
@@ -307,9 +232,9 @@ const en: Dictionary = {
           },
         ],
         images: {
-          desktop: "/projects/NovaAdmin1.png",
-          tablet: "/projects/NovaAdmin2.png",
-          mobile: "/projects/NovaAdmin3.png",
+          desktop: "/pictures/NovaAdmin1.png",
+          tablet: "/pictures/NovaAdmin2.png",
+          mobile: "/pictures/NovaAdmin3.png",
         },
         blocks: [
           { type: "heading", text: "About the project" },
@@ -367,6 +292,81 @@ const en: Dictionary = {
         ],
       },
       {
+        number: "02",
+        title: "Ellara Academy",
+        subtitle: "A multilingual platform for learning languages",
+        meta: [
+          { label: "Role", value: "Frontend Design & Development" },
+          { label: "Year", value: "2026" },
+          { label: "Stack", value: "React 19 / TypeScript / Vite" },
+          { label: "Type", value: "Language Learning Platform" },
+        ],
+        links: [
+          {
+            label: "Live demo",
+            href: "https://ellara-academy.ellahe-khawari.workers.dev/",
+          },
+        ],
+        images: {
+          desktop: "/pictures/EllaraAcademy1.png",
+          tablet: "/pictures/EllaraAcademy3.png",
+          mobile: "/pictures/EllaraAcademy5.png",
+        },
+        blocks: [
+          { type: "heading", text: "About the project" },
+          {
+            type: "paragraph",
+            text: "Ellara Academy is a frontend project for a language-learning platform offering English, Chinese, Korean, Spanish, and Persian courses. I built a responsive landing page, a simulated authentication flow, and a student dashboard with charts and data tables. The project gave me an opportunity to bring several parts of a platform together while paying attention to layout, interaction, and usability. Authentication and data are simulated on the client side; there is no real backend.",
+          },
+          { type: "heading", text: "Key features" },
+          {
+            type: "list",
+            items: [
+              "Responsive landing page with animated sections and a reviews carousel",
+              "Simulated login, registration, password recovery, and session persistence",
+              "Student dashboard with charts and data tables",
+              "English and Persian language support with automatic RTL/LTR switching",
+              "Dark and light themes",
+              "Responsive layouts for mobile, tablet, and desktop",
+            ],
+          },
+          { type: "heading", text: "Tech stack" },
+          {
+            type: "table",
+            columns: ["Category", "Technology", "Purpose"],
+            rows: [
+              ["Core", "React 19, TypeScript, Vite", "Application structure and development"],
+              ["Styling", "Tailwind CSS v4", "Responsive layouts and styling"],
+              ["Routing", "React Router", "Page navigation and protected routes"],
+              ["State / Data", "Zustand, TanStack React Query", "Authentication state and mock data handling"],
+              ["Forms", "TanStack Form", "Form state and validation"],
+              ["UI", "MUI, MUI X Data Grid", "Dashboard components and data tables"],
+              ["Charts", "Recharts", "Dashboard visualizations"],
+              ["Animation", "Framer Motion", "Scroll animations and interactions"],
+              ["Other", "next-themes, Embla Carousel, Sonner, Lucide React", "Themes, carousel, notifications, and icons"],
+            ],
+          },
+          { type: "heading", text: "Demo account" },
+          {
+            type: "paragraph",
+            text: "You can use the demo account below or register a new account. Authentication is simulated, and account data is stored in the browser.",
+          },
+          {
+            type: "code",
+            code: "email: demo@lingova.com\npassword: demo1234",
+          },
+          {
+            type: "links",
+            items: [
+              {
+                label: "Open live demo",
+                href: "https://ellara-academy.ellahe-khawari.workers.dev/",
+              },
+            ],
+          },
+        ],
+      },
+      {
         number: "03",
         title: "Estatein",
         subtitle: "A real estate platform for exploring property listings",
@@ -383,7 +383,7 @@ const en: Dictionary = {
           },
         ],
         images: {
-          desktop: "/projects/estatein-desktop.png",
+          desktop: "/pictures/estatein1.png",
           tablet: "/projects/estatein-tablet.png",
           mobile: "/projects/estatein-mobile.png",
         },

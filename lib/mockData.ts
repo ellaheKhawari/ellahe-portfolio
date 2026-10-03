@@ -41,28 +41,28 @@ export const MARQUEE_SKILLS = [
 export const projectSection: ProjectBase[] = [
   {
     id: "01",
-    tech: ["React", "TypeScript", "Framer Motion"],
-    image: "/pictures/project2.png",
+    tech: ["Next.js", "D3", "Tailwind"],
+    image: "/pictures/NovaAdmin1.png",
   },
   {
     id: "02",
-    tech: ["Next.js", "D3", "Tailwind"],
-    image: "/pictures/project2.png",
+    tech: ["React", "TypeScript", "Framer Motion"],
+    image: "/pictures/EllaraAcademy1.png",
   },
   {
     id: "03",
     tech: ["React", "Three.js", "Sanity"],
-    image: "/pictures/project2.png",
+    image: "/pictures/EllaraAcademy1.png",
   },
   {
     id: "04",
     tech: ["Next.js", "Stripe", "Tailwind"],
-    image: "/pictures/project2.png",
+    image: "/pictures/EllaraAcademy1.png",
   },
   {
     id: "05",
     tech: ["React", "GLSL", "Lenis"],
-    image: "/pictures/project2.png",
+    image: "/pictures/NovaAdmin1.png",
   },
 ];
 

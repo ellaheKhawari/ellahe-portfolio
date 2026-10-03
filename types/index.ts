@@ -413,7 +413,7 @@ export interface ProjectsDetailsCopy {
   items: ProjectDetailsItem[];
 }
 
-export interface DeviceShowcase {
+export interface DeviceShowcaseProps {
   name: string;
   images: { desktop: string; tablet: string; mobile: string };
 };
