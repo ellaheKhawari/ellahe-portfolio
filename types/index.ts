@@ -31,7 +31,6 @@ export interface Dictionary {
     eyebrow: string;
     title: string;
     body: string;
-    stats: { value: string; label: string }[];
   };
   skills: {
     eyebrow: string;
@@ -395,7 +394,7 @@ export type Block =
   | { type: "links"; items: { label: string; href: string }[] };
 
 export interface ProjectDetailsItem {
-  number: ProjectId; // همون کلید "01" تا "05"، انکر هم میشه project-01
+  number: ProjectId;
   title: string;
   subtitle: string;
   meta: { label: string; value: string }[];

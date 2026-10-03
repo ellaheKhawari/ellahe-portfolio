@@ -31,12 +31,7 @@ const en: Dictionary = {
   about: {
     eyebrow: "About me",
     title: "A little about me",
-    body: "I'm Ellahe Khawari and I’ve been seriously pursuing web development for the past three years. I started with structured courses and training, then continued learning on my own through tutorials, experiments and—most importantly—building things. I enjoy creating something people can actually see, use, and connect with. Visual design matters a lot to me, but I don’t see it as separate from usability or performance. A good interface should feel thoughtful, responsive, accessible, and natural to use.",
-    stats: [
-      { value: "", label: "" },
-      { value: "", label: "" },
-      { value: "", label: "" },
-    ],
+    body: "I'm Ellahe Khawari and I’ve been seriously pursuing web development for the past three years. I started with structured courses and training, then continued learning on my own through tutorials, experiments and—most importantly—building things. I enjoy creating something people can actually see, use, and connect with. Visual design matters a lot to me, but I don’t see it as separate from usability or performance. A good interface should feel thoughtful, responsive, accessible, and natural to use."
   },
   skills: {
     eyebrow: "My skills",

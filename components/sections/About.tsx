@@ -36,16 +36,7 @@ export function About() {
               text={t.about.body}
               className="justify-center"
             />
-
-            <dl className="mt-12 grid grid-cols-3 gap-6 pt-8">
-              {t.about.stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-3xl font-medium text-mist md:text-5xl">{stat.value}</dd>
-                  <dd className="mt-3 text-xs md:text-sm leading-snug text-muted-foreground">{stat.label}</dd>
-                </div>
-              ))}
-            </dl>
+            
           </motion.div>
         </div>
       </div>
