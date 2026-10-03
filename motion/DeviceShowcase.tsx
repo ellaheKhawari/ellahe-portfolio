@@ -66,7 +66,7 @@ export function DeviceShowcase({ name, images }: DeviceShowcase ) {
     if (!inView || hover || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = setInterval(() => {
       if (Date.now() - lastTouch.current > 8000) go(index + 1);
-    }, 4000);
+    }, 2000);
     return () => clearInterval(t);
   }, [inView, hover, index, go]);
 

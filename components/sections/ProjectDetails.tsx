@@ -6,6 +6,7 @@ import { BackToProjects } from "../ui/buttons/backButton";
 import { useDictionary, dictionaries } from "@/lib/i18n/store";
 import { DeviceShowcase } from "@/motion/DeviceShowcase";
 import type { Block } from "@/types";
+import { ShimmerButton } from "../ui/buttons/shimmerButton";
 
 const BORDER = "border-[rgba(20,20,20,0.12)]";
 const linkCls ="inline-flex items-baseline gap-0.5 font-medium text-ink underline decoration-ink/40 underline-offset-4 transition-colors hover:decoration-ink";
@@ -90,9 +91,9 @@ function BlockView({ b }: { b: Block }) {
       return (
         <div className="flex flex-wrap gap-3">
           {b.items.map((l) => (
-            <ExtLink key={l.href + l.label} href={l.href} className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-ink hover:text-foreground">
+            <ShimmerButton variant="light" key={l.href + l.label} onClick={() => window.open(l.href, "_blank")}>
               {l.label}
-            </ExtLink>
+            </ShimmerButton>
           ))}
         </div>
       );
@@ -137,9 +138,9 @@ export function ProjectDetails() {
 
             <div className="mt-6 flex flex-wrap gap-3">
               {p.links.map((l) => (
-                <ExtLink key={l.href} href={l.href} className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-foreground transition-opacity hover:opacity-80">
+                <ShimmerButton variant="dark" key={l.href} onClick={() => window.open(l.href, "_blank")}>
                   {l.label}
-                </ExtLink>
+                </ShimmerButton>
               ))}
             </div>
 

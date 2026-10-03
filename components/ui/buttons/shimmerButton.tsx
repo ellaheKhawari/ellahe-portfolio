@@ -14,7 +14,7 @@ const variants = {
       "bg-[linear-gradient(110deg,transparent_40%,rgba(255,255,255,0.35)_50%,transparent_60%)]",
   },
   light: {
-    button: "border-black/10 bg-white text-neutral-900 hover:bg-neutral-100",
+    button: "border-background! bg-neutral-100 text-neutral-900 hover:bg-neutral-100",
     shimmer:
       "bg-[linear-gradient(110deg,transparent_40%,rgba(0,0,0,0.12)_50%,transparent_60%)]",
   },

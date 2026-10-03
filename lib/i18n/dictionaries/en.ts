@@ -232,9 +232,9 @@ const en: Dictionary = {
           },
         ],
         images: {
-          desktop: "/projects/ellara-desktop.png",
-          tablet: "/projects/ellara-tablet.png",
-          mobile: "/projects/ellara-mobile.png",
+          desktop: "/projects/EllaraAcademy1.png",
+          tablet: "/projects/EllaraAcademy3.png",
+          mobile: "/projects/EllaraAcademy5.png",
         },
         blocks: [
           { type: "heading", text: "About the project" },
@@ -307,9 +307,9 @@ const en: Dictionary = {
           },
         ],
         images: {
-          desktop: "/projects/nova-desktop.png",
-          tablet: "/projects/nova-tablet.png",
-          mobile: "/projects/nova-mobile.png",
+          desktop: "/projects/NovaAdmin1.png",
+          tablet: "/projects/NovaAdmin2.png",
+          mobile: "/projects/NovaAdmin3.png",
         },
         blocks: [
           { type: "heading", text: "About the project" },

@@ -220,14 +220,14 @@ const fa: Dictionary = {
         ],
         links: [
           {
-            label: "مشاهده دِمو",
+            label: "مشاهده نسخه آنلاین",
             href: "https://ellara-academy.ellahe-khawari.workers.dev/",
           },
         ],
         images: {
-          desktop: "/projects/ellara-desktop.png",
-          tablet: "/projects/ellara-tablet.png",
-          mobile: "/projects/ellara-mobile.png",
+          desktop: "/projects/EllaraAcademy2.png",
+          tablet: "/projects/EllaraAcademy4.png",
+          mobile: "/projects/EllaraAcademy6.png",
         },
         blocks: [
           { type: "heading", text: "درباره پروژه" },
@@ -276,7 +276,7 @@ const fa: Dictionary = {
             type: "links",
             items: [
               {
-                label: "مشاهده دِمو",
+                label: "مشاهده نسخه آنلاین",
                 href: "https://ellara-academy.ellahe-khawari.workers.dev/",
               },
             ],
@@ -300,9 +300,9 @@ const fa: Dictionary = {
           },
         ],
         images: {
-          desktop: "/projects/nova-desktop.png",
-          tablet: "/projects/nova-tablet.png",
-          mobile: "/projects/nova-mobile.png",
+          desktop: "/projects/NovaAdmin1.png",
+          tablet: "/projects/NovaAdmin2.png",
+          mobile: "/projects/NovaAdmin3.png",
         },
         blocks: [
           { type: "heading", text: "درباره پروژه" },
