@@ -35,9 +35,9 @@ export function Contact() {
               pointerEvents: showSuccess ? "auto" : "none",
             }}
           >
-            <div className="flex flex-col justify-center items-center gap-2">
+            <div className="flex flex-col text-center justify-center items-center gap-2">
               <span
-                className="text-md md:text-lg mb-3 font-medium uppercase tracking-[0.3em] text-muted-foreground transition-all duration-500"
+                className="text-md md:text-lg mb-3 px-5 font-medium uppercase tracking-[0.3em] text-muted-foreground transition-all duration-500"
                 style={{
                   transform: showSuccess ? "translateY(0)" : "translateY(10px)",
                   opacity: showSuccess ? 1 : 0,

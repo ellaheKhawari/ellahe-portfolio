@@ -49,12 +49,12 @@ export function Footer() {
 
           <div className="absolute right-1/2 left-1/2 top-0 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground/20 blur" />
 
-          <div className="mt-10 md:mt-14 grid grid-cols-2 gap-8 md:grid-cols-4" dir={dir}>
+          <div className="mt-10 md:mt-14 grid grid-cols-2 gap-8 lg:grid-cols-4" dir={dir}>
             {sections.map((section, index) => (
               <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
                 <div className="mb-10 md:mb-0">
-                  <h3 className="text-xs xl:text-lg uppercase tracking-wide text-foreground">{section.label}</h3>
-                  <ul className="mt-4 space-y-2 text-sm xl:text-lg text-muted-foreground">
+                  <h3 className="text-xs md:text-lg uppercase tracking-wide text-foreground">{section.label}</h3>
+                  <ul className="mt-4 space-y-2 text-sm md:text-lg text-muted-foreground">
                     {section.items.map((item) => {
                       const Icon = item.icon;
 

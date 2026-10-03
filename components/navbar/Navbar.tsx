@@ -129,6 +129,10 @@ export function Navbar() {
   ];
 
   const downloadLabel = locale === "fa" ? "دانلود رزومه" : "Download CV";
+  const cvFile =
+    locale === "fa"
+      ? "/cv/Resume.pdf"
+      : "/cv/Resume-en.pdf";
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -213,7 +217,7 @@ export function Navbar() {
               exit="exit"
               role="dialog"
               aria-modal="true"
-              className="fixed inset-4 z-50 flex flex-col justify-center  overflow-hidden rounded-3xl bg-background p-6 text-foreground shadow-2xl sm:inset-auto sm:m-2 sm:w-full sm:h-[calc(100vh-2rem)] md:w-4/12"
+              className="fixed inset-4 z-50 flex flex-col justify-center  overflow-hidden rounded-3xl bg-background p-6 text-foreground shadow-2xl sm:inset-auto sm:m-2 sm:w-full md:w-8/12 md:m-2 sm:h-[calc(100vh-2rem)] lg:w-4/12"
             >
               <div
                 className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)] bg-size-[40px_40px]"
@@ -236,9 +240,8 @@ export function Navbar() {
                     href={link.href}
                     onClick={closeMenu}
                     whileTap={{ scale: 0.97 }}
-                    className={`group relative flex items-center justify-between gap-2 overflow-hidden rounded-2xl px-3 py-3 text-4xl font-semibold leading-tight text-foreground  ${
-                      index > 0 ? " pt-6" : ""
-                    }`}
+                    className={`group relative flex items-center justify-between gap-2 overflow-hidden rounded-2xl px-3 py-3 text-4xl font-semibold leading-tight text-foreground  ${index > 0 ? " pt-6" : ""
+                      }`}
                   >
                     <span
                       aria-hidden="true"
@@ -304,7 +307,7 @@ export function Navbar() {
 
               <motion.a
                 variants={itemVariants}
-                href="#"
+                href={cvFile}
                 whileTap={{ scale: 0.97 }}
                 className="mt-6 flex items-center justify-between rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-foreground transition-colors bg-foreground/5"
               >
