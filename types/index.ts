@@ -411,4 +411,10 @@ export interface ProjectsDetailsCopy {
 export interface DeviceShowcaseProps {
   name: string;
   images: { desktop: string; tablet: string; mobile: string };
-};
+}
+
+export type PreloaderPhase = "loading" | "ghost-exit" | "reveal" | "done";
+export interface PreloaderProps {
+    onComplete?: () => void;
+}
+

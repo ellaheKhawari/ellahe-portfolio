@@ -12,7 +12,7 @@ export function Skills() {
   return (
     <section id="skills" className="sticky top-0 z-0 mb-15 flex h-dvh w-full flex-col items-center justify-center overflow-hidden py-10 md:py-14">
       <div className="flex w-full flex-col items-center justify-around text-center gap-7">
-        <h2 className="text-[clamp(2.7rem,9vw,4rem)] px-4">{t.skills.title1}</h2>
+        <h2 className="text-[clamp(2.7rem,7vw,4rem)] px-4">{t.skills.title1}</h2>
         <CreativeMarquee
           rowOne={['HTML5','Bootstrap', 'Tailwind CSS','TypeScript','React','jQuery',]}
           rowTwo={['JavaScript','MUI','Responsive Design','Next.js','CSS3/Sass(SCSS)','Framer Motion']}
@@ -20,7 +20,7 @@ export function Skills() {
           direction="right"
           outlineWidth={2.5}
         />
-        <h2 className="text-[clamp(2.7rem,9vw,4rem)] px-4">{t.skills.title2}</h2>
+        <h2 className="text-[clamp(2.7rem,7vw,4rem)] px-4">{t.skills.title2}</h2>
         <MarqueeCross
           text={MARQUEE_SKILLS}
           separator="✦"

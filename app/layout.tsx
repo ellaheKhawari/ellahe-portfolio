@@ -6,6 +6,7 @@ import { ThemeRegistry } from "@/providers/ThemeRegistry";
 import { Toaster } from "sonner";
 import { CursorTrailProvider } from "@/providers/CursorTrailProvider";
 import CursorTrailBackground from "@/components/ui/backgroundEffects/cursorTrailBackground";
+import { Preloader } from "@/motion/Preloader";
 
 export const metadata: Metadata = {
   title: "Portfolio — Designer & Developer",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <CursorTrailBackground />
           <LocaleProvider>
             <ThemeRegistry>
+              <Preloader />
               {children}
               <Toaster
                 position="bottom-right"
