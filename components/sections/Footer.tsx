@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useDictionary } from "@/lib/i18n/store";
-import type { ViewAnimationProps } from "@/.next/dev/types/index";
+import type { ReactNode } from "react";
 import { FooterLinkItem } from "@/types";
 import { contactItems, socialItems } from "@/lib/mockData";
 
@@ -83,7 +83,10 @@ export function Footer() {
   );
 }
 
-type FooterAnimatedProps = ViewAnimationProps & {
+type FooterAnimatedProps = {
+  className?: string;
+  delay?: number;
+  children: ReactNode;
   dir?: "ltr" | "rtl" | "inherit";
 };
 
