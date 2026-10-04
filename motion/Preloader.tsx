@@ -110,7 +110,7 @@ export function Preloader({
                 </AnimatePresence>
 
                 <motion.div
-                    className="fixed inset-x-0 top-0 z-[10001] h-1/2 bg-[var(--background)]"
+                    className="fixed inset-x-0 top-0 z-10001 h-1/2 bg-background"
                     initial={{ y: 0 }}
                     animate={{
                         y: phase === "reveal" ? "-100%" : 0,
