@@ -40,13 +40,13 @@ export function HeroBackground({
   const y = useSpring(targetY, springConfig);
 
   useAnimationFrame((t) => {
-  if (hoveringRef.current) return;
+    if (hoveringRef.current) return;
 
-  const nx = 50 + idle(t, 0.00034, 0) * 26;
-  const ny = 42 + idle(t, 0.00052, 1.3) * 16;
+    const nx = 50 + idle(t, 0.00034, 0) * 26;
+    const ny = 42 + idle(t, 0.00052, 1.3) * 16;
 
-  targetX.set(Math.round(nx * 100) / 100);
-  targetY.set(Math.round(ny * 100) / 100);
+    targetX.set(Math.round(nx * 100) / 100);
+    targetY.set(Math.round(ny * 100) / 100);
   });
 
   const dotMask = useMotionTemplate`
@@ -111,9 +111,9 @@ export function HeroBackground({
 
         const color =
           palette[
-            Math.floor(
-              seeded(i + 7000) * palette.length,
-            )
+          Math.floor(
+            seeded(i + 7000) * palette.length,
+          )
           ];
 
         return {
@@ -221,9 +221,9 @@ export function HeroBackground({
         const pulse =
           0.72 +
           0.28 *
-            Math.sin(
-              t * 0.03 + p.x * 0.01,
-            );
+          Math.sin(
+            t * 0.03 + p.x * 0.01,
+          );
 
         const a = p.glow * pulse;
 
@@ -294,115 +294,125 @@ export function HeroBackground({
   ]);
 
   useEffect(() => {
-    function onMove(e: PointerEvent) {
-      const rect =
-        canvasRef.current?.getBoundingClientRect();
+    function updateMouse(e: PointerEvent) {
+      const rect = canvasRef.current?.getBoundingClientRect();
 
       if (!rect) return;
 
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-
       const inside =
-        x >= 0 &&
-        y >= 0 &&
-        x <= rect.width &&
-        y <= rect.height;
-
+        x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
       mouseRef.current = inside ? { x, y } : null;
+    }
+
+    function onMove(e: PointerEvent) {
+      updateMouse(e);
+    }
+
+    function onDown(e: PointerEvent) {
+      if (e.pointerType === "mouse") return;
+      updateMouse(e);
     }
 
     function onLeave() {
       mouseRef.current = null;
     }
 
-    window.addEventListener(
-      "pointermove",
-      onMove,
-      { passive: true },
-    );
+    function onUp(e: PointerEvent) {
+      if (e.pointerType === "mouse") return;
+      mouseRef.current = null;
+    }
 
-    document.documentElement.addEventListener(
-      "pointerleave",
-      onLeave,
-    );
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerdown", onDown, { passive: true });
+    window.addEventListener("pointerup", onUp, { passive: true });
+    window.addEventListener("pointercancel", onUp, { passive: true });
+
+    document.documentElement.addEventListener("pointerleave", onLeave);
 
     return () => {
-      window.removeEventListener(
-        "pointermove",
-        onMove,
-      );
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
 
-      document.documentElement.removeEventListener(
-        "pointerleave",
-        onLeave,
-      );
+      document.documentElement.removeEventListener("pointerleave", onLeave);
     };
   }, []);
   useEffect(() => {
-  function handleGlobalPointerMove(e: PointerEvent) {
-    const rect = skillsRef.current?.getBoundingClientRect();
+    function applyPointer(e: PointerEvent) {
+      const rect = skillsRef.current?.getBoundingClientRect();
 
-    if (!rect) return;
+      if (!rect) return;
 
-    const inside =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
+      const inside =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
 
-    if (!inside) {
-      hoveringRef.current = false;
-      return;
+      if (!inside) {
+        hoveringRef.current = false;
+        return;
+      }
+
+      const px = ((e.clientX - rect.left) / rect.width) * 100;
+      const py = ((e.clientY - rect.top) / rect.height) * 100;
+
+      hoveringRef.current = true;
+
+      targetX.set(Math.round(Math.min(100, Math.max(0, px)) * 100) / 100);
+      targetY.set(Math.round(Math.min(100, Math.max(0, py)) * 100) / 100);
     }
 
-    const px =
-      ((e.clientX - rect.left) / rect.width) * 100;
+    function handleGlobalPointerMove(e: PointerEvent) {
+      applyPointer(e);
+    }
 
-    const py =
-      ((e.clientY - rect.top) / rect.height) * 100;
+    function handleGlobalPointerDown(e: PointerEvent) {
+      if (e.pointerType === "mouse") return;
+      applyPointer(e);
+    }
 
-    hoveringRef.current = true;
+    function handleGlobalPointerLeave() {
+      hoveringRef.current = false;
+    }
 
-    targetX.set(
-      Math.round(
-        Math.min(100, Math.max(0, px)) * 100,
-      ) / 100,
-    );
+    function handleGlobalPointerUp(e: PointerEvent) {
+      if (e.pointerType === "mouse") return;
+      hoveringRef.current = false;
+    }
 
-    targetY.set(
-      Math.round(
-        Math.min(100, Math.max(0, py)) * 100,
-      ) / 100,
-    );
-  }
+    window.addEventListener("pointermove", handleGlobalPointerMove, {
+      passive: true,
+    });
+    window.addEventListener("pointerdown", handleGlobalPointerDown, {
+      passive: true,
+    });
+    window.addEventListener("pointerup", handleGlobalPointerUp, {
+      passive: true,
+    });
+    window.addEventListener("pointercancel", handleGlobalPointerUp, {
+      passive: true,
+    });
 
-  function handleGlobalPointerLeave() {
-    hoveringRef.current = false;
-  }
-
-  window.addEventListener(
-    "pointermove",
-    handleGlobalPointerMove,
-    { passive: true },
-  );
-
-  document.documentElement.addEventListener(
-    "pointerleave",
-    handleGlobalPointerLeave,
-  );
-
-  return () => {
-    window.removeEventListener(
-      "pointermove",
-      handleGlobalPointerMove,
-    );
-
-    document.documentElement.removeEventListener(
+    document.documentElement.addEventListener(
       "pointerleave",
       handleGlobalPointerLeave,
     );
-  };
+
+    return () => {
+      window.removeEventListener("pointermove", handleGlobalPointerMove);
+      window.removeEventListener("pointerdown", handleGlobalPointerDown);
+      window.removeEventListener("pointerup", handleGlobalPointerUp);
+      window.removeEventListener("pointercancel", handleGlobalPointerUp);
+
+      document.documentElement.removeEventListener(
+        "pointerleave",
+        handleGlobalPointerLeave,
+      );
+    };
   }, [targetX, targetY]);
   return (
     <div
@@ -423,6 +433,7 @@ export function HeroBackground({
       <div
         ref={skillsRef}
         className="pointer-events-auto absolute inset-0 z-10 overflow-hidden"
+        style={{ touchAction: "pan-y" }}
       >
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.12]"
