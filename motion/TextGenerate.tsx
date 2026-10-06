@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { cn, EASE_OUT } from "@/lib/utils";
 
 export function TextGenerate({
@@ -18,20 +18,37 @@ export function TextGenerate({
 }) {
   const words = text.split(" ");
 
+  const container: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: delayStep } },
+  };
+
+  const word: Variants = {
+    hidden: { opacity: 0, filter: "blur(8px)" },
+    show: {
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: { duration, ease: EASE_OUT },
+    },
+  };
+
   return (
-    <div className={cn("flex flex-wrap", className)}>
-      {words.map((word, i) => (
+    <motion.div
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.1 }}
+      className={cn("flex flex-wrap", className)}
+    >
+      {words.map((w, i) => (
         <motion.span
-          key={`${word}-${i}`}
-          initial={{ opacity: 0, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, filter: "blur(0px)" }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration, delay: i * delayStep, ease: EASE_OUT }}
+          key={`${w}-${i}`}
+          variants={word}
           className={cn("me-[0.35em] inline-block", wordClassName)}
         >
-          {word}
+          {w}
         </motion.span>
       ))}
-    </div>
+    </motion.div>
   );
 }
