@@ -18,12 +18,19 @@ export function ProjectsEffect({
   const [lowQuality, setLowQuality] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setEnabled(!mq.matches);
-    update();
-    mq.addEventListener("change", update);
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const desktop = window.matchMedia(
+    "(min-width: 1024px) and (hover: hover) and (pointer: fine)"
+  );
+  const update = () => setEnabled(!reduced.matches && desktop.matches);
+  update();
+    reduced.addEventListener("change", update);
+    desktop.addEventListener("change", update);
     setLowQuality(reducedQuality ?? (navigator.hardwareConcurrency ?? 8) <= 4);
-    return () => mq.removeEventListener("change", update);
+    return () => {
+      reduced.removeEventListener("change", update);
+      desktop.removeEventListener("change", update);
+    };
   }, [reducedQuality]);
 
   const merged = useMemo<ProjectsEffectConfig>(
