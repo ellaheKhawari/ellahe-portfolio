@@ -42,13 +42,13 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
         </div>
 
         <div className={clsx(wide ? "col-[3/7]" : "col-[3/6]", "max-[900px]:col-[1/5]")}>
-          <div ref={imageRef} className="relative aspect-video overflow-hidden bg-[#e4e2dd]">
+          <div ref={imageRef} className="relative overflow-hidden bg-[#e4e2dd]">
             <img
               src={project.image}
               alt={project.imageAlt}
               loading="lazy"
               className={clsx(
-                "absolute inset-0 h-full w-full object-cover",
+                "h-full w-full object-cover",
                 "filter-[grayscale(1)_contrast(1.02)]",
                 "transition-[filter,transform] duration-350 ease-[ease]",
               )}
