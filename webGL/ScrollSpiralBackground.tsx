@@ -7,7 +7,7 @@ import type { DefaultContext, DrawCommand, Regl } from "regl";
 
 type Vec3 = [number, number, number];
 
-const VERTEX_SHADER = /* glsl */ `
+const VERTEX_SHADER = `
   attribute vec2 position;
   void main() {
     gl_Position = vec4(3.0 * position, 0.0, 1.0);
@@ -79,9 +79,9 @@ function hexToVec3(value: string): Vec3 | null {
   const full =
     hex.length === 3
       ? hex
-          .split("")
-          .map((c) => c + c)
-          .join("")
+        .split("")
+        .map((c) => c + c)
+        .join("")
       : hex;
   if (!/^[0-9a-fA-F]{6}$/.test(full)) return null;
   const n = parseInt(full, 16);
@@ -146,9 +146,11 @@ export function ScrollSpiralBackground({
       if (!draw || canvas.scrollHeight === 0) return;
 
       const aspect = canvas.scrollWidth / canvas.scrollHeight;
-      const width = Math.floor(1024 * aspect);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const width = Math.floor(canvas.scrollWidth * dpr);
+      const height = Math.floor(canvas.scrollHeight * dpr);
       if (canvas.width !== width) canvas.width = width;
-      if (canvas.height !== 1024) canvas.height = 1024;
+      if (canvas.height !== height) canvas.height = height;
 
       const rect = section.getBoundingClientRect();
       const pinned = rect.height - sticky.offsetHeight;

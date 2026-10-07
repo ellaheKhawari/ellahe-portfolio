@@ -1,4 +1,4 @@
-"useClient"
+"useClient";
 
 import { ScrollSpiralBackground } from "@/webGL/ScrollSpiralBackground"
 
