@@ -34,6 +34,7 @@ export function TextGenerate({
 
   return (
     <motion.div
+      key={text}
       variants={container}
       initial="hidden"
       whileInView="show"

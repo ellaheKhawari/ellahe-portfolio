@@ -54,7 +54,7 @@ export function ProjectsEffect({
       <ProjectsErrorBoundary onError={() => setEnabled(false)}>
         <Canvas
           frameloop="always"
-          dpr={[2, 2]}
+          dpr={[1, 2]}
           resize={{ scroll: false }}
           camera={{ fov: 45, near: 10, far: 20000, position: [0, 0, 1000] }}
           gl={{
