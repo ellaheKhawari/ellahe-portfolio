@@ -39,14 +39,9 @@ export function LearningJourney() {
   const reduced = useReducedMotion() ?? false;
   const [activeIndex, setActiveIndex] = useState(0);
   const [bgRevealed, setBgRevealed] = useState(false);
-  const startedRef = useRef(false);
-  const bgRevealedRef = useRef(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [inView, setInView] = useState(false);
+  const [atTop, setAtTop] = useState(false);
   const prevProgressRef = useRef(0);
-  const setBg = useCallback((v: boolean) => {
-    bgRevealedRef.current = v;
-    setBgRevealed(v);
-  }, []);
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start start", "end end"],
@@ -98,43 +93,35 @@ export function LearningJourney() {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    if (reduced) {
-      startedRef.current = true;
-      setBg(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!startedRef.current) {
-            startedRef.current = true;
-            timerRef.current = setTimeout(() => setBg(true), REVEAL_DELAY_MS);
-          }
-        } else {
-          if (timerRef.current) clearTimeout(timerRef.current);
-          startedRef.current = false;
-          setBg(false);
-        }
-      },
+      (entries) => setInView(entries[entries.length - 1].isIntersecting),
       { threshold: 0 }
     );
-
     observer.observe(el);
-    return () => {
-      observer.disconnect();
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [reduced, setBg]);
+    return () => observer.disconnect();
+  }, []);
+
+  const shouldShow = reduced || (inView && !atTop);
+
+  useEffect(() => {
+    if (!shouldShow) {
+      setBgRevealed(false);
+      return;
+    }
+    if (reduced) {
+      setBgRevealed(true);
+      return;
+    }
+    const id = setTimeout(() => setBgRevealed(true), REVEAL_DELAY_MS);
+    return () => clearTimeout(id);
+  }, [shouldShow, reduced]);
 
   useMotionValueEvent(scrollYProgress, "change", (p) => {
     const goingUp = p < prevProgressRef.current;
     prevProgressRef.current = p;
-    if (!reduced && goingUp && p <= NEAR_TOP_PROGRESS && bgRevealedRef.current) {
-      if (timerRef.current) clearTimeout(timerRef.current);
-      startedRef.current = false;
-      setBg(false);
-    }
+    if (reduced) return;
+    if (goingUp && p <= NEAR_TOP_PROGRESS) setAtTop(true);
+    else if (p > NEAR_TOP_PROGRESS) setAtTop(false);
   });
 
   return (
