@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import type { ProjectCardProps } from "@/types";
@@ -13,7 +13,13 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
     const wide = index % 2 === 1;
     const { t } = useDictionary();
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+      const reset = () => setLoading(false);
+      window.addEventListener("pageshow", reset);
+      return () => window.removeEventListener("pageshow", reset);
+    }, []);
     return (
       <div
         className={clsx(
@@ -94,7 +100,9 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
             {project.category}
           </p>
 
-          <ShimmerButton variant="dark" onClick={() => router.push(projectHref(project.id))}>
+          <ShimmerButton variant="dark" loading={loading} onClick={() => {
+            setLoading(true); router.push(projectHref(project.id));
+            }}>
             {t.button.seeMore}
           </ShimmerButton>
 
