@@ -18,6 +18,7 @@
   --font-heading: var(--font-heading-en), var(--font-body);
   --font-special1: var(--font-special1-en), cursive;
   --font-special2: var(--font-special2-raw), monospace;
+  --font-hero-fa: var(--font-hero-fa), var(--font-heading);
 }
 
 [data-locale="fa"] {
@@ -43,6 +44,7 @@
   --font-heading: var(--font-heading);
   --font-special-1: var(--font-special1);
   --font-special-2: var(--font-special2-raw);
+  --font-hero-fa: var(--font-hero-fa);
 }
 
 * {

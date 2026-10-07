@@ -22,7 +22,7 @@ export function Projects() {
           </span>
 
           <h2
-            className="mt-0 mr-0 mb-[clamp(1.5rem,4vw,3rem)] ml-[-0.3rem] w-[calc(100%+3vw)] font-heading text-[clamp(4.5rem,16vw,10rem)] leading-[0.85] font-bold tracking-[-0.01em] min-[901px]:max-[1100px]:text-[clamp(3.25rem,11vw,7rem)] max-[560px]:mx-0 max-[560px]:w-full"
+            className="rtl:font-hero-fa! mt-0 mr-0 mb-[clamp(1.5rem,4vw,3rem)] ml-[-0.3rem] w-[calc(100%+3vw)] font-heading text-[clamp(4.5rem,16vw,10rem)] leading-[0.85] font-bold tracking-[-0.01em] min-[901px]:max-[1100px]:text-[clamp(3.25rem,11vw,7rem)] max-[560px]:mx-0 max-[560px]:w-full"
           >
             {t.projects.title}
           </h2>

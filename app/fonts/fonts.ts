@@ -3,6 +3,7 @@ import {
   Varela_Round,
   Zeyada,
   VT323,
+  Cairo
 } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -24,6 +25,13 @@ export const vt323 = VT323({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-special2-raw",
+  display: "swap",
+});
+
+export const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-hero-fa",
   display: "swap",
 });
 
@@ -63,4 +71,5 @@ export const fontVariables = [
   qasedak.variable,
   zeyada.variable,
   vt323.variable,
+  cairo.variable
 ].join(" ");

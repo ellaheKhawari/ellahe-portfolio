@@ -48,11 +48,11 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE_OUT, delay: 0.1 }}
-          className="text-6xl md:text-8xl mt-2 font-medium leading-[1.03] tracking-tight text-foreground"
+          className="rtl:font-hero-fa! text-6xl md:text-8xl mt-2 font-medium leading-[1.03] tracking-tight text-foreground"
         >
           {t.hero.title1}
           <br />
-          <span className="text-muted-foreground">{t.hero.title2}</span>
+          <span className="rtl:font-hero-fa! text-muted-foreground ">{t.hero.title2}</span>
         </motion.h1>
 
         <motion.div className="absolute bottom-3 right-5 z-10">

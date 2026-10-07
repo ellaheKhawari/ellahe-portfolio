@@ -47,7 +47,7 @@ export function Contact() {
                 {t.contact.available}
               </span>
               <h3
-                className="text-6xl mb-4 font-light tracking-tight text-foreground transition-all duration-500 text-center"
+                className="md:text-6xl text-4xl px-4 md:px-0 mb-4 font-light tracking-tight text-foreground transition-all duration-500 text-center"
                 style={{
                   transform: showSuccess ? "translateY(0)" : "translateY(10px)",
                   opacity: showSuccess ? 1 : 0,
