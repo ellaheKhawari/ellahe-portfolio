@@ -48,9 +48,9 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
               alt={project.imageAlt}
               loading="lazy"
               className={clsx(
-                "h-full w-full object-cover",
-                "[@media(hover:hover)_and_(pointer:fine)]:filter-[grayscale(1)_contrast(1.02)]",
-                "transition-[filter,transform] duration-350 ease-[ease]",
+                "h-full w-full object-cover ",
+                "[@media(hover:hover)_and_(pointer:fine)]:filter-[grayscale(1)_contrast(1.02)] ",
+                "transition-[filter,transform] duration-350 ease-[ease] ",
               )}
             />
           </div>

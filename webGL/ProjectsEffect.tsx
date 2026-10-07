@@ -18,12 +18,12 @@ export function ProjectsEffect({
   const [lowQuality, setLowQuality] = useState(false);
 
   useEffect(() => {
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const desktop = window.matchMedia(
-    "(min-width: 1024px) and (hover: hover) and (pointer: fine)"
-  );
-  const update = () => setEnabled(!reduced.matches && desktop.matches);
-  update();
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktop = window.matchMedia(
+      "(min-width: 1024px) and (hover: hover) and (pointer: fine)"
+    );
+    const update = () => setEnabled(!reduced.matches && desktop.matches);
+    update();
     reduced.addEventListener("change", update);
     desktop.addEventListener("change", update);
     setLowQuality(reducedQuality ?? (navigator.hardwareConcurrency ?? 8) <= 4);
@@ -54,7 +54,7 @@ export function ProjectsEffect({
       <ProjectsErrorBoundary onError={() => setEnabled(false)}>
         <Canvas
           frameloop="always"
-          dpr={[1, 2]}
+          dpr={[2, 2]}
           resize={{ scroll: false }}
           camera={{ fov: 45, near: 10, far: 20000, position: [0, 0, 1000] }}
           gl={{

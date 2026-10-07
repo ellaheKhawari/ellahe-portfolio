@@ -18,16 +18,18 @@ export const vertexShader = `
   }
 `;
 
-export const fragmentShader =  `
+export const fragmentShader = `
   uniform sampler2D uTexture;
-  uniform vec2 uFitScale;   
-  uniform vec2 uFitOffset; 
+  uniform vec2 uFitScale;
+  uniform vec2 uFitOffset;
   varying vec2 vUv;
   void main() {
     vec2 p = vec2(vUv.x, 1.0 - vUv.y);
     vec2 t = (p - uFitOffset) / uFitScale;
-    vec4 color = texture2D(uTexture, vec2(t.x, 1.0 - t.y));
-    if (t.x < 0.0 || t.x > 1.0 || t.y < 0.0 || t.y > 1.0) discard;
+    float e = 0.004;
+    if (t.x < -e || t.x > 1.0 + e || t.y < -e || t.y > 1.0 + e) discard;
+    vec2 c = clamp(t, 0.0, 1.0);
+    vec4 color = texture2D(uTexture, vec2(c.x, 1.0 - c.y));
     gl_FragColor = vec4(color.rgb, 1.0);
   }
 `;
