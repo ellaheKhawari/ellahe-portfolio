@@ -262,7 +262,7 @@ export type PositionLayout = {
   rotate: number;
 };
 
-export type ProjectId = "01" | "02" | "03" | "04" | "05";
+export type ProjectId = "01" | "02" | "03" ;
 
 export interface ProjectProps {
   id: string;

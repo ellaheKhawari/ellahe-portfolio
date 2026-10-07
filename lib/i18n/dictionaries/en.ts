@@ -68,22 +68,8 @@ const en: Dictionary = {
         category: "Real Estate Platform",
         description:
           "A real-estate platform focused on presenting and managing property listings through clear search and filtering experiences. The project includes simulated authentication and a responsive interface designed for both desktop and mobile, with a structure that can be extended as the product grows.",
-        imageAlt: "",
-      },
-      "04": {
-        title: ["ELLARA", "SHOP"],
-        category: "E-COMMERCE",
-        description:
-          "The commerce counterpart to Ellara Academy — same visual language, tuned for browsing, comparison, and a fast, quiet checkout.",
-        imageAlt: "Abstract minimal composition of geometric objects",
-      },
-      "05": {
-        title: ["PORTFOLIO", "EXPERIMENT"],
-        category: "CASE STUDY",
-        description:
-          "A self-directed study in editorial grid systems on the web — this section is, in fact, one of its results.",
-        imageAlt: "Minimal modern workspace object on a neutral background",
-      },
+        imageAlt: "Estatein",
+      }
     },
   },
   learningJourney: {
@@ -360,9 +346,9 @@ const en: Dictionary = {
           },
         ],
         images: {
-          desktop: "/pictures/estatein1.png",
+          desktop: "/pictures/Estatein1.png",
           tablet: "/projects/estatein-tablet.png",
-          mobile: "/projects/estatein-mobile.png",
+          mobile: "/pictures/Estatein2.png",
         },
         blocks: [
           { type: "heading", text: "About the project" },

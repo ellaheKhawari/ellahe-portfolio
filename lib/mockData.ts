@@ -73,18 +73,8 @@ export const projectSection: ProjectBase[] = [
   {
     id: "03",
     tech: ["React", "Three.js", "Sanity"],
-    image: "/pictures/EllaraAcademy1.png",
-  },
-  {
-    id: "04",
-    tech: ["Next.js", "Stripe", "Tailwind"],
-    image: "/pictures/EllaraAcademy1.png",
-  },
-  {
-    id: "05",
-    tech: ["React", "GLSL", "Lenis"],
-    image: "/pictures/NovaAdmin1.png",
-  },
+    image: "/pictures/Estatein1.png",
+  }
 ];
 
 export function getYearPanels(locale: "en" | "fa" = "en"): YearPanel[] {
