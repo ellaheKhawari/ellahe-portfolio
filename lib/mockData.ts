@@ -7,7 +7,7 @@ const BaleIcon = ({ className }: { className?: string }) =>
   React.createElement("img", {
     src: "/baleIcon.png",
     alt: "Bale",
-    className : "opacity-70 " + className,
+    className : "opacity-65! " + className,
     style: { filter: "brightness(0) invert(1)" },
   });
 
