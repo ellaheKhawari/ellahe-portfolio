@@ -43,7 +43,7 @@ export function Footer() {
           <AnimatedContainer className="space-y-4" dir="ltr">
             <h3 className="text-3xl md:text-4xl font-medium text-foreground font-special-2!">Ellahe khawari</h3>
             <p className="mt-8 text-sm xl:text-lg text-muted-foreground md:mt-0">
-              © {year} Portfolio. {t.footer.rights}
+              © {year} Ellahe Khawari. {t.footer.rights}
             </p>
           </AnimatedContainer>
 
