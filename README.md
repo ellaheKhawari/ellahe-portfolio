@@ -106,14 +106,14 @@ This repository is public for viewing and evaluation only. Copying, modifying, o
 | هسته اصلی | Next.js 16 (App Router، خروجی استاتیک)، React 19، TypeScript |
 | استایل‌دهی | Tailwind CSS نسخه ۴، `tw-animate-css`، `class-variance-authority`، `tailwind-merge` |
 | انیمیشن | Framer Motion / Motion |
-| سه‌بعدی و WebGL | Three.js، React Three Fiber، `@react-three/drei`، regl، `shaders` |
+| 3D و WebGL | Three.js، React Three Fiber، `@react-three/drei`، regl، `shaders` |
 | مدیریت state | Zustand (استور زبان، ذخیره‌شده در `localStorage`) |
 | رابط کاربری | MUI (تم سازگار با RTL)، Lucide، React Icons، Sonner (نوتیفیکیشن) |
 | دیپلوی | Cloudflare Pages |
 
 ### 🌐 زبان و محتوا
 
-- **زبان:** پیش‌فرض انگلیسیه. با سوییچ داخل نوبار می‌تونید به فارسی برید که جهت صفحه هم RTL می‌شه. انتخاب شما در `localStorage` ذخیره می‌مونه.
+- **زبان:** پیش‌فرض انگلیسیه. با سوییچ داخل navbar می‌تونید زبان رو تغییر بدید که جهت صفحه هم RTL می‌شه. انتخاب شما در `localStorage` ذخیره می‌مونه.
 - **ترجمه‌ها:** تمام متن‌های رابط کاربری در `lib/i18n/dictionaries/en.ts` و `fa.ts` هستن. هر متن جدید رو باید در **هر دو** فایل اضافه کنید.
 - **پروژه‌ها و داده‌ها:** اطلاعات پروژه‌ها، مهارت‌های مارکی، تنظیمات تایم‌لاین و لینک‌های شبکه‌های اجتماعی در `lib/mockData.ts` قرار دارن.
 
