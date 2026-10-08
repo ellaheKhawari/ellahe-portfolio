@@ -155,7 +155,7 @@ export function Contact() {
                     className="block transition-transform delay-75 duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                     style={{ transform: isHovered && !isClicked ? "translateY(-8%)" : "translateY(0)" }}
                   >
-                    <span className="text-muted-foreground/60">{t.contact.title2}</span>
+                    <span className="text-muted-foreground/90">{t.contact.title2}</span>
                   </span>
                 </span>
               </h2>

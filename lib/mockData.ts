@@ -56,7 +56,7 @@ export const CARD_PROGRESS_START = 0.12;
 export const CARD_PROGRESS_END = 0.92;
 export const STAGE_THRESHOLDS: readonly number[] = STAGE_YEARS.map((_, i) => i / STAGE_COUNT);
 export const SPRING = { stiffness: 110, damping: 26, mass: 0.5 } as const;
-export const REVEAL_DELAY_MS = 2000;
+export const REVEAL_DELAY_MS = 200;
 export const NEAR_TOP_PROGRESS = 0.04;
 
 export const projectSection: ProjectBase[] = [
